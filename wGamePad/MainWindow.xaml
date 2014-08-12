@@ -12,7 +12,7 @@
             <Ellipse Fill="White" Stroke="Black" StrokeThickness="5"/>
             <Label Content="&#xE10A;" FontSize="64" FontWeight="Bold" FontFamily="Segoe UI Symbol" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Grid x:Name="Keyboard" Width="64" Height="64" Opacity="0.25" Canvas.Left="247" Canvas.Top="169" MouseLeftButtonDown="Keyboard_MouseLeftButtonDown" MouseLeftButtonUp="Keyboard_MouseLeftButtonUp">
+        <Grid x:Name="Keyboard" Width="64" Height="64" Opacity="0.25" Canvas.Left="247" Canvas.Top="169" MouseLeftButtonDown="Keyboard_MouseLeftButtonDown" MouseLeftButtonUp="Keyboard_MouseLeftButtonUp" TouchDown="Button_TouchDown">
             <Ellipse Fill="White" Stroke="Black" StrokeThickness="5"/>
             <Label Content="&#xE144;" FontSize="32" FontFamily="Segoe UI Symbol" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
