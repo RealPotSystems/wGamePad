@@ -5,7 +5,6 @@
         WindowStyle="None" Topmost="True"
         Background="Transparent" ShowInTaskbar="False"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen"
         Margin="0" Padding="0" Initialized="Window_Initialized">
     <Window.Resources>
         <Style TargetType="Grid">
@@ -29,7 +28,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
     </Window.Resources>
-    <Canvas x:Name="vGamePadCanvas">
+    <Canvas x:Name="vGamePadCanvas" Background="Transparent" Margin="0" IsManipulationEnabled="True">
         <Rectangle Width="Auto" Height="Auto" Fill="Black"/>
         <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128">
             <Ellipse/>
@@ -142,7 +141,7 @@
             <Ellipse StrokeThickness="2"/>
             <Label Content="&#xE115;" FontWeight="Normal" FontSize="16"/>
         </Grid>
-        <Grid x:Name="Close" x:Uid="Close" Width="32" Height="32">
+        <Grid x:Name="Exit" x:Uid="Exit" Width="32" Height="32">
             <Ellipse StrokeThickness="2"/>
             <Label Content="&#xE10A;" FontWeight="Normal" FontSize="16"/>
         </Grid>

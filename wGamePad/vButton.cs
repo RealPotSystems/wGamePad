@@ -97,7 +97,7 @@ namespace wGamePad
             vButtonDic.Add("Keyboard", new vButton() { Bottom = 0.0 , Left = 300.0, Visible = System.Windows.Visibility.Visible });
             vButtonDic.Add("Crop", new vButton() { Bottom = 0.0, Right = 300.0, Visible = System.Windows.Visibility.Visible });
             vButtonDic.Add("Config", new vButton() { Top = 0.0, Right = 40.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Close", new vButton() { Top = 0.0, Right = 0.0, Visible = System.Windows.Visibility.Visible });
+            vButtonDic.Add("Exit", new vButton() { Top = 0.0, Right = 0.0, Visible = System.Windows.Visibility.Visible });
         }
     }
 }
