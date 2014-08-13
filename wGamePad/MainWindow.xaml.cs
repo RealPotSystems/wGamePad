@@ -26,39 +26,6 @@ namespace wGamePad
             InitializeComponent();
         }
 
-        private void Keyboard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // 反転
-            foreach(object child in ((Grid)sender).Children)
-            {
-                if (child is Ellipse)
-                {
-                    ((Ellipse)child).Fill = new SolidColorBrush(Colors.Black);
-                }
-                if (child is Label)
-                {
-                    ((Label)child).Foreground = new SolidColorBrush(Colors.White);
-                }
-            }
-        }
-
-        private void Keyboard_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            // 戻し
-            foreach (object child in ((Grid)sender).Children)
-            {
-                if (child is Ellipse)
-                {
-                    ((Ellipse)child).Fill = new SolidColorBrush(Colors.White);
-                }
-                if (child is Label)
-                {
-                    ((Label)child).Foreground = new SolidColorBrush(Colors.Black);
-                }
-            }
-
-        }
-
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -73,9 +40,42 @@ namespace wGamePad
             SetWindowLong(helper.Handle, GWL_EXSTYLE, GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE);
         }
 
+        // ボタンタッチ
         private void Button_TouchDown(object sender, TouchEventArgs e)
         {
+            // 反転
+            foreach (object child in ((Grid)sender).Children)
+            {
+                if (child is Ellipse)
+                {
+                    ((Ellipse)child).Fill = new SolidColorBrush(Colors.Black);
+                }
+                if (child is Label)
+                {
+                    ((Label)child).Foreground = new SolidColorBrush(Colors.White);
+                }
+            }
 
+            // タッチ音を鳴らす
+
+            // 押下されたボタンを判定する
+
+        }
+
+        private void Button_TouchUp(object sender, TouchEventArgs e)
+        {
+            // 戻し
+            foreach (object child in ((Grid)sender).Children)
+            {
+                if (child is Ellipse)
+                {
+                    ((Ellipse)child).Fill = new SolidColorBrush(Colors.White);
+                }
+                if (child is Label)
+                {
+                    ((Label)child).Foreground = new SolidColorBrush(Colors.Black);
+                }
+            }
         }
     }
 }
