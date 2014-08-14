@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Interop;
+using System.Diagnostics;
 
 namespace wGamePad
 {
@@ -21,7 +13,7 @@ namespace wGamePad
     /// </summary>
     public partial class MainWindow : Window
     {
-        vButtonDictionay dic = null;
+        private static vButtonDictionay dic = null;
 
         public MainWindow()
         {
@@ -69,91 +61,60 @@ namespace wGamePad
                     }
                 }
             }
+            dic.vButtonDic["Exit"].UpAction += new EventHandler(ExitGamePad);
             // Sample
         }
 
-        protected override void OnSourceInitialized(EventArgs e)
+        // サンプル
+        public void ExitGamePad(object sender, EventArgs e)
         {
-            base.OnSourceInitialized(e);
-            WindowInteropHelper helper = new WindowInteropHelper(this);
-            SetWindowLong(helper.Handle, GWL_EXSTYLE, GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE);
-            HwndSource souce = HwndSource.FromHwnd(helper.Handle);
-            souce.AddHook(WndProc);
+            this.Close();
         }
 
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        private void ChangeButtonStatus(UIElement ui, Color A, Color B)
         {
-            switch (msg)
+            // 反転
+            foreach (object child in ((Grid)ui).Children)
             {
-                case WM_POINTERDOWN:
-                    OnPointerDown(PointFromScreen(new System.Windows.Point(GET_X_LPARAM(lParam),GET_Y_LPARAM(lParam))),GET_POINTERID_WPARAM(wParam));
-                    break;
-                case WM_POINTERUP:
-                    OnPointerUp(GET_POINTERID_WPARAM(wParam));
-                    break;
-                case WM_POINTERUPDATE:
-                    // OnPointerUpdate(GET_POINTERID_WPARAM(wParam));
-                    break;
-                case WM_LBUTTONUP:
-                    foreach (string key in dic.vButtonDic.Keys)
-                    {
-                        var button = dic.vButtonDic[key];
-                        if (button.Id == 1)
-                        {
-                            button.Id = uint.MaxValue;
-                            foreach (UIElement ui in vGamePadCanvas.Children)
-                            {
-                                if (ui.Uid == key)
-                                {
-                                    // 反転
-                                    foreach (object child in ((Grid)ui).Children)
-                                    {
-                                        if (child is Ellipse)
-                                        {
-                                            ((Ellipse)child).Fill = new SolidColorBrush(Colors.White);
-                                        }
-                                        if (child is Label)
-                                        {
-                                            ((Label)child).Foreground = new SolidColorBrush(Colors.Black);
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                    break;
-
+                if (child is Ellipse)
+                {
+                    ((Ellipse)child).Fill = new SolidColorBrush(A);
+                }
+                if (child is Label)
+                {
+                    ((Label)child).Foreground = new SolidColorBrush(B);
+                }
             }
-            return IntPtr.Zero;
+
         }
 
         private void OnPointerDown(System.Windows.Point point, uint id)
         {
             foreach (string key in dic.vButtonDic.Keys)
             {
-                var button = dic.vButtonDic[key];
-                if (button.hitTest(point) == true)
+                if (dic.vButtonDic[key].hitTest(point))
                 {
                     foreach (UIElement ui in vGamePadCanvas.Children)
                     {
                         if (ui.Uid == key)
                         {
                             // 反転
-                            foreach (object child in ((Grid)ui).Children)
+                            ChangeButtonStatus(ui, Colors.Black, Colors.White);
+                            dic.vButtonDic[key].Id = id;
+
+                            // 移動可能なコントロール
+                            if (dic.vButtonDic[key].Moving)
                             {
-                                if (child is Ellipse)
-                                {
-                                    ((Ellipse)child).Fill = new SolidColorBrush(Colors.Black);
-                                }
-                                if (child is Label)
-                                {
-                                    ((Label)child).Foreground = new SolidColorBrush(Colors.White);
-                                }
+                                // この座標を中心点にする
+                                // 中心点の計算
+                                double width = (double)ui.GetValue(WidthProperty);
+                                double height = (double)ui.GetValue(HeightProperty);
+                                ui.SetValue(Canvas.LeftProperty, point.X - width / 2);
+                                ui.SetValue(Canvas.TopProperty, point.Y - height / 2);
                             }
 
-                            button.Id = id;
+                            // イベントハンドラが登録されている場合はDownイベントを実行する
+                            // dic.vButtonDic[key].ExecEvent(vButton.ExecType.Down);
                             break;
                         }
                     }
@@ -167,62 +128,111 @@ namespace wGamePad
         {
             foreach (string key in dic.vButtonDic.Keys)
             {
-                var button = dic.vButtonDic[key];
-                if (button.Id == id)
+                if (dic.vButtonDic[key].Id == id)
                 {
-                    button.Id = uint.MaxValue;
+                    dic.vButtonDic[key].Id = uint.MaxValue;
+                    foreach(UIElement ui in vGamePadCanvas.Children)
+                    {
+                        if (ui.Uid == key)
+                        {
+                            ChangeButtonStatus(ui, Colors.White, Colors.Black);
+                            if (dic.vButtonDic[key].Moving)
+                            {
+                                if (dic.vButtonDic[key].Top != double.MaxValue)
+                                {
+                                    ui.ClearValue(Canvas.BottomProperty);
+                                    ui.SetValue(Canvas.TopProperty, dic.vButtonDic[key].Top);
+                                }
+                                if (dic.vButtonDic[key].Left != double.MaxValue)
+                                {
+                                    ui.ClearValue(Canvas.RightProperty);
+                                    ui.SetValue(Canvas.LeftProperty, dic.vButtonDic[key].Left);
+                                }
+                                if (dic.vButtonDic[key].Bottom != double.MaxValue)
+                                {
+                                    ui.ClearValue(Canvas.TopProperty);
+                                    ui.SetValue(Canvas.BottomProperty, dic.vButtonDic[key].Bottom);
+                                }
+                                if (dic.vButtonDic[key].Right != double.MaxValue)
+                                {
+                                    ui.ClearValue(Canvas.LeftProperty);
+                                    ui.SetValue(Canvas.RightProperty, dic.vButtonDic[key].Right);
+                                }
+                            }
+                            dic.vButtonDic[key].ExecEvent(vButton.ExecType.Up);
+                        }
+                    }
                 }
             }
         }
 
-        //private void vGamePadCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    Point pt = e.GetPosition((UIElement)sender);
-        //    HitTestResult result = VisualTreeHelper.HitTest((UIElement)sender, pt);
+        private void vGamePadCanvas_StylusDown(object sender, StylusDownEventArgs e)
+        {
+            Debug.WriteLine("vGamePadCanvas_StylusDown");
+        }
 
-        //    if (result != null)
-        //    {
-        //        // TODO:
-        //    }
-        //}
+        private void vGamePadCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            vGamePadCanvas.CaptureMouse();
+            Debug.WriteLine("vGamePadCanvas_MouseDown X:{0} Y:{1}", e.MouseDevice.GetPosition(this).X, e.MouseDevice.GetPosition(this).Y);
+            OnPointerDown(e.MouseDevice.GetPosition(this), 1);
+        }
 
+        private void vGamePadCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Debug.WriteLine("vGamePadCanvas_MouseMove X:{0} Y:{1}", e.MouseDevice.GetPosition(this).X, e.MouseDevice.GetPosition(this).Y);
+                // 移動可能なターゲットにヒットしているのか？
+                // ボタンクラスの IsMove が true のボタンかつIDが対象の時、移動する
+                // 移動可能範囲は
+                foreach (string key in dic.vButtonDic.Keys)
+                {
+                    if (dic.vButtonDic[key].Id == 1 && dic.vButtonDic[key].Moving)
+                    {
+                        foreach (UIElement ui in vGamePadCanvas.Children)
+                        {
+                            if (ui.Uid == key)
+                            {
+                                // マウスの座標に対して、実際の移動可能座標を取得する
+                                Point pos = dic.vButtonDic[key].GetPosition(e.GetPosition((Canvas)sender));
+                                // この座標を中心点にする
+                                // 中心点の計算
+                                double width = (double)ui.GetValue(WidthProperty);
+                                double height = (double)ui.GetValue(HeightProperty);
+                                ui.SetValue(Canvas.LeftProperty, pos.X - width/2);
+                                ui.SetValue(Canvas.TopProperty, pos.Y - height/2);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
 
-        //// ボタンタッチ
-        //private void Button_TouchDown(object sender, TouchEventArgs e)
-        //{
-        //    // 反転
-        //    foreach (object child in ((Grid)sender).Children)
-        //    {
-        //        if (child is Ellipse)
-        //        {
-        //            ((Ellipse)child).Fill = new SolidColorBrush(Colors.Black);
-        //        }
-        //        if (child is Label)
-        //        {
-        //            ((Label)child).Foreground = new SolidColorBrush(Colors.White);
-        //        }
-        //    }
+        private void vGamePadCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Debug.WriteLine("vGamePadCanvas_MouseUp X:{0} Y:{1}", e.MouseDevice.GetPosition(this).X, e.MouseDevice.GetPosition(this).Y);
+            OnPointerUp(1);
+            vGamePadCanvas.ReleaseMouseCapture();
+        }
 
-        //    // タッチ音を鳴らす
+        private void vGamePadCanvas_TouchDown(object sender, TouchEventArgs e)
+        {
+            Debug.WriteLine("vGamePadCanvas_TouchDown X:{0} Y:{1} ID:{2}", e.GetTouchPoint(this).Position.X,e.GetTouchPoint(this).Position.Y,e.GetTouchPoint(this).TouchDevice.Id);
+            ((Canvas)sender).CaptureTouch(e.TouchDevice);
+        }
 
-        //    // 押下されたボタンを判定する
+        private void vGamePadCanvas_TouchUp(object sender, TouchEventArgs e)
+        {
+            Debug.WriteLine("vGamePadCanvas_TouchUp X:{0} Y:{1} ID:{2}", e.GetTouchPoint(this).Position.X, e.GetTouchPoint(this).Position.Y, e.GetTouchPoint(this).TouchDevice.Id);
+            ((Canvas)sender).ReleaseTouchCapture(e.TouchDevice);
+        }
 
-        //}
-
-        //private void Button_TouchUp(object sender, TouchEventArgs e)
-        //{
-        //    // 戻し
-        //    foreach (object child in ((Grid)sender).Children)
-        //    {
-        //        if (child is Ellipse)
-        //        {
-        //            ((Ellipse)child).Fill = new SolidColorBrush(Colors.White);
-        //        }
-        //        if (child is Label)
-        //        {
-        //            ((Label)child).Foreground = new SolidColorBrush(Colors.Black);
-        //        }
-        //    }
-        //}
+        private void vGamePadCanvas_TouchMove(object sender, TouchEventArgs e)
+        {
+            Debug.WriteLine("vGamePadCanvas_TouchUp X:{0} Y:{1} ID:{2}", e.GetTouchPoint(this).Position.X, e.GetTouchPoint(this).Position.Y, e.GetTouchPoint(this).TouchDevice.Id);
+        }
     }
 }

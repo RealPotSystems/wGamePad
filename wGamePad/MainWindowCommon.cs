@@ -1,50 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Interop;
 
 namespace wGamePad
 {
+    public abstract class NativeMethods
+    {
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        internal static extern uint SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        internal static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+    }
+
     public partial class MainWindow : Window
     {
-        private const int WM_MOUSEMOVE = 0x0200;
-        private const int WM_LBUTTONDOWN = 0x0201;
-        private const int WM_LBUTTONUP = 0x0202;
-
-        private const int WM_POINTERUPDATE = 0x0245;
-        private const int WM_POINTERDOWN = 0x0246;
-        private const int WM_POINTERUP = 0x0247;
+        const int WM_SYSKEYDOWN = 0x0104;
+        const int VK_F4 = 0x73;
 
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_NOACTIVATE = 0x8000000;
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            WindowInteropHelper helper = new WindowInteropHelper(this);
+            NativeMethods.SetWindowLong(helper.Handle, GWL_EXSTYLE, NativeMethods.GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE);
+            HwndSource souce = HwndSource.FromHwnd(helper.Handle);
+            souce.AddHook(WndProc);
+        }
 
-        private static int GET_X_LPARAM(IntPtr lParam)
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            return (int)lParam & 0xFFFF;
-        }
-        private static int GET_Y_LPARAM(IntPtr lParam)
-        {
-            return (int)lParam >> 16;
-        }
-        private static uint GET_POINTERID_WPARAM(IntPtr wParam)
-        {
-            return (uint)wParam & 0xFFFF;
+            if ((msg == WM_SYSKEYDOWN) && (wParam.ToInt32() == VK_F4))
+            {
+                handled = true;
+            }
+            return IntPtr.Zero;
         }
     }
 }
