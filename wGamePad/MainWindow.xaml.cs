@@ -88,7 +88,7 @@ namespace wGamePad
 
         }
 
-        private void OnPointerDown(System.Windows.Point point, uint id)
+        private void OnPointerDown(Point point, uint id)
         {
             foreach (string key in dic.vButtonDic.Keys)
             {
@@ -114,7 +114,7 @@ namespace wGamePad
                             }
 
                             // イベントハンドラが登録されている場合はDownイベントを実行する
-                            // dic.vButtonDic[key].ExecEvent(vButton.ExecType.Down);
+                            dic.vButtonDic[key].ExecEvent(vButton.ExecType.Down);
                             break;
                         }
                     }
@@ -160,22 +160,43 @@ namespace wGamePad
                                 }
                             }
                             dic.vButtonDic[key].ExecEvent(vButton.ExecType.Up);
+                            break;
                         }
                     }
+                    break;
                 }
             }
         }
 
-        private void vGamePadCanvas_StylusDown(object sender, StylusDownEventArgs e)
+        private void OnPointerMove(Point point, uint id)
         {
-            Debug.WriteLine("vGamePadCanvas_StylusDown");
+            foreach (string key in dic.vButtonDic.Keys)
+            {
+                if (dic.vButtonDic[key].Id == id && dic.vButtonDic[key].Moving)
+                {
+                    foreach (UIElement ui in vGamePadCanvas.Children)
+                    {
+                        if (ui.Uid == key)
+                        {
+                            Point pos = dic.vButtonDic[key].GetPosition(point);
+                            double width = (double)ui.GetValue(WidthProperty);
+                            double height = (double)ui.GetValue(HeightProperty);
+                            ui.SetValue(Canvas.LeftProperty, pos.X - width / 2);
+                            ui.SetValue(Canvas.TopProperty, pos.Y - height / 2);
+                            dic.vButtonDic[key].ExecEvent(vButton.ExecType.Move);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         private void vGamePadCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             vGamePadCanvas.CaptureMouse();
             Debug.WriteLine("vGamePadCanvas_MouseDown X:{0} Y:{1}", e.MouseDevice.GetPosition(this).X, e.MouseDevice.GetPosition(this).Y);
-            OnPointerDown(e.MouseDevice.GetPosition(this), 1);
+            OnPointerDown(e.MouseDevice.GetPosition((UIElement)sender), 1);
         }
 
         private void vGamePadCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -183,31 +204,7 @@ namespace wGamePad
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Debug.WriteLine("vGamePadCanvas_MouseMove X:{0} Y:{1}", e.MouseDevice.GetPosition(this).X, e.MouseDevice.GetPosition(this).Y);
-                // 移動可能なターゲットにヒットしているのか？
-                // ボタンクラスの IsMove が true のボタンかつIDが対象の時、移動する
-                // 移動可能範囲は
-                foreach (string key in dic.vButtonDic.Keys)
-                {
-                    if (dic.vButtonDic[key].Id == 1 && dic.vButtonDic[key].Moving)
-                    {
-                        foreach (UIElement ui in vGamePadCanvas.Children)
-                        {
-                            if (ui.Uid == key)
-                            {
-                                // マウスの座標に対して、実際の移動可能座標を取得する
-                                Point pos = dic.vButtonDic[key].GetPosition(e.GetPosition((Canvas)sender));
-                                // この座標を中心点にする
-                                // 中心点の計算
-                                double width = (double)ui.GetValue(WidthProperty);
-                                double height = (double)ui.GetValue(HeightProperty);
-                                ui.SetValue(Canvas.LeftProperty, pos.X - width/2);
-                                ui.SetValue(Canvas.TopProperty, pos.Y - height/2);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
+                OnPointerMove(e.MouseDevice.GetPosition((UIElement)sender), 1);
             }
         }
 
@@ -220,19 +217,19 @@ namespace wGamePad
 
         private void vGamePadCanvas_TouchDown(object sender, TouchEventArgs e)
         {
-            Debug.WriteLine("vGamePadCanvas_TouchDown X:{0} Y:{1} ID:{2}", e.GetTouchPoint(this).Position.X,e.GetTouchPoint(this).Position.Y,e.GetTouchPoint(this).TouchDevice.Id);
             ((Canvas)sender).CaptureTouch(e.TouchDevice);
+            OnPointerDown(e.GetTouchPoint((UIElement)sender).Position, (uint)e.GetTouchPoint(this).TouchDevice.Id);
         }
 
         private void vGamePadCanvas_TouchUp(object sender, TouchEventArgs e)
         {
-            Debug.WriteLine("vGamePadCanvas_TouchUp X:{0} Y:{1} ID:{2}", e.GetTouchPoint(this).Position.X, e.GetTouchPoint(this).Position.Y, e.GetTouchPoint(this).TouchDevice.Id);
+            OnPointerUp((uint)e.GetTouchPoint((UIElement)sender).TouchDevice.Id);
             ((Canvas)sender).ReleaseTouchCapture(e.TouchDevice);
         }
 
         private void vGamePadCanvas_TouchMove(object sender, TouchEventArgs e)
         {
-            Debug.WriteLine("vGamePadCanvas_TouchUp X:{0} Y:{1} ID:{2}", e.GetTouchPoint(this).Position.X, e.GetTouchPoint(this).Position.Y, e.GetTouchPoint(this).TouchDevice.Id);
+            OnPointerMove(e.GetTouchPoint(this).Position, (uint)e.GetTouchPoint(this).TouchDevice.Id);
         }
     }
 }

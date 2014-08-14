@@ -157,8 +157,6 @@ namespace wGamePad
             {
                 pos.Y = y + Range;
             }
-
-            System.Diagnostics.Debug.WriteLine("中心点 X:{0},Y:{0}", x, y);
             return pos;
         }
     }
