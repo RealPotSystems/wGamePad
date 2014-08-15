@@ -1,76 +1,169 @@
-﻿using System;
+﻿//------------------------------------------------------------
+//
+//  仮想ゲームパッド vGamePad
+//  © 2014,RealPotSystems(TAKUBON). All rights reserverd.
+//
+//  Workfile : vButton.cs
+//  Author   : TAKUYA MANABE(manataku@me.com)
+//
+//------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace wGamePad
+namespace vGamePad
 {
+    public class vGamePadEventArgs : EventArgs
+    {
+        public UIElement ui { set; get; }
+        public Point point { set; get; }
+        public int id { set; get; }
+        public vGamePadEventArgs(UIElement u, Point p, int i = -1)
+        {
+            ui = u;
+            point = p;
+            id = i;
+        }
+    }
+
+    /// <summary>
+    /// 仮想ゲームパッド上に表示する仮想ボタンクラス
+    /// </summary>
     public class vButton
     {
-        public enum ExecType
+        /// <summary>
+        /// 仮想ボタンをタッチ時のアクション
+        /// </summary>
+        public enum ActionType
         {
             Down,
             Up,
             Move
         };
-        // イベントハンドラを実装する
-        public event EventHandler DownAction;
-        public event EventHandler UpAction;
-        public event EventHandler MoveAction;
-        protected virtual void OnDownAction(EventArgs e)
+        /// <summary>
+        /// 連射状態
+        /// </summary>
+        public enum BarrageState
+        {
+            TimerOff,
+            WaitTimeout,
+            TimerOn,
+            None,
+        }
+        /// <summary>
+        /// 仮想ボタン：ダウン時のイベントデリゲート
+        /// </summary>
+        public event EventHandler<vGamePadEventArgs> DownAction;
+        /// <summary>
+        /// 仮想ボタン：ダウン時のイベントハンドラ
+        /// </summary>
+        /// <param name="e">仮想ゲームパッドボタンイベント</param>
+        protected virtual void OnDownAction(vGamePadEventArgs e)
         {
             if (DownAction != null)
             {
                 DownAction(this, e);
             }
         }
-        protected virtual void OnUpAction(EventArgs e)
+        /// <summary>
+        /// 仮想ボタン：アップ時のイベントデリゲート
+        /// </summary>
+        public event EventHandler<vGamePadEventArgs> UpAction;
+        /// <summary>
+        /// 仮想ボタン：アップ時のイベントハンドラ
+        /// </summary>
+        /// <param name="e">仮想ゲームパッドボタンイベント</param>
+        protected virtual void OnUpAction(vGamePadEventArgs e)
         {
             if (UpAction != null)
             {
                 UpAction(this, e);
             }
         }
-        protected virtual void OnMoveAction(EventArgs e)
+        /// <summary>
+        /// 仮想ボタン：移動時のイベントデリゲート
+        /// </summary>
+        public event EventHandler<vGamePadEventArgs> MoveAction;
+        /// <summary>
+        /// 仮想ボタン：移動時のイベントハンドラ
+        /// </summary>
+        /// <param name="e">仮想ゲームパッドボタンイベント</param>
+        protected virtual void OnMoveAction(vGamePadEventArgs e)
         {
             if (MoveAction != null)
             {
                 MoveAction(this, e);
             }
         }
-
-        public void ExecEvent(ExecType type)
+        /// <summary>
+        /// 仮想ボタン：イベントトリガー
+        /// </summary>
+        /// <param name="type">仮想ボタンの状態</param>
+        public void ActionEvent(ActionType type, UIElement ui, Point point, int id = -1)
         {
             switch (type)
             {
-                case ExecType.Down:
-                    OnDownAction(new EventArgs());
+                case ActionType.Down:
+                    OnDownAction(new vGamePadEventArgs(ui,point,id));
                     break;
-                case ExecType.Up:
-                    OnUpAction(new EventArgs());
+                case ActionType.Up:
+                    OnUpAction(new vGamePadEventArgs(ui,point));
                     break;
-                case ExecType.Move:
-                    OnMoveAction(new EventArgs());
+                case ActionType.Move:
+                    OnMoveAction(new vGamePadEventArgs(ui,point));
                     break;
             }
         }
-
-        //
-        public uint Id { set; get; }
-
-        // 座標情報
+        /// <summary>
+        /// 仮想ボタンのユニークID
+        /// </summary>
+        /// <remarks>
+        /// タッチスクリーンにタッチした際、システムが割り当てる固有のID
+        /// int.MinValueを指定することで管理対象外扱いになる
+        /// </remarks>
+        public int Id { set; get; }
+        /// <summary>
+        /// 仮想ボタンの画面上からの座標
+        /// </summary>
+        /// <remarks>
+        /// Bottomを指定する場合、MaxValueを設定する
+        /// </remarks>
         public double Top { set; get; }
+        /// <summary>
+        /// 仮想ボタンの画面下からの座標
+        /// </summary>
+        /// <remarks>
+        /// Topを指定する場合、MaxValueを設定する
+        /// </remarks>
         public double Bottom { set; get; }
+        /// <summary>
+        /// 仮想ボタンの画面左から座標
+        /// </summary>
+        /// <remarks>
+        /// Rightを指定する場合、MaxValueを設定する
+        /// </remarks>
         public double Left { set; get; }
+        /// <summary>
+        /// 仮想ボタンの画面左から座標
+        /// </summary>
+        /// <remarks>
+        /// Leftを指定する場合、MaxValueを設定する
+        /// </remarks>
         public double Right { set; get; }
-
-        // 表示情報
+        /// <summary>
+        /// 仮想ボタンの表示状態
+        /// </summary>
         public Visibility Visible { set; get; }
-
-        //
+        /// <summary>
+        /// 仮想ボタンの幅
+        /// </summary>
         public double Width { set; get; }
+        /// <summary>
+        /// 仮想ボタンの高さ
+        /// </summary>
         public double Height { set; get; }
 
         // 移動可能
@@ -78,27 +171,43 @@ namespace wGamePad
         // 移動可能距離(中心点からの高さ、幅)
         public double Range { set; get; }
 
-        private Window win = Application.Current.MainWindow;
+        // 連射機能
+        public BarrageState Barrage { set; get; }
 
+        /// <summary>
+        /// vGamePadのメインウィンドウ
+        /// </summary>
+        private static readonly Window mainwindow = Application.Current.MainWindow;
+        /// <summary>
+        /// 仮想ボタンコンストラクタ
+        /// </summary>
         public vButton()
         {
-            Id = uint.MaxValue;
+            // ボタン未押下状態
+            Id = int.MinValue;
 
+            // 各座標はMaxValueで統一
             Top = double.MaxValue;
             Bottom = double.MaxValue;
             Left = double.MaxValue;
             Right = double.MaxValue;
 
+            // 初期値はCollapsedにしておく
             Visible = Visibility.Collapsed;
 
+            // 幅、高さはMaxValueで統一
             Width = double.MaxValue;
             Height = double.MaxValue;
 
-            Moving = false; // 移動不可
+            // 移動不可だがレンジは一応50で
+            Moving = false;
             Range = 50.0;
+
+            // 連射状態
+            Barrage = BarrageState.None;
         }
 
-        public bool hitTest(Point now)
+        public bool vHitTest(Point now)
         {
             // 保存されている座標情報から判断する
             // 幅から基準となるradiusを決める
@@ -110,12 +219,12 @@ namespace wGamePad
             if (Left != double.MaxValue)
                 x = Left + Width / 2;
             else
-                x = win.Width - Right - Width / 2;
+                x = mainwindow.Width - Right - Width / 2;
 
             if (Top != double.MaxValue)
                 y = Top + Height / 2;
             else
-                y = win.Height - Bottom - Height / 2;
+                y = mainwindow.Height - Bottom - Height / 2;
 
             if ((x - now.X) * (x - now.X) + (y - now.Y) * (y - now.Y) <= (radian * radian))
             {
@@ -125,7 +234,7 @@ namespace wGamePad
             return false;
         }
 
-        public Point GetPosition(Point pos)
+        public Point vGetPosition(Point pos)
         {
             // ボタンの中心点を求める
             double x;
@@ -134,12 +243,12 @@ namespace wGamePad
             if (Left != double.MaxValue)
                 x = Left + Width / 2;
             else
-                x = win.Width - Right - Width / 2;
+                x = mainwindow.Width - Right - Width / 2;
 
             if (Top != double.MaxValue)
                 y = Top + Height / 2;
             else
-                y = win.Height - Bottom - Height / 2;
+                y = mainwindow.Height - Bottom - Height / 2;
 
             if ((x - Range) >= pos.X)
             {
@@ -167,28 +276,29 @@ namespace wGamePad
 
         public vButtonDictionay()
         {
-            vButtonDic.Add("AnalogStick0", new vButton() { Top = 150.0, Left = 300.0, Visible = System.Windows.Visibility.Visible, Moving = true });
-            vButtonDic.Add("AnalogStick1", new vButton() { Top = 150.0, Right = 300.0, Visible = System.Windows.Visibility.Visible, Moving = true });
-            vButtonDic.Add("Button01", new vButton() { Top = 120.0, Right = 100.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button02", new vButton() { Top = 170.0, Right = 50.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button03", new vButton() { Top = 220.0, Right = 100.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button04", new vButton() { Top = 170.0, Right = 150.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button05", new vButton() { Top = 50.0, Right = 150.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button06", new vButton() { Top = 50.0, Right = 80.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button07", new vButton() { Top = 50.0, Left = 220.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button08", new vButton() { Top = 50.0, Right = 220.0, Visible = System.Windows.Visibility.Visible });
+            vButtonDic.Add("AnalogStick0", new vButton() { Top = 120.0, Left = 300.0, Visible = Visibility.Visible, Moving = true });
+            vButtonDic.Add("AnalogStick1", new vButton() { Top = 120.0, Right = 300.0, Visible = Visibility.Visible, Moving = true });
+            vButtonDic.Add("Button01", new vButton() { Top = 120.0, Right = 100.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button02", new vButton() { Top = 170.0, Right = 50.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button03", new vButton() { Top = 220.0, Right = 100.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button04", new vButton() { Top = 170.0, Right = 150.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button05", new vButton() { Top = 50.0, Right = 150.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button06", new vButton() { Top = 50.0, Right = 80.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button07", new vButton() { Top = 50.0, Left = 220.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button08", new vButton() { Top = 50.0, Right = 220.0, Visible = Visibility.Visible });
             vButtonDic.Add("Button09", new vButton() { });
-            vButtonDic.Add("Button10", new vButton() { Top = 240.0, Left = 210.0, Visible = System.Windows.Visibility.Visible });
+            vButtonDic.Add("Button10", new vButton() { Top = 240.0, Left = 210.0, Visible = Visibility.Visible });
             vButtonDic.Add("Button11", new vButton() { });
-            vButtonDic.Add("Button12", new vButton() { Top = 240.0, Right = 210.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button_UP", new vButton() { Top = 100.0, Left = 100.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button_DOWN", new vButton() { Top = 200.0, Left = 100.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button_LEFT", new vButton() { Top = 150.0, Left = 50.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Button_RIGHT", new vButton() { Top = 150.0, Left = 150.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Keyboard", new vButton() { Bottom = 0.0 , Left = 300.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Crop", new vButton() { Bottom = 0.0, Right = 300.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Config", new vButton() { Top = 0.0, Right = 40.0, Visible = System.Windows.Visibility.Visible });
-            vButtonDic.Add("Exit", new vButton() { Top = 0.0, Right = 0.0, Visible = System.Windows.Visibility.Visible });
+            vButtonDic.Add("Button12", new vButton() { Top = 240.0, Right = 210.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button_UP", new vButton() { Top = 100.0, Left = 100.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button_DOWN", new vButton() { Top = 200.0, Left = 100.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button_LEFT", new vButton() { Top = 150.0, Left = 50.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Button_RIGHT", new vButton() { Top = 150.0, Left = 150.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Keyboard", new vButton() { Top = 300.0 , Left = 300.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Crop", new vButton() { Top = 300.0, Right = 300.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Config", new vButton() { Top = 40.0, Right = 40.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Exit", new vButton() { Top = 40.0, Right = 0.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Home", new vButton() { Top = 40.0, Left = 0.0, Visible = Visibility.Visible, Moving = true });
         }
     }
 }

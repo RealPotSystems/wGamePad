@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Interop;
 
-namespace wGamePad
+namespace vGamePad
 {
     public abstract class NativeMethods
     {
