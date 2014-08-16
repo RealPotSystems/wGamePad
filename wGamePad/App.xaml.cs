@@ -21,7 +21,7 @@ namespace vGamePad
     /// <summary>
     /// App.xaml の相互作用ロジック
     /// </summary>
-    public partial class App : Application
+    public sealed partial class App : Application,IDisposable
     {
         /// <summary>
         /// 多重起動抑止のミューテックス
@@ -57,10 +57,18 @@ namespace vGamePad
         /// <param name="e"></param>
         private void Application_Exit(object sender, ExitEventArgs e)
         {
+            Dispose();
+        }
+        /// <summary>
+        /// mutexの解放漏れを防ぐためDisposeを実装
+        /// </summary>
+        public void Dispose()
+        {
             if (mutex != null)
             {
                 mutex.ReleaseMutex();
                 mutex.Close();
+                mutex = null;
             }
         }
     }
