@@ -7,103 +7,73 @@
         AllowsTransparency="True"
         Margin="0" Padding="0" Initialized="Window_Initialized" Loaded="Window_Loaded">
     <Window.Resources>
-        <Style TargetType="Grid">
-            <Setter Property="Opacity" Value="0.25"/>
-            <Setter Property="Width" Value="64"/>
-            <Setter Property="Height" Value="64"/>
-            <Setter Property="Visibility" Value="Collapsed"/>
-        </Style>
-        <!--<Style TargetType="Ellipse">
-            <Setter Property="Fill" Value="White"/>
-            <Setter Property="Stroke" Value="Black"/>
-            <Setter Property="StrokeThickness" Value="5"/>
-        </Style>-->
-        <Style TargetType="Ellipse">
-            <Setter Property="Fill" Value="Black"/>
-            <Setter Property="Stroke" Value="White"/>
-            <Setter Property="StrokeThickness" Value="5"/>
-        </Style>
-        <!--<Style TargetType="Label">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="FontFamily" Value="Segoe UI,Segoe UI Symbol"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>-->
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="32"/>
-            <Setter Property="FontFamily" Value="Segoe UI,Segoe UI Symbol"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="vGamePadStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Canvas x:Name="vGamePadCanvas" Background="Transparent" Margin="0" IsManipulationEnabled="False" TouchDown="vGamePadCanvas_TouchDown" TouchMove="vGamePadCanvas_TouchMove" TouchUp="vGamePadCanvas_TouchUp" MouseDown="vGamePadCanvas_MouseDown" MouseMove="vGamePadCanvas_MouseMove" MouseUp="vGamePadCanvas_MouseUp">
-        <Grid x:Name="vGamePadBase" Background="Black"/>
-        <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128">
-            <Ellipse/>
-            <Label Content="&#xE10A;" FontSize="64"/>
+        <Grid x:Name="vGamePadBase" Background="Black" Style="{StaticResource gridStyle}"/>
+        <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="AnalogStick1" x:Uid="AnalogStick1" Width="128" Height="128">
-            <Ellipse/>
-            <Label Content="&#xE10A;" FontSize="64"/>
+        <Grid x:Name="AnalogStick1" x:Uid="AnalogStick1" Width="128" Height="128" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button01" x:Uid="Button01">
-            <Ellipse/>
-            <Label Content="1"/>
+        <Grid x:Name="Button01" x:Uid="Button01" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="1" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button02" x:Uid="Button02">
-            <Ellipse/>
-            <Label Content="2"/>
+        <Grid x:Name="Button02" x:Uid="Button02" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="2" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button03" x:Uid="Button03">
-            <Ellipse/>
-            <Label Content="3"/>
+        <Grid x:Name="Button03" x:Uid="Button03" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="3" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button04" x:Uid="Button04">
-            <Ellipse/>
-            <Label Content="4"/>
+        <Grid x:Name="Button04" x:Uid="Button04" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="4" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button05" x:Uid="Button05">
-            <Ellipse/>
-            <Label Content="5"/>
+        <Grid x:Name="Button05" x:Uid="Button05" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="5" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button06" x:Uid="Button06">
-            <Ellipse/>
-            <Label Content="6"/>
+        <Grid x:Name="Button06" x:Uid="Button06" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="6" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button07" x:Uid="Button07">
-            <Ellipse/>
-            <Label Content="7"/>
+        <Grid x:Name="Button07" x:Uid="Button07" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="7" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button08" x:Uid="Button08">
-            <Ellipse/>
-            <Label Content="8"/>
+        <Grid x:Name="Button08" x:Uid="Button08" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="8" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button09" x:Uid="Button09">
-            <Ellipse/>
-            <Label Content="9"/>
+        <Grid x:Name="Button09" x:Uid="Button09" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="9" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button10" x:Uid="Button10">
-            <Ellipse/>
-            <Label Content="10"/>
+        <Grid x:Name="Button10" x:Uid="Button10" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="10" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button11" x:Uid="Button11">
-            <Ellipse/>
-            <Label Content="11"/>
+        <Grid x:Name="Button11" x:Uid="Button11" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="11" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button12" x:Uid="Button12">
-            <Ellipse/>
-            <Label Content="12"/>
+        <Grid x:Name="Button12" x:Uid="Button12" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="12" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Button_UP" x:Uid="Button_UP">
-            <Ellipse/>
-            <Label Content="&#xE102;" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="Button_UP" x:Uid="Button_UP" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE102;" FontWeight="Normal" RenderTransformOrigin="0.5,0.5" Style="{StaticResource labelStyle}">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -114,9 +84,9 @@
                 </Label.RenderTransform>
             </Label>
         </Grid>
-        <Grid x:Name="Button_DOWN" x:Uid="Button_DOWN">
-            <Ellipse/>
-            <Label Content="&#xE102;" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="Button_DOWN" x:Uid="Button_DOWN" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE102;" FontWeight="Normal" RenderTransformOrigin="0.5,0.5" Style="{StaticResource labelStyle}">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -127,9 +97,9 @@
                 </Label.RenderTransform>
             </Label>
         </Grid>
-        <Grid x:Name="Button_LEFT" x:Uid="Button_LEFT">
-            <Ellipse/>
-            <Label Content="&#xE102;" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="Button_LEFT" x:Uid="Button_LEFT" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE102;" FontWeight="Normal" RenderTransformOrigin="0.5,0.5" Style="{StaticResource labelStyle}">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -140,29 +110,29 @@
                 </Label.RenderTransform>
             </Label>
         </Grid>
-        <Grid x:Name="Button_RIGHT" x:Uid="Button_RIGHT">
-            <Ellipse/>
-            <Label Content="&#xE102;" FontWeight="Normal"/>
+        <Grid x:Name="Button_RIGHT" x:Uid="Button_RIGHT" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE102;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Keyboard" x:Uid="Keyboard">
-            <Ellipse/>
-            <Label Content="&#xE144;" FontWeight="Normal"/>
+        <Grid x:Name="Keyboard" x:Uid="Keyboard" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE144;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Crop" x:Uid="Crop">
-            <Ellipse/>
-            <Label Content="&#xE123;" FontWeight="Normal"/>
+        <Grid x:Name="Crop" x:Uid="Crop" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE123;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Config" x:Uid="Config" Width="32" Height="32">
-            <Ellipse StrokeThickness="2"/>
-            <Label Content="&#xE115;" FontWeight="Normal" FontSize="16"/>
+        <Grid x:Name="Config" x:Uid="Config" Width="32" Height="32" Style="{StaticResource gridStyle}">
+            <Ellipse StrokeThickness="2" Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE115;" FontWeight="Normal" FontSize="16" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Exit" x:Uid="Exit" Width="32" Height="32">
-            <Ellipse StrokeThickness="2"/>
-            <Label Content="&#xE10A;" FontWeight="Normal" FontSize="16"/>
+        <Grid x:Name="Exit" x:Uid="Exit" Width="32" Height="32" Style="{StaticResource gridStyle}">
+            <Ellipse StrokeThickness="2" Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE10A;" FontWeight="Normal" FontSize="16" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Home" x:Uid="Home" Width="32" Height="32">
-            <Ellipse StrokeThickness="2"/>
-            <Label Content="&#xE154;" FontWeight="Normal" FontSize="16"/>
+        <Grid x:Name="Home" x:Uid="Home" Width="32" Height="32" Style="{StaticResource gridStyle}">
+            <Ellipse StrokeThickness="2" Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE154;" FontWeight="Normal" FontSize="16" Style="{StaticResource labelStyle}"/>
         </Grid>
     </Canvas>
 </Window>
