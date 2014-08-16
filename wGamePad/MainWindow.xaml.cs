@@ -179,10 +179,7 @@ namespace vGamePad
             catch(Exception ex)
             {
                 // ダイアログメッセージを表示する
-                vGamePad.DialogWindow.DialogWindow dialog = new vGamePad.DialogWindow.DialogWindow(
-                    Properties.Resources.DialogTitle,
-                    ex.Message);
-                dialog.ShowDialog();
+                Debug.WriteLine(ex.Message);
                 Close();
             }
         }

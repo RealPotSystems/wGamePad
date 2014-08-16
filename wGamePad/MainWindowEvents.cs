@@ -265,13 +265,7 @@ namespace vGamePad
         {
             DefaultUp(sender, e);
             // 確認ダイアログを表示する
-            DialogWindow.DialogWindow dialog = new DialogWindow.DialogWindow(
-                Properties.Resources.DialogTitle,
-                Properties.Resources.ExitApplication,
-                DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
-            bool? result = dialog.ShowDialog();
-            if (result == true)
-                Close();
+            Close();
         }
 
         public void HomeDown(object sender, vGamePadEventArgs e)
