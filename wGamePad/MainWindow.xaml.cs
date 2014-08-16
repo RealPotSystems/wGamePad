@@ -158,6 +158,14 @@ namespace vGamePad
             dic.vButtonDic["Home"].MoveAction += new EventHandler<vGamePadEventArgs>(HomeMove);
             dic.vButtonDic["Home"].UpAction += new EventHandler<vGamePadEventArgs>(HomeUp);
             // Sample
+
+            // デバッグ用イベントハンドラ
+            // MouseDown="vGamePadCanvas_MouseDown" MouseMove="vGamePadCanvas_MouseMove" MouseUp="vGamePadCanvas_MouseUp"
+#if DEBUG
+            vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
+            vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
+            vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
+#endif
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -252,6 +260,7 @@ namespace vGamePad
             }
         }
 
+#if DEBUG
         private void vGamePadCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ((Canvas)sender).CaptureMouse();
@@ -274,7 +283,7 @@ namespace vGamePad
             OnPointerUp(e.MouseDevice.GetPosition((UIElement)sender), 1);
             ((Canvas)sender).ReleaseMouseCapture();
         }
-
+#endif
         private void vGamePadCanvas_TouchDown(object sender, TouchEventArgs e)
         {
             ((Canvas)sender).CaptureTouch(e.TouchDevice);

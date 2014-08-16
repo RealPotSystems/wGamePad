@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Canvas x:Name="vGamePadCanvas" Background="Transparent" Margin="0" IsManipulationEnabled="False" TouchDown="vGamePadCanvas_TouchDown" TouchMove="vGamePadCanvas_TouchMove" TouchUp="vGamePadCanvas_TouchUp" MouseDown="vGamePadCanvas_MouseDown" MouseMove="vGamePadCanvas_MouseMove" MouseUp="vGamePadCanvas_MouseUp">
+    <Canvas x:Name="vGamePadCanvas" Background="Transparent" Margin="0" IsManipulationEnabled="False" TouchDown="vGamePadCanvas_TouchDown" TouchMove="vGamePadCanvas_TouchMove" TouchUp="vGamePadCanvas_TouchUp">
         <Grid x:Name="vGamePadBase" Background="Black" Style="{StaticResource gridStyle}"/>
         <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>
