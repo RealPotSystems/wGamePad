@@ -61,6 +61,24 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   vGamePadメッセージ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DialogTitle {
+            get {
+                return ResourceManager.GetString("DialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   vGamePadを終了してもよろしいですか？ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExitApplication {
+            get {
+                return ResourceManager.GetString("ExitApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   %ProgramFiles%\Common Files\microsoft shared\ink\TabTip.exe に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string TabTip {
