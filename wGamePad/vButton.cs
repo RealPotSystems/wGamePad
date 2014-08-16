@@ -313,8 +313,8 @@ namespace vGamePad
 
         public vButtonDictionay()
         {
-            vButtonDic.Add("AnalogStick0", new vButton() { Index = 0, Top = 120.0, Left = 300.0, Visible = Visibility.Visible, Moving = true });
-            vButtonDic.Add("AnalogStick1", new vButton() { Index = 1, Top = 120.0, Right = 300.0, Visible = Visibility.Visible, Moving = true });
+            vButtonDic.Add("AnalogStick0", new vButton() { Index = 0, Top = 360.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
+            vButtonDic.Add("AnalogStick1", new vButton() { Index = 1, Top = 360.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
             vButtonDic.Add("Button01", new vButton() { Index = 0, Top = 120.0, Right = 100.0, Visible = Visibility.Visible });
             vButtonDic.Add("Button02", new vButton() { Index = 1, Top = 170.0, Right = 50.0, Visible = Visibility.Visible });
             vButtonDic.Add("Button03", new vButton() { Index = 2, Top = 220.0, Right = 100.0, Visible = Visibility.Visible });
@@ -333,9 +333,9 @@ namespace vGamePad
             vButtonDic.Add("Button_RIGHT", new vButton() { Index = 1, Top = 150.0, Left = 150.0, Visible = Visibility.Visible });
             vButtonDic.Add("Keyboard", new vButton() { Top = 300.0 , Left = 300.0, Visible = Visibility.Visible });
             vButtonDic.Add("Crop", new vButton() { Top = 300.0, Right = 300.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Config", new vButton() { Top = 40.0, Right = 40.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Exit", new vButton() { Top = 40.0, Right = 0.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Home", new vButton() { Top = 40.0, Left = 0.0, Visible = Visibility.Visible, Moving = true });
+            vButtonDic.Add("Config", new vButton() { Top = 20.0, Right = 60.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Exit", new vButton() { Top = 20.0, Right = 20.0, Visible = Visibility.Visible });
+            vButtonDic.Add("Home", new vButton() { Top = 20.0, Left = 0.0, Visible = Visibility.Visible, Moving = true });
         }
     }
 }
