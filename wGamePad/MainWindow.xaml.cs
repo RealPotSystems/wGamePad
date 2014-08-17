@@ -16,7 +16,7 @@ namespace vGamePad
     public partial class MainWindow : Window
     {
         private static vButtonDictionay dic = null;
-        private static JoyStick devCon = new JoyStick();
+        public static JoyStick devCon = new JoyStick();
 
         public MainWindow()
         {
@@ -26,10 +26,10 @@ namespace vGamePad
         private void Window_Initialized(object sender, EventArgs e)
         {
             var screen = System.Windows.Forms.Screen.PrimaryScreen;
-            this.Left = screen.Bounds.Left;
-            this.Top = screen.Bounds.Top;
-            this.Width = screen.Bounds.Width;
-            this.Height = screen.Bounds.Height;
+            Left = screen.Bounds.Left;
+            Top = screen.Bounds.Top;
+            Width = screen.Bounds.Width;
+            Height = screen.Bounds.Height;
 
             // Sample
             dic = new vButtonDictionay();
@@ -65,8 +65,8 @@ namespace vGamePad
                             ui.SetValue(Canvas.BottomProperty, button.Bottom);
                             if ((button.Height - button.Bottom) < top)
                                 top = button.Height - button.Bottom;
-                            if ((this.Height - button.Bottom) > bottom)
-                                bottom = this.Height - button.Bottom;
+                            if ((Height - button.Bottom) > bottom)
+                                bottom = Height - button.Bottom;
                         }
                         if (button.Right != double.MaxValue)
                         {
@@ -160,7 +160,9 @@ namespace vGamePad
             // Sample
 
             // デバッグ用イベントハンドラ
-            // MouseDown="vGamePadCanvas_MouseDown" MouseMove="vGamePadCanvas_MouseMove" MouseUp="vGamePadCanvas_MouseUp"
+            // MouseDown="vGamePadCanvas_MouseDown"
+            // MouseMove="vGamePadCanvas_MouseMove"
+            // MouseUp="vGamePadCanvas_MouseUp"
 #if DEBUG
             vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
             vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;

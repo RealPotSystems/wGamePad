@@ -205,8 +205,8 @@ namespace DeviceControl
         /// <returns></returns>
         public override string ToString()
         {
-            string strTemp = joystick.GetvJoyManufacturerString() + joystick.GetvJoyProductString() + joystick.GetvJoySerialNumberString();
-            return strTemp;
+            string format = "{0} version {1}\nCopyright © {2}.";
+            return string.Format(format, joystick.GetvJoyProductString(), joystick.GetvJoySerialNumberString(), joystick.GetvJoyManufacturerString());
         }
 
         /// <summary>

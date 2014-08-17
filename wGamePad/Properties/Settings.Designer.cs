@@ -22,5 +22,22 @@ namespace vGamePad.Properties {
                 return defaultInstance;
             }
         }
+        
+        /// <summary>
+        /// ボタンをタッチした際、音を鳴らす、鳴らさないの設定
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("ボタンをタッチした際、音を鳴らす、鳴らさないの設定")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool Sound {
+            get {
+                return ((bool)(this["Sound"]));
+            }
+            set {
+                this["Sound"] = value;
+            }
+        }
     }
 }

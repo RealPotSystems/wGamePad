@@ -10,7 +10,6 @@
 using System;
 using System.Windows;
 using System.Collections.Generic;
-using System.Windows.Interop;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Forms;
@@ -44,6 +43,9 @@ namespace vGamePad
         {
             // 反転
             ChangeButtonStatus(e.ui, Colors.White, Colors.Black);
+            // 音を鳴らす
+            PlayButtonSound.Play();
+
             dic.vButtonDic[e.ui.Uid].Id = e.id;
 
             // 移動可能なコントロール
@@ -213,7 +215,9 @@ namespace vGamePad
                 ((BarrageTimer)sender).Interval = new TimeSpan(0, 0, 0, 0, 100);
                 // 画面ボタン赤に
                 ChangeButtonStatus(((BarrageTimer)sender).Ui, Colors.Red, Colors.White);
-                // 音を鳴らす
+                // 音を２回鳴らす
+                PlayButtonSound.Play(PlayButtonSound.PlayType.Sync);
+                PlayButtonSound.Play();
             }
             // vJoyボタンダウン
             devCon.PushButton(dic.vButtonDic[((BarrageTimer)sender).Ui.Uid].Index);
@@ -251,6 +255,8 @@ namespace vGamePad
         {
             DefaultUp(sender, e);
             // 環境設定ダイアログの表示
+            ConfigWindow conf = new ConfigWindow();
+            conf.ShowDialog();
         }
 
         // 切り取り
@@ -278,6 +284,10 @@ namespace vGamePad
         {
             // 反転
             ChangeButtonStatus(e.ui, Colors.White, Colors.Black);
+
+            //　音
+            PlayButtonSound.Play();
+
             dic.vButtonDic[e.ui.Uid].Id = e.id;
             dic.vButtonDic[e.ui.Uid].Range = Height;
             vGamePadBase.Background = new SolidColorBrush(Colors.White);

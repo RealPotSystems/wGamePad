@@ -11,8 +11,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
-        <Label x:Name="Type" Content="&#xE17E;&#xE171;" Foreground="Red" Grid.Row="0" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="5,5,352,5" FontFamily="Segoe UI Symbol" FontSize="16"/>
-        <Label x:Name="MessageTitle" Grid.Row="0" Foreground="White" VerticalContentAlignment="Center" Margin="48,5,5,5" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16"/>
+        <Label x:Name="Type" Content="&#xE17E;&#xE171;" Foreground="Red" Grid.Row="0" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="5,5,352,5" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="12"/>
+        <Label x:Name="MessageTitle" Grid.Row="0" Foreground="White" VerticalContentAlignment="Center" Margin="48,5,5,5" FontFamily="Segoe UI" FontSize="16"/>
         <TextBox x:Name="MessageText" Grid.Row="1" IsReadOnly="True" Margin="10,0,10,5" Foreground="White" Background="Black" FontSize="16" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button x:Name="Yes" Margin="10,5,5,10" Width="185" Background="Black" Content="はい" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnOkClick"/>

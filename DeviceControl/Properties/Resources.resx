@@ -127,7 +127,7 @@
     <value>POV(十字キー)の設定がない、または、正しく設定されていません。</value>
   </data>
   <data name="VJOY_STAT_OWN" xml:space="preserve">
-    <value>すでに他プログラムがvJoyを使用しています。</value>
+    <value>すでに他プログラムがvJoyを使用しています。他のプログラムを終了してから再度起動してください。</value>
   </data>
   <data name="VJOY_STICK_LEFT_FATAL" xml:space="preserve">
     <value>アナログスティック(左)が正しく設定されていません。</value>

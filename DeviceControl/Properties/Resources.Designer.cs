@@ -88,7 +88,7 @@ namespace DeviceControl.Properties {
         }
         
         /// <summary>
-        ///   すでに他プログラムがvJoyを使用しています。 に類似しているローカライズされた文字列を検索します。
+        ///   すでに他プログラムがvJoyを使用しています。他のプログラムを終了してから再度起動してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string VJOY_STAT_OWN {
             get {

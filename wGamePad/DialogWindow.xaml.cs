@@ -19,6 +19,8 @@ namespace vGamePad.DialogWindow
     /// </summary>
     public partial class DialogWindow : Window
     {
+        const string _OK = "\uE17E\uE171";          // !
+        const string _OKCANCEL = "\uE17E\uE11B";    // ?
         public enum DialogStyle
         {
             OK,
@@ -33,10 +35,12 @@ namespace vGamePad.DialogWindow
 
             if (s == DialogStyle.OK)
             {
+                Type.Content = _OK;
                 OK.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
+                Type.Content = _OKCANCEL;
                 Yes.Visibility = System.Windows.Visibility.Visible;
                 No.Visibility = System.Windows.Visibility.Visible;
             }
@@ -44,12 +48,14 @@ namespace vGamePad.DialogWindow
 
         private void OnOkClick(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             DialogResult = true;
             Close();
         }
 
         private void OnCancelClick(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             DialogResult = false;
             Close();
         }

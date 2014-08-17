@@ -1,9 +1,41 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interop;
+using System.Media;
 
 namespace vGamePad
 {
+    public static class PlayButtonSound
+    {
+        private static SoundPlayer player = new SoundPlayer(Properties.Resources.Sound01);
+
+        public enum PlayType
+        {
+            Normal,
+            Sync,
+            Loop,
+        }
+
+        public static void Play(PlayType p = PlayType.Normal)
+        {
+            if (Properties.Settings.Default.Sound)
+            {
+                switch (p)
+                {
+                    case PlayType.Normal:
+                        player.Play();
+                        break;
+                    case PlayType.Sync:
+                        player.PlaySync();
+                        break;
+                    case PlayType.Loop:
+                        // ループは止める方法が無いのでいったん未実装
+                        break;
+                }
+            }
+        }
+    }
+
     public abstract class NativeMethods
     {
         [System.Runtime.InteropServices.DllImport("user32.dll")]

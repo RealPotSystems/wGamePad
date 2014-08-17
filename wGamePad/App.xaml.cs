@@ -57,6 +57,8 @@ namespace vGamePad
         /// <param name="e"></param>
         private void Application_Exit(object sender, ExitEventArgs e)
         {
+            //アプリケーションの設定を保存する
+            vGamePad.Properties.Settings.Default.Save();
             Dispose();
         }
         /// <summary>

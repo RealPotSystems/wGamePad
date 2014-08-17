@@ -79,6 +79,15 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   System.IO.MemoryStream に類似した型 System.IO.UnmanagedMemoryStream のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Sound01 {
+            get {
+                return ResourceManager.GetStream("Sound01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   %ProgramFiles%\Common Files\microsoft shared\ink\TabTip.exe に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string TabTip {
