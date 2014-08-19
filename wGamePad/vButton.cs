@@ -210,7 +210,7 @@ namespace vGamePad
 
             // 移動不可だがレンジは一応50で
             Moving = false;
-            Range = 50.0;
+            Range = 32.0;
 
             // 連射状態
             Barrage = BarrageState.None;
@@ -303,6 +303,8 @@ namespace vGamePad
                 x = mainwindow.Width - Right - Width / 2;
             if (NowX == double.MaxValue)
                 return 50;
+
+            double z = (x + Range - NowX)*.25;
             return (long)((x + Range - NowX) * 100 / (Range * 2));
         }
     }

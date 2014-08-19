@@ -16,8 +16,8 @@
         <TextBox x:Name="MessageText" Grid.Row="1" IsReadOnly="True" Margin="10,0,10,5" Foreground="White" Background="Black" FontSize="16" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button x:Name="Yes" Margin="10,5,5,10" Width="185" Background="Black" Content="はい" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnOkClick"/>
-            <Button x:Name="No" Margin="5,5,10,10" Width="185" Background="Black" Content="いいえ" Foreground="White" FontWeight="Bold" FontSize="16" IsDefault="True" Visibility="Collapsed" Click="OnCancelClick"/>
-            <Button x:Name="OK" Margin="10,5,10,10" Width="380" Background="Black" Content="OK" Foreground="White" FontWeight="Bold" FontSize="16" IsDefault="True" Visibility="Collapsed" Click="OnOkClick"/>
+            <Button x:Name="No" Margin="5,5,10,10" Width="185" Background="Black" Content="いいえ" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnCancelClick"/>
+            <Button x:Name="OK" Margin="10,5,10,10" Width="380" Background="Black" Content="OK" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnOkClick"/>
         </StackPanel>
     </Grid>
 </Window>

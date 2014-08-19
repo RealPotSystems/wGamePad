@@ -18,8 +18,8 @@
             <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Content="&#xE1AA;"/>
             <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol"/>
             <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol"/>
             <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Click="Sound_Click"/>
+            <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Click="ScreenRotate_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="40"/>
