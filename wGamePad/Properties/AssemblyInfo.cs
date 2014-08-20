@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("vGamePad")]
 [assembly: AssemblyDescription("Virtual Game Pad for Windows 8")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Real Pot Systems")]
+[assembly: AssemblyCompany("Real Pot Systems (TAKUBON)")]
 [assembly: AssemblyProduct("vGamePad")]
-[assembly: AssemblyCopyright("Copyright ©  2014 TAKUBON.")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

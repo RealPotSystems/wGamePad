@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Microsoft.Win32;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Reflection;
+using Microsoft.Win32;
 
 namespace vGamePad
 {
@@ -21,24 +13,28 @@ namespace vGamePad
     /// </summary>
     public partial class ConfigWindow : Window
     {
-        private const string versionFormat = "{0} version {1}\nCopyright © 2014 Real Pot Systems (TAKUBON).\n";
+        private const string versionFormat = "{0} version {1}\n{2} {3}.\n";
         private const string sound_on = "\uE15D";
         private const string sound_off = "\uE198";
         private const string ScreenRotate_on = "\uE244";
         private const string ScreenRotate_off = "\uE245";
+        private const string check_on = "\uE0A2";
+        private const string check_off = "\uE003";
 
         public ConfigWindow()
         {
             InitializeComponent();
 
-            System.Diagnostics.FileVersionInfo ver =
-                System.Diagnostics.FileVersionInfo.GetVersionInfo(
-                System.Reflection.Assembly.GetExecutingAssembly().Location);
-            About.Text = string.Format(versionFormat, ver.ProductName, ver.ProductVersion);
+            FileVersionInfo ver =
+                FileVersionInfo.GetVersionInfo(
+                Assembly.GetExecutingAssembly().Location);
+            About.Text = string.Format(versionFormat, ver.ProductName, ver.ProductVersion, ver.LegalCopyright, ver.CompanyName);
             About.Text += MainWindow.devCon.ToString();
 
             ScreenRotate.IsEnabled = SensorPresent();
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
+            Skeleton.Content = check_off;
+
         }
 
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -76,6 +72,7 @@ namespace vGamePad
 
         private void ScreenRotate_Click(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             SendKeys.Send("^{ESC}o");
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
         }
@@ -105,6 +102,30 @@ namespace vGamePad
                 return false;
             }
 
+        }
+
+        private void SetPostion_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play(); 
+            try
+            {
+                Process[] ps = Process.GetProcessesByName("DQXGame");   // ドラクエ10のプロセス名を指定する
+                if (ps.Length == 1)
+                {
+                    ps[0].WaitForInputIdle();
+                    NativeMethods.SetWindowPos(
+                        ps[0].MainWindowHandle,
+                        NativeMethods.HWND_TOP,
+                        System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Left,
+                        System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Top,
+                        0,
+                        0,
+                        NativeMethods.SWP_NOSIZE | NativeMethods.SWP_SHOWWINDOW);
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

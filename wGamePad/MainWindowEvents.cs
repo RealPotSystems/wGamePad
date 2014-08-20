@@ -256,7 +256,9 @@ namespace vGamePad
             DefaultUp(sender, e);
             // 環境設定ダイアログの表示
             ConfigWindow conf = new ConfigWindow();
+            Hide();
             conf.ShowDialog();
+            Show();
         }
 
         // 切り取り
@@ -275,9 +277,14 @@ namespace vGamePad
                 Properties.Resources.DialogTitle,
                 Properties.Resources.ExitApplication,
                 DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            Hide();
             bool? result = dialog.ShowDialog();
             if (result == true)
+            {
                 Close();
+                return;
+            }
+            Show();
         }
 
         public void HomeDown(object sender, vGamePadEventArgs e)

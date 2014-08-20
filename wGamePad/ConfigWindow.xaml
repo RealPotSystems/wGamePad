@@ -15,16 +15,16 @@
         <Label x:Name="MessageTitle" Content="vGamePad環境設定" Grid.Row="0" Foreground="White" VerticalContentAlignment="Center" Margin="48,5,48,5" FontFamily="Segoe UI" FontSize="16"/>
         <Label x:Name="Exit" Content="&#xE17E;&#xE10A;" Foreground="White" Grid.Row="0" VerticalContentAlignment="Center" Margin="352,5,5,5" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="12" HorizontalContentAlignment="Center" MouseLeftButtonDown="Exit_MouseLeftButtonDown" />
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Content="&#xE1AA;"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol"/>
+            <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Content="&#xE1AA;" Click="SetPostion_Click"/>
+            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" IsEnabled="False"/>
+            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" IsEnabled="False"/>
             <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Click="Sound_Click"/>
             <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Click="ScreenRotate_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Vertical">
-            <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="40"/>
-            <Button Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="40"/>
-            <Button Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="40"/>
+            <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1"/>
+            <Button x:Name="AstTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1"/>
+            <Button x:Name="BtyTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1"/>
         </StackPanel>
         <TextBox x:Name="About" Grid.Row="3" Margin="10,0,10,10" IsReadOnly="True" Foreground="White" Background="Black" FontSize="12" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
     </Grid>
