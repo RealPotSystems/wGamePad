@@ -15,7 +15,7 @@ namespace vGamePad
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static vButtonDictionay dic = null;
+        private static vButtonDictionary dic = null;
         public static JoyStick devCon = new JoyStick();
 
         public MainWindow()
@@ -31,19 +31,19 @@ namespace vGamePad
             Width = screen.Bounds.Width;
             Height = screen.Bounds.Height;
 
-            // Sample
-            dic = new vButtonDictionay();
+            // ここにこのロジックを置くべきか？
+            dic = new vButtonDictionary();
 
             double top = double.MaxValue;
             double bottom = double.MinValue;
 
             foreach (UIElement ui in vGamePadCanvas.Children)
             {
-                foreach (string key in dic.vButtonDic.Keys)
+                foreach (string key in dic.Keys)
                 {
                     if (ui.Uid == key)
                     {
-                        var button = dic.vButtonDic[key];
+                        var button = dic[key];
 
                         button.Width = (double)ui.GetValue(WidthProperty);
                         button.Height = (double)ui.GetValue(HeightProperty);
@@ -80,90 +80,90 @@ namespace vGamePad
             // 一番上にあるボタンと一番下にあるボタンの下を求める
             vGamePadBase.Width = screen.Bounds.Width;
             vGamePadBase.Visibility = System.Windows.Visibility.Visible;
-            vGamePadBase.Height = bottom - top + 16;
-            vGamePadBase.SetValue(Canvas.TopProperty, top - 8);
+            vGamePadBase.Height = bottom - top + App.GRID * 2;
+            vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
 
             // 各イベントハンドラの登録
             SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
 
-            dic.vButtonDic["AnalogStick0"].DownAction += new EventHandler<vGamePadEventArgs>(AnalogStickDown);
-            dic.vButtonDic["AnalogStick0"].MoveAction += new EventHandler<vGamePadEventArgs>(AnalogStickMove);
-            dic.vButtonDic["AnalogStick0"].UpAction += new EventHandler<vGamePadEventArgs>(AnalogStickUp);
+            dic["AnalogStick0"].DownAction += new EventHandler<vGamePadEventArgs>(AnalogStickDown);
+            dic["AnalogStick0"].MoveAction += new EventHandler<vGamePadEventArgs>(AnalogStickMove);
+            dic["AnalogStick0"].UpAction += new EventHandler<vGamePadEventArgs>(AnalogStickUp);
 
-            dic.vButtonDic["AnalogStick1"].DownAction += new EventHandler<vGamePadEventArgs>(AnalogStickDown);
-            dic.vButtonDic["AnalogStick1"].MoveAction += new EventHandler<vGamePadEventArgs>(AnalogStickMove);
-            dic.vButtonDic["AnalogStick1"].UpAction += new EventHandler<vGamePadEventArgs>(AnalogStickUp);
+            dic["AnalogStick1"].DownAction += new EventHandler<vGamePadEventArgs>(AnalogStickDown);
+            dic["AnalogStick1"].MoveAction += new EventHandler<vGamePadEventArgs>(AnalogStickMove);
+            dic["AnalogStick1"].UpAction += new EventHandler<vGamePadEventArgs>(AnalogStickUp);
 
-            dic.vButtonDic["Button01"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
-            dic.vButtonDic["Button01"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
+            dic["Button01"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
+            dic["Button01"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
 
-            dic.vButtonDic["Button02"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
-            dic.vButtonDic["Button02"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
+            dic["Button02"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
+            dic["Button02"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
 
-            dic.vButtonDic["Button03"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
-            dic.vButtonDic["Button03"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
+            dic["Button03"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
+            dic["Button03"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
 
-            dic.vButtonDic["Button04"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
-            dic.vButtonDic["Button04"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
+            dic["Button04"].DownAction += new EventHandler<vGamePadEventArgs>(BarrageDown);
+            dic["Button04"].UpAction += new EventHandler<vGamePadEventArgs>(BarrageUp);
 
-            dic.vButtonDic["Button05"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button05"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button05"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button05"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button06"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button06"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button06"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button06"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button07"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button07"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button07"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button07"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button08"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button08"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button08"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button08"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button09"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button09"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button09"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button09"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button10"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button10"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button10"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button10"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button11"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button11"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button11"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button11"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button12"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
-            dic.vButtonDic["Button12"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
+            dic["Button12"].DownAction += new EventHandler<vGamePadEventArgs>(ButtonDown);
+            dic["Button12"].UpAction += new EventHandler<vGamePadEventArgs>(ButtonUp);
 
-            dic.vButtonDic["Button_UP"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
-            dic.vButtonDic["Button_UP"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
+            dic["Button_UP"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
+            dic["Button_UP"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
 
-            dic.vButtonDic["Button_DOWN"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
-            dic.vButtonDic["Button_DOWN"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
+            dic["Button_DOWN"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
+            dic["Button_DOWN"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
 
-            dic.vButtonDic["Button_LEFT"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
-            dic.vButtonDic["Button_LEFT"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
+            dic["Button_LEFT"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
+            dic["Button_LEFT"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
 
-            dic.vButtonDic["Button_RIGHT"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
-            dic.vButtonDic["Button_RIGHT"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
+            dic["Button_RIGHT"].DownAction += new EventHandler<vGamePadEventArgs>(CrossDown);
+            dic["Button_RIGHT"].UpAction += new EventHandler<vGamePadEventArgs>(CrossUp);
 
-            dic.vButtonDic["Keyboard"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
-            dic.vButtonDic["Keyboard"].UpAction += new EventHandler<vGamePadEventArgs>(KeyboardUp);
+            dic["Keyboard"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
+            dic["Keyboard"].UpAction += new EventHandler<vGamePadEventArgs>(KeyboardUp);
 
-            dic.vButtonDic["Crop"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
-            dic.vButtonDic["Crop"].UpAction += new EventHandler<vGamePadEventArgs>(CropUp);
+            dic["Crop"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
+            dic["Crop"].UpAction += new EventHandler<vGamePadEventArgs>(CropUp);
 
-            dic.vButtonDic["Config"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
-            dic.vButtonDic["Config"].UpAction += new EventHandler<vGamePadEventArgs>(ConfigUp);
+            dic["Config"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
+            dic["Config"].UpAction += new EventHandler<vGamePadEventArgs>(ConfigUp);
 
-            dic.vButtonDic["Exit"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
-            dic.vButtonDic["Exit"].UpAction += new EventHandler<vGamePadEventArgs>(ExitUp);
+            dic["Exit"].DownAction += new EventHandler<vGamePadEventArgs>(DefaultDown);
+            dic["Exit"].UpAction += new EventHandler<vGamePadEventArgs>(ExitUp);
 
-            dic.vButtonDic["Home"].DownAction += new EventHandler<vGamePadEventArgs>(HomeDown);
-            dic.vButtonDic["Home"].MoveAction += new EventHandler<vGamePadEventArgs>(HomeMove);
-            dic.vButtonDic["Home"].UpAction += new EventHandler<vGamePadEventArgs>(HomeUp);
+            dic["Home"].DownAction += new EventHandler<vGamePadEventArgs>(HomeDown);
+            dic["Home"].MoveAction += new EventHandler<vGamePadEventArgs>(HomeMove);
+            dic["Home"].UpAction += new EventHandler<vGamePadEventArgs>(HomeUp);
             // Sample
 
-            // デバッグ用イベントハンドラ
+#if DEBUG
+            // デバッグ用イベントハンドラは以下の３つにしておく
             // MouseDown="vGamePadCanvas_MouseDown"
             // MouseMove="vGamePadCanvas_MouseMove"
             // MouseUp="vGamePadCanvas_MouseUp"
-#if DEBUG
             vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
             vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
             vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
@@ -208,16 +208,16 @@ namespace vGamePad
 
         private void OnPointerDown(Point point, int id)
         {
-            foreach (string key in dic.vButtonDic.Keys)
+            foreach (string key in dic.Keys)
             {
-                if (dic.vButtonDic[key].vHitTest(point))
+                if (dic[key].vHitTest(point))
                 {
                     foreach (UIElement ui in vGamePadCanvas.Children)
                     {
                         if (ui.Uid == key)
                         {
                             // イベントハンドラが登録されている場合はDownイベントを実行する
-                            dic.vButtonDic[key].ActionEvent(vButton.ActionType.Down, ui, point, id);
+                            dic[key].ActionEvent(vButton.ActionType.Down, ui, point, id);
                             break;
                         }
                     }
@@ -228,16 +228,16 @@ namespace vGamePad
 
         private void OnPointerUp(Point point, int id)
         {
-            foreach (string key in dic.vButtonDic.Keys)
+            foreach (string key in dic.Keys)
             {
-                if (dic.vButtonDic[key].Id == id)
+                if (dic[key].Id == id)
                 {
-                    dic.vButtonDic[key].Id = int.MinValue;
+                    dic[key].Id = int.MinValue;
                     foreach (UIElement ui in vGamePadCanvas.Children)
                     {
                         if (ui.Uid == key)
                         {
-                            dic.vButtonDic[key].ActionEvent(vButton.ActionType.Up, ui, point);
+                            dic[key].ActionEvent(vButton.ActionType.Up, ui, point);
                             break;
                         }
                     }
@@ -248,15 +248,15 @@ namespace vGamePad
 
         private void OnPointerMove(Point point, int id)
         {
-            foreach (string key in dic.vButtonDic.Keys)
+            foreach (string key in dic.Keys)
             {
-                if (dic.vButtonDic[key].Id == id && dic.vButtonDic[key].Moving)
+                if (dic[key].Id == id && dic[key].Moving)
                 {
                     foreach (UIElement ui in vGamePadCanvas.Children)
                     {
                         if (ui.Uid == key)
                         {
-                            dic.vButtonDic[key].ActionEvent(vButton.ActionType.Move, ui, point);
+                            dic[key].ActionEvent(vButton.ActionType.Move, ui, point);
                             break;
                         }
                     }

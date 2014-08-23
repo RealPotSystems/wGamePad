@@ -24,6 +24,14 @@ namespace vGamePad
     public sealed partial class App : Application,IDisposable
     {
         /// <summary>
+        /// このプログラムのグリッド単位
+        /// </summary>
+        public static readonly int GRID = 16;
+        /// <summary>
+        /// このプログラムの動作モード
+        /// </summary>
+        public static bool MaintenanceMode = false;
+        /// <summary>
         /// 多重起動抑止のミューテックス
         /// </summary>
         private Mutex mutex = new Mutex(false, "vGamePad");

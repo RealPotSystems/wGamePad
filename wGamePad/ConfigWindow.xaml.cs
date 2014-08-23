@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
+using System.Collections.Generic;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using Microsoft.Win32;
 
 namespace vGamePad
@@ -20,22 +22,23 @@ namespace vGamePad
         private const string ScreenRotate_off = "\uE245";
         private const string check_on = "\uE0A2";
         private const string check_off = "\uE003";
+        private const string stick = "\uE10A";
 
         public ConfigWindow()
         {
             InitializeComponent();
 
+            // バージョン情報の編集
             FileVersionInfo ver =
                 FileVersionInfo.GetVersionInfo(
                 Assembly.GetExecutingAssembly().Location);
             About.Text = string.Format(versionFormat, ver.ProductName, ver.ProductVersion, ver.LegalCopyright, ver.CompanyName);
             About.Text += MainWindow.devCon.ToString();
 
+            // 回転機能ボタン
             ScreenRotate.IsEnabled = SensorPresent();
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
             Skeleton.Content = check_off;
-            Focus();
-
         }
 
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -130,6 +133,74 @@ namespace vGamePad
             catch
             {
             }
+        }
+
+        private void Maintenance_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
+            if (App.MaintenanceMode)
+            {
+                App.MaintenanceMode = false;
+
+                mainWindow.LeftContent.Content = stick;
+                mainWindow.RightContent.Content = stick;
+
+                List<UIElement> uiList = new List<UIElement>();
+                foreach (object c in mainWindow.vGamePadCanvas.Children)
+                {
+                    // System.Windows.Shapes.Path
+                    Debug.WriteLine(((UIElement)c).GetType());
+                    if (((UIElement)c).GetType().ToString() == "System.Windows.Shapes.Path")
+                    {
+                        uiList.Add((UIElement)c);
+                    }
+                }
+                foreach (var c in uiList)
+                {
+                    mainWindow.vGamePadCanvas.Children.Remove(c);
+                }
+                mainWindow.vGamePadCanvas.Background = new SolidColorBrush(Colors.Transparent);
+            }
+            else
+            {
+                App.MaintenanceMode = true;
+
+                ScaleTransform scaleTransform = new ScaleTransform();
+
+                mainWindow.LeftContent.Content = "左";
+                mainWindow.RightContent.Content = "右";
+                mainWindow.vGamePadCanvas.Background = new SolidColorBrush(Colors.DarkGray);
+                for (int i = 0; i < mainWindow.vGamePadCanvas.ActualWidth; i += App.GRID)
+                {
+                    Path path = new Path()
+                    {
+                        Data = new LineGeometry(new Point(i, 0), new Point(i, mainWindow.vGamePadCanvas.ActualHeight)),
+                        Stroke = Brushes.White,
+                        StrokeThickness = .5
+                    };
+
+                    path.Data.Transform = scaleTransform;
+
+                    mainWindow.vGamePadCanvas.Children.Add(path);
+                }
+
+                // 横線
+                for (int i = 0; i < mainWindow.vGamePadCanvas.ActualHeight; i += App.GRID)
+                {
+                    Path path = new Path()
+                    {
+                        Data = new LineGeometry(new Point(0, i), new Point(mainWindow.vGamePadCanvas.ActualWidth, i)),
+                        Stroke = Brushes.White,
+                        StrokeThickness = .5
+                    };
+
+                    path.Data.Transform = scaleTransform;
+
+                    mainWindow.vGamePadCanvas.Children.Add(path);
+                }
+            }
+            Close();
         }
     }
 }

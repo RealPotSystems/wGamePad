@@ -46,10 +46,10 @@ namespace vGamePad
             // 音を鳴らす
             PlayButtonSound.Play();
 
-            dic.vButtonDic[e.ui.Uid].Id = e.id;
+            dic[e.ui.Uid].Id = e.id;
 
             // 移動可能なコントロール
-            if (dic.vButtonDic[e.ui.Uid].Moving)
+            if (dic[e.ui.Uid].Moving)
             {
                 // この座標を中心点にする
                 // 中心点の計算
@@ -63,34 +63,34 @@ namespace vGamePad
         public void DefaultUp(object sender, vGamePadEventArgs e)
         {
             ChangeButtonStatus(e.ui, Colors.Black, Colors.White);
-            if (dic.vButtonDic[e.ui.Uid].Moving)
+            if (dic[e.ui.Uid].Moving)
             {
-                if (dic.vButtonDic[e.ui.Uid].Top != double.MaxValue)
+                if (dic[e.ui.Uid].Top != double.MaxValue)
                 {
                     e.ui.ClearValue(Canvas.BottomProperty);
-                    e.ui.SetValue(Canvas.TopProperty, dic.vButtonDic[e.ui.Uid].Top);
+                    e.ui.SetValue(Canvas.TopProperty, dic[e.ui.Uid].Top);
                 }
-                if (dic.vButtonDic[e.ui.Uid].Left != double.MaxValue)
+                if (dic[e.ui.Uid].Left != double.MaxValue)
                 {
                     e.ui.ClearValue(Canvas.RightProperty);
-                    e.ui.SetValue(Canvas.LeftProperty, dic.vButtonDic[e.ui.Uid].Left);
+                    e.ui.SetValue(Canvas.LeftProperty, dic[e.ui.Uid].Left);
                 }
-                if (dic.vButtonDic[e.ui.Uid].Bottom != double.MaxValue)
+                if (dic[e.ui.Uid].Bottom != double.MaxValue)
                 {
                     e.ui.ClearValue(Canvas.TopProperty);
-                    e.ui.SetValue(Canvas.BottomProperty, dic.vButtonDic[e.ui.Uid].Bottom);
+                    e.ui.SetValue(Canvas.BottomProperty, dic[e.ui.Uid].Bottom);
                 }
-                if (dic.vButtonDic[e.ui.Uid].Right != double.MaxValue)
+                if (dic[e.ui.Uid].Right != double.MaxValue)
                 {
                     e.ui.ClearValue(Canvas.LeftProperty);
-                    e.ui.SetValue(Canvas.RightProperty, dic.vButtonDic[e.ui.Uid].Right);
+                    e.ui.SetValue(Canvas.RightProperty, dic[e.ui.Uid].Right);
                 }
             }
         }
 
         public void DefaultMove(object sender, vGamePadEventArgs e)
         {
-            Point pos = dic.vButtonDic[e.ui.Uid].vGetPosition(e.point);
+            Point pos = dic[e.ui.Uid].vGetPosition(e.point);
             double width = (double)e.ui.GetValue(WidthProperty);
             double height = (double)e.ui.GetValue(HeightProperty);
             e.ui.ClearValue(Canvas.RightProperty);
@@ -101,44 +101,44 @@ namespace vGamePad
         
         public void AnalogStickDown(object sender, vGamePadEventArgs e)
         {
-            devCon.MoveStick(dic.vButtonDic[e.ui.Uid].Index, dic.vButtonDic[e.ui.Uid].vGetAxisX(e.point.X), dic.vButtonDic[e.ui.Uid].vGetAxisY(e.point.Y));
+            devCon.MoveStick(dic[e.ui.Uid].Index, dic[e.ui.Uid].vGetAxisX(e.point.X), dic[e.ui.Uid].vGetAxisY(e.point.Y));
             DefaultDown(sender, e);
         }
 
         public void AnalogStickUp(object sender, vGamePadEventArgs e)
         {
-            devCon.MoveStick(dic.vButtonDic[e.ui.Uid].Index, dic.vButtonDic[e.ui.Uid].vGetAxisX(double.MaxValue), dic.vButtonDic[e.ui.Uid].vGetAxisY(double.MaxValue));
+            devCon.MoveStick(dic[e.ui.Uid].Index, dic[e.ui.Uid].vGetAxisX(double.MaxValue), dic[e.ui.Uid].vGetAxisY(double.MaxValue));
             DefaultUp(sender, e);
         }
 
         public void AnalogStickMove(object sender, vGamePadEventArgs e)
         {
-            Point pos = dic.vButtonDic[e.ui.Uid].vGetPosition(e.point);
-            devCon.MoveStick(dic.vButtonDic[e.ui.Uid].Index, dic.vButtonDic[e.ui.Uid].vGetAxisX(pos.X), dic.vButtonDic[e.ui.Uid].vGetAxisY(pos.Y));
+            Point pos = dic[e.ui.Uid].vGetPosition(e.point);
+            devCon.MoveStick(dic[e.ui.Uid].Index, dic[e.ui.Uid].vGetAxisX(pos.X), dic[e.ui.Uid].vGetAxisY(pos.Y));
             DefaultMove(sender, e);
         }
 
         public void CrossDown(object sender, vGamePadEventArgs e)
         {
-            devCon.PushCross(dic.vButtonDic[e.ui.Uid].Index);
+            devCon.PushCross(dic[e.ui.Uid].Index);
             DefaultDown(sender, e);
         }
 
         public void CrossUp(object sender, vGamePadEventArgs e)
         {
-            devCon.FreeCross(dic.vButtonDic[e.ui.Uid].Index);
+            devCon.FreeCross(dic[e.ui.Uid].Index);
             DefaultUp(sender, e);
         }
 
         public void ButtonDown(object sender, vGamePadEventArgs e)
         {
-            devCon.PushButton(dic.vButtonDic[e.ui.Uid].Index);
+            devCon.PushButton(dic[e.ui.Uid].Index);
             DefaultDown(sender, e);
         }
 
         public void ButtonUp(object sender, vGamePadEventArgs e)
         {
-            devCon.FreeButton(dic.vButtonDic[e.ui.Uid].Index);
+            devCon.FreeButton(dic[e.ui.Uid].Index);
             DefaultUp(sender, e);
         }
 
@@ -148,7 +148,7 @@ namespace vGamePad
             DefaultDown(sender, e);
 
             // vJoyボタンダウン
-            devCon.PushButton(dic.vButtonDic[e.ui.Uid].Index);
+            devCon.PushButton(dic[e.ui.Uid].Index);
 
             // タイマーオブジェクトの有無を確認
             if (!vButtonTimerDic.ContainsKey(e.ui.Uid))
@@ -156,11 +156,11 @@ namespace vGamePad
                 vButtonTimerDic.Add(e.ui.Uid, new BarrageTimer(e.ui));
             }
             // 対象のボタンのタイマー状態で動作を切り分け
-            switch (dic.vButtonDic[e.ui.Uid].Barrage)
+            switch (dic[e.ui.Uid].Barrage)
             {
                 case vButton.BarrageState.TimerOn:
                     vButtonTimerDic[e.ui.Uid].Tick -= new EventHandler(BarrageTimerEvent);
-                    dic.vButtonDic[e.ui.Uid].Barrage = vButton.BarrageState.TimerOff;
+                    dic[e.ui.Uid].Barrage = vButton.BarrageState.TimerOff;
                     vButtonTimerDic[e.ui.Uid].Stop();
                     break;
                 case vButton.BarrageState.None:
@@ -168,7 +168,7 @@ namespace vGamePad
                     // 2秒間のタイマーセット
                     vButtonTimerDic[e.ui.Uid].Interval = new TimeSpan(0, 0, 2);
                     vButtonTimerDic[e.ui.Uid].Tick += new EventHandler(BarrageTimerEvent);
-                    dic.vButtonDic[e.ui.Uid].Barrage = vButton.BarrageState.WaitTimeout;
+                    dic[e.ui.Uid].Barrage = vButton.BarrageState.WaitTimeout;
                     vButtonTimerDic[e.ui.Uid].Start();
                     break;
                 case vButton.BarrageState.WaitTimeout:
@@ -180,7 +180,7 @@ namespace vGamePad
         {
             // デフォルト動作は不要
             // vJoyボタンアップ
-            devCon.FreeButton(dic.vButtonDic[e.ui.Uid].Index);
+            devCon.FreeButton(dic[e.ui.Uid].Index);
 
             // タイマーオブジェクトの有無を確認(※そもそもBarrageDownが先にくるが...)
             if (!vButtonTimerDic.ContainsKey(e.ui.Uid))
@@ -188,7 +188,7 @@ namespace vGamePad
                 vButtonTimerDic.Add(e.ui.Uid, new BarrageTimer(e.ui));
             }
             // 対象のボタンタイマー状態で動作を切り分け
-            switch (dic.vButtonDic[e.ui.Uid].Barrage)
+            switch (dic[e.ui.Uid].Barrage)
             {
                 case vButton.BarrageState.None:
                 case vButton.BarrageState.TimerOff:
@@ -196,7 +196,7 @@ namespace vGamePad
                     break;
                 case vButton.BarrageState.WaitTimeout:
                     vButtonTimerDic[e.ui.Uid].Tick -= new EventHandler(BarrageTimerEvent);
-                    dic.vButtonDic[e.ui.Uid].Barrage = vButton.BarrageState.TimerOff;
+                    dic[e.ui.Uid].Barrage = vButton.BarrageState.TimerOff;
                     vButtonTimerDic[e.ui.Uid].Stop();
                     ChangeButtonStatus(e.ui, Colors.Black, Colors.White);
                     break;
@@ -207,10 +207,10 @@ namespace vGamePad
         {
             Debug.WriteLine("BarrageTimerEvent:{0}",((BarrageTimer)sender).Ui.Uid);
 
-            if (dic.vButtonDic[((BarrageTimer)sender).Ui.Uid].Barrage == vButton.BarrageState.WaitTimeout)
+            if (dic[((BarrageTimer)sender).Ui.Uid].Barrage == vButton.BarrageState.WaitTimeout)
             {
                 // タイマーステータス TimerOn
-                dic.vButtonDic[((BarrageTimer)sender).Ui.Uid].Barrage = vButton.BarrageState.TimerOn;
+                dic[((BarrageTimer)sender).Ui.Uid].Barrage = vButton.BarrageState.TimerOn;
                 // インターバル 0.1秒
                 ((BarrageTimer)sender).Interval = new TimeSpan(0, 0, 0, 0, 100);
                 // 画面ボタン赤に
@@ -220,9 +220,9 @@ namespace vGamePad
                 PlayButtonSound.Play();
             }
             // vJoyボタンダウン
-            devCon.PushButton(dic.vButtonDic[((BarrageTimer)sender).Ui.Uid].Index);
+            devCon.PushButton(dic[((BarrageTimer)sender).Ui.Uid].Index);
             // vJoyボタンアップ
-            devCon.FreeButton(dic.vButtonDic[((BarrageTimer)sender).Ui.Uid].Index);
+            devCon.FreeButton(dic[((BarrageTimer)sender).Ui.Uid].Index);
         }
 
         // キーボードの起動
@@ -295,11 +295,11 @@ namespace vGamePad
             //　音
             PlayButtonSound.Play();
 
-            dic.vButtonDic[e.ui.Uid].Id = e.id;
-            dic.vButtonDic[e.ui.Uid].Range = Height;
+            dic[e.ui.Uid].Id = e.id;
+            dic[e.ui.Uid].Range = Height;
             vGamePadBase.Background = new SolidColorBrush(Colors.White);
             // 移動可能なコントロール
-            if (dic.vButtonDic[e.ui.Uid].Moving)
+            if (dic[e.ui.Uid].Moving)
             {
                 // この座標を中心点にする
                 // 中心点の計算
@@ -310,58 +310,59 @@ namespace vGamePad
 
         public void HomeMove(object sender, vGamePadEventArgs e)
         {
-            Point pos = dic.vButtonDic[e.ui.Uid].vGetPosition(e.point);
+            Point pos = dic[e.ui.Uid].vGetPosition(e.point);
+            pos.Y = ((int)(pos.Y / App.GRID)) * App.GRID;
             double height = (double)e.ui.GetValue(HeightProperty);
-            if (pos.Y < height / 2 + 8)
-                pos.Y = height / 2 + 8;
-            else if (pos.Y > (Height - vGamePadBase.Height + height / 2 + 8))
-                pos.Y = Height - vGamePadBase.Height + height / 2 + 8;
+            if (pos.Y < height / 2 + App.GRID)
+                pos.Y = height / 2 + App.GRID;
+            else if (pos.Y > (Height - vGamePadBase.Height + height / 2 + App.GRID))
+                pos.Y = Height - vGamePadBase.Height + height / 2 + App.GRID;
             e.ui.ClearValue(Canvas.BottomProperty);
             e.ui.SetValue(Canvas.TopProperty, pos.Y - height / 2);
-            vGamePadBase.SetValue(Canvas.TopProperty, pos.Y - height / 2 - 8);
+            vGamePadBase.SetValue(Canvas.TopProperty, pos.Y - height / 2 - App.GRID);
         }
 
         public void HomeUp(object sender, vGamePadEventArgs e)
         {
             this.vGamePadBase.Background = new SolidColorBrush(Colors.Black);
             ChangeButtonStatus(e.ui, Colors.Black, Colors.White);
-            if (dic.vButtonDic[e.ui.Uid].Moving)
+            if (dic[e.ui.Uid].Moving)
             {
-                Point pos = dic.vButtonDic[e.ui.Uid].vGetPosition(e.point);
+                Point pos = dic[e.ui.Uid].vGetPosition(e.point);
                 double height = (double)e.ui.GetValue(HeightProperty);
-                if (pos.Y < height / 2 + 8)
-                    pos.Y = height / 2 + 8;
-                else if (pos.Y > (Height - vGamePadBase.Height + height / 2 + 8))
-                    pos.Y = Height - vGamePadBase.Height + height / 2 + 8;
+                if (pos.Y < height / 2 + App.GRID)
+                    pos.Y = height / 2 + App.GRID;
+                else if (pos.Y > (Height - vGamePadBase.Height + height / 2 + App.GRID))
+                    pos.Y = Height - vGamePadBase.Height + height / 2 + App.GRID;
 
                 // 自分の座標以外を全部移動させる
-                double range = pos.Y - height / 2 - dic.vButtonDic[e.ui.Uid].Top;
+                double range = pos.Y - height / 2 - dic[e.ui.Uid].Top;
 
                 foreach (UIElement ui in vGamePadCanvas.Children)
                 {
-                    foreach (string key in dic.vButtonDic.Keys)
+                    foreach (string key in dic.Keys)
                     {
                         if (ui.Uid == "Home")
                             continue;
                         if (ui.Uid == key)
                         {
-                            if (dic.vButtonDic[key].Top != double.MaxValue)
+                            if (dic[key].Top != double.MaxValue)
                             {
-                                dic.vButtonDic[key].Top = dic.vButtonDic[key].Top + range;
+                                dic[key].Top = dic[key].Top + range;
                                 ui.ClearValue(Canvas.BottomProperty);
-                                ui.SetValue(Canvas.TopProperty, dic.vButtonDic[key].Top);
+                                ui.SetValue(Canvas.TopProperty, dic[key].Top);
                             }
-                            if (dic.vButtonDic[key].Bottom != double.MaxValue)
+                            if (dic[key].Bottom != double.MaxValue)
                             {
-                                dic.vButtonDic[key].Bottom = dic.vButtonDic[key].Bottom + range;
+                                dic[key].Bottom = dic[key].Bottom + range;
                                 ui.ClearValue(Canvas.TopProperty);
-                                ui.SetValue(Canvas.BottomProperty, dic.vButtonDic[key].Bottom);
+                                ui.SetValue(Canvas.BottomProperty, dic[key].Bottom);
                             }
                         }
                     }
                 }
-                vGamePadBase.SetValue(Canvas.TopProperty, pos.Y - height / 2 - 8);
-                dic.vButtonDic[e.ui.Uid].Top = pos.Y - height / 2;
+                vGamePadBase.SetValue(Canvas.TopProperty, pos.Y - height / 2 - App.GRID);
+                dic[e.ui.Uid].Top = pos.Y - height / 2;
             }
         }
     }

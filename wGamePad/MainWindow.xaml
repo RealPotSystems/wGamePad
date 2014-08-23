@@ -17,11 +17,11 @@
         <Grid x:Name="vGamePadBase" Background="Black" Style="{StaticResource gridStyle}"/>
         <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>
-            <Label Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>
+            <Label x:Name="LeftContent" Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>
         </Grid>
         <Grid x:Name="AnalogStick1" x:Uid="AnalogStick1" Width="128" Height="128" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>
-            <Label Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>
+            <Label x:Name="RightContent" Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>
         </Grid>
         <Grid x:Name="Button01" x:Uid="Button01" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>

@@ -4,6 +4,13 @@
         Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
         Title="ConfigWindow" Height="500" Width="400" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="vGamePadStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Opacity="0.75" Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -15,11 +22,11 @@
         <Label x:Name="MessageTitle" Content="vGamePad環境設定" Grid.Row="0" Foreground="White" VerticalContentAlignment="Center" Margin="48,5,48,5" FontFamily="Segoe UI" FontSize="16"/>
         <Label x:Name="Exit" Content="&#xE17E;&#xE10A;" Foreground="White" Grid.Row="0" VerticalContentAlignment="Center" Margin="352,5,5,5" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="12" HorizontalContentAlignment="Center" MouseLeftButtonDown="Exit_MouseLeftButtonDown" />
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Content="&#xE1AA;" Click="SetPostion_Click" Background="Black" Foreground="White"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" IsEnabled="False"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" IsEnabled="False"/>
-            <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Click="Sound_Click" Background="Black" Foreground="White"/>
-            <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" FontSize="40" Click="ScreenRotate_Click" Background="Black" Foreground="White"/>
+            <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE1AA;" Click="SetPostion_Click" Style="{StaticResource defaultButton}"/>
+            <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="Sound_Click" Style="{StaticResource defaultButton}"/>
+            <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="ScreenRotate_Click" Style="{StaticResource defaultButton}"/>
+            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" IsEnabled="False" Style="{StaticResource defaultButton}"/>
+            <Button x:Name="Maintenance" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White"/>

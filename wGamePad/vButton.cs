@@ -313,35 +313,35 @@ namespace vGamePad
         }
     }
 
-    public class vButtonDictionay
+    public class vButtonDictionary : Dictionary<string,vButton>
     {
-        public Dictionary<string, vButton> vButtonDic = new Dictionary<string, vButton>();
+//        public Dictionary<string, vButton> vButtonDic = new Dictionary<string, vButton>();
 
-        public vButtonDictionay()
+        public vButtonDictionary()
         {
-            vButtonDic.Add("AnalogStick0", new vButton() { Index = 0, Top = 360.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
-            vButtonDic.Add("AnalogStick1", new vButton() { Index = 1, Top = 360.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
-            vButtonDic.Add("Button01", new vButton() { Index = 0, Top = 120.0, Right = 100.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button02", new vButton() { Index = 1, Top = 170.0, Right = 50.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button03", new vButton() { Index = 2, Top = 220.0, Right = 100.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button04", new vButton() { Index = 3, Top = 170.0, Right = 150.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button05", new vButton() { Index = 4, Top = 50.0, Right = 150.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button06", new vButton() { Index = 5, Top = 50.0, Right = 80.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button07", new vButton() { Index = 6, Top = 50.0, Left = 220.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button08", new vButton() { Index = 7, Top = 50.0, Right = 220.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button09", new vButton() { });
-            vButtonDic.Add("Button10", new vButton() { Index = 9, Top = 240.0, Left = 210.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button11", new vButton() { });
-            vButtonDic.Add("Button12", new vButton() { Index = 11, Top = 240.0, Right = 210.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button_UP", new vButton() { Index = 0, Top = 100.0, Left = 100.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button_DOWN", new vButton() { Index = 2, Top = 200.0, Left = 100.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button_LEFT", new vButton() { Index = 3, Top = 150.0, Left = 50.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Button_RIGHT", new vButton() { Index = 1, Top = 150.0, Left = 150.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Keyboard", new vButton() { Top = 300.0 , Left = 300.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Crop", new vButton() { Top = 300.0, Right = 300.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Config", new vButton() { Top = 20.0, Right = 60.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Exit", new vButton() { Top = 20.0, Right = 20.0, Visible = Visibility.Visible });
-            vButtonDic.Add("Home", new vButton() { Top = 20.0, Left = 0.0, Visible = Visibility.Visible, Moving = true });
+            Add("AnalogStick0", new vButton() { Index = 0, Top = 352.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
+            Add("AnalogStick1", new vButton() { Index = 1, Top = 352.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
+            Add("Button01", new vButton() { Index = 0, Top = 208.0, Right = 240.0, Visible = Visibility.Visible });
+            Add("Button02", new vButton() { Index = 1, Top = 256.0, Right = 192.0, Visible = Visibility.Visible });
+            Add("Button03", new vButton() { Index = 2, Top = 304.0, Right = 240.0, Visible = Visibility.Visible });
+            Add("Button04", new vButton() { Index = 3, Top = 256.0, Right = 288.0, Visible = Visibility.Visible });
+            Add("Button05", new vButton() { Index = 4, Top = 512.0, Right = 176.0, Visible = Visibility.Visible });
+            Add("Button06", new vButton() { Index = 5, Top = 416.0, Right = 240.0, Visible = Visibility.Visible });
+            Add("Button07", new vButton() { Index = 6, Top = 256.0, Left = 64.0, Visible = Visibility.Visible });
+            Add("Button08", new vButton() { Index = 7, Top = 256.0, Left = 176.0, Visible = Visibility.Visible });
+            Add("Button09", new vButton() { });
+            Add("Button10", new vButton() { Index = 9, Top = 336.0, Left = 240.0, Visible = Visibility.Visible });
+            Add("Button11", new vButton() { });
+            Add("Button12", new vButton() { Index = 11, Top = 512.0, Right = 48.0, Visible = Visibility.Visible });
+            Add("Button_UP", new vButton() { Index = 0, Top = 160.0, Right = 80.0, Visible = Visibility.Visible });
+            Add("Button_DOWN", new vButton() { Index = 2, Top = 256.0, Right = 80.0, Visible = Visibility.Visible });
+            Add("Button_LEFT", new vButton() { Index = 3, Top = 208.0, Right = 128.0, Visible = Visibility.Visible });
+            Add("Button_RIGHT", new vButton() { Index = 1, Top = 208.0, Right = 32.0, Visible = Visibility.Visible });
+            Add("Keyboard", new vButton() { Top = 432.0 , Left = 240.0, Visible = Visibility.Visible });
+            Add("Crop", new vButton() { Top = 512, Left = 176.0, Visible = Visibility.Visible });
+            Add("Config", new vButton() { Top = 16.0, Right = 60.0, Visible = Visibility.Visible });
+            Add("Exit", new vButton() { Top = 16.0, Right = 16.0, Visible = Visibility.Visible });
+            Add("Home", new vButton() { Top = 16.0, Left = 16.0, Visible = Visibility.Visible, Moving = true });
         }
     }
 }
