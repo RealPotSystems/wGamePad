@@ -174,11 +174,14 @@ namespace vGamePad
         /// 仮想ボタンの高さ
         /// </summary>
         public double Height { set; get; }
-
         // 移動可能
         public bool Moving { set; get; }
         // 移動可能距離(中心点からの高さ、幅)
         public double Range { set; get; }
+        /// <summary>
+        /// 管理対象ボタン
+        /// </summary>
+        public bool Fixed { set; get; }
 
         // 連射機能
         public BarrageState Barrage { set; get; }
@@ -208,12 +211,15 @@ namespace vGamePad
             Width = double.MaxValue;
             Height = double.MaxValue;
 
-            // 移動不可だがレンジは一応50で
+            // 移動不可
             Moving = false;
             Range = 32.0;
 
             // 連射状態
             Barrage = BarrageState.None;
+
+            // 再配置可能
+            Fixed = false;
         }
 
         public bool vHitTest(Point now)
@@ -280,7 +286,6 @@ namespace vGamePad
 
         public long vGetAxisY(double NowY)
         {
-            //return ((m_home.Y + scope - m_point.Y) * 100) / ((scope - 5) * 2);
             double y;
             // 中心座標を計算する
             if (Top != double.MaxValue)
@@ -294,7 +299,6 @@ namespace vGamePad
 
         public long vGetAxisX(double NowX)
         {
-            //return ((m_home.X + scope - m_point.X) * 100) / ((scope - 5) * 2);
             double x;
             // 中心座標を計算する
             if (Left != double.MaxValue)
@@ -304,27 +308,20 @@ namespace vGamePad
             if (NowX == double.MaxValue)
                 return 50;
 
-            double k = 50.0 / Range * Range * Range;
-
-            //double z = (x + Range - NowX) * (x + Range - NowX) * (x + Range - NowX) * 0.000256;
-            //System.Diagnostics.Debug.WriteLine(z);
-            //return (long)(k * (x - NowX) * (x - NowX) * (x - NowX) - 50) * -1;
             return (long)((x + Range - NowX) * 100 / (Range * 2));
         }
     }
 
     public class vButtonDictionary : Dictionary<string,vButton>
     {
-//        public Dictionary<string, vButton> vButtonDic = new Dictionary<string, vButton>();
-
         public vButtonDictionary()
         {
             Add("AnalogStick0", new vButton() { Index = 0, Top = 352.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
             Add("AnalogStick1", new vButton() { Index = 1, Top = 352.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
-            Add("Button01", new vButton() { Index = 0, Top = 208.0, Right = 240.0, Visible = Visibility.Visible });
-            Add("Button02", new vButton() { Index = 1, Top = 256.0, Right = 192.0, Visible = Visibility.Visible });
-            Add("Button03", new vButton() { Index = 2, Top = 304.0, Right = 240.0, Visible = Visibility.Visible });
-            Add("Button04", new vButton() { Index = 3, Top = 256.0, Right = 288.0, Visible = Visibility.Visible });
+            Add("Button01", new vButton() { Index = 0, Top = 128.0, Right = 80.0, Visible = Visibility.Visible });
+            Add("Button02", new vButton() { Index = 1, Top = 192.0, Right = 16.0, Visible = Visibility.Visible });
+            Add("Button03", new vButton() { Index = 2, Top = 256.0, Right = 80.0, Visible = Visibility.Visible });
+            Add("Button04", new vButton() { Index = 3, Top = 192.0, Right = 144.0, Visible = Visibility.Visible });
             Add("Button05", new vButton() { Index = 4, Top = 512.0, Right = 176.0, Visible = Visibility.Visible });
             Add("Button06", new vButton() { Index = 5, Top = 416.0, Right = 240.0, Visible = Visibility.Visible });
             Add("Button07", new vButton() { Index = 6, Top = 256.0, Left = 64.0, Visible = Visibility.Visible });
@@ -333,15 +330,15 @@ namespace vGamePad
             Add("Button10", new vButton() { Index = 9, Top = 336.0, Left = 240.0, Visible = Visibility.Visible });
             Add("Button11", new vButton() { });
             Add("Button12", new vButton() { Index = 11, Top = 512.0, Right = 48.0, Visible = Visibility.Visible });
-            Add("Button_UP", new vButton() { Index = 0, Top = 160.0, Right = 80.0, Visible = Visibility.Visible });
-            Add("Button_DOWN", new vButton() { Index = 2, Top = 256.0, Right = 80.0, Visible = Visibility.Visible });
-            Add("Button_LEFT", new vButton() { Index = 3, Top = 208.0, Right = 128.0, Visible = Visibility.Visible });
-            Add("Button_RIGHT", new vButton() { Index = 1, Top = 208.0, Right = 32.0, Visible = Visibility.Visible });
-            Add("Keyboard", new vButton() { Top = 432.0 , Left = 240.0, Visible = Visibility.Visible });
+            Add("Button_UP", new vButton() { Index = 0, Top = 192.0, Right = 240.0, Visible = Visibility.Visible });
+            Add("Button_DOWN", new vButton() { Index = 2, Top = 320.0, Right = 240.0, Visible = Visibility.Visible });
+            Add("Button_LEFT", new vButton() { Index = 3, Top = 256.0, Right = 288.0, Visible = Visibility.Visible });
+            Add("Button_RIGHT", new vButton() { Index = 1, Top = 256.0, Right = 192.0, Visible = Visibility.Visible });
+            Add("Keyboard", new vButton() { Top = 432.0, Left = 240.0, Visible = Visibility.Visible });
             Add("Crop", new vButton() { Top = 512, Left = 176.0, Visible = Visibility.Visible });
-            Add("Config", new vButton() { Top = 16.0, Right = 60.0, Visible = Visibility.Visible });
-            Add("Exit", new vButton() { Top = 16.0, Right = 16.0, Visible = Visibility.Visible });
-            Add("Home", new vButton() { Top = 16.0, Left = 16.0, Visible = Visibility.Visible, Moving = true });
+            Add("Config", new vButton() { Top = 16.0, Right = 208.0, Visible = Visibility.Visible, Fixed = true });
+            Add("Exit", new vButton() { Top = 16.0, Right = 128.0, Visible = Visibility.Visible, Fixed = true });
+            Add("Home", new vButton() { Top = 16.0, Left = 16.0, Visible = Visibility.Visible, Moving = true, Fixed = true });
         }
     }
 }

@@ -329,6 +329,7 @@ namespace vGamePad
             if (dic[e.ui.Uid].Moving)
             {
                 Point pos = dic[e.ui.Uid].vGetPosition(e.point);
+                pos.Y = ((int)(pos.Y / App.GRID)) * App.GRID;
                 double height = (double)e.ui.GetValue(HeightProperty);
                 if (pos.Y < height / 2 + App.GRID)
                     pos.Y = height / 2 + App.GRID;
@@ -346,6 +347,8 @@ namespace vGamePad
                             continue;
                         if (ui.Uid == key)
                         {
+                            if (dic[key].Fixed)
+                                break;
                             if (dic[key].Top != double.MaxValue)
                             {
                                 dic[key].Top = dic[key].Top + range;

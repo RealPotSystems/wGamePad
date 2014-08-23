@@ -122,17 +122,17 @@
             <Ellipse Style="{StaticResource ellipseStyle}"/>
             <Label Content="&#xE123;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Config" x:Uid="Config" Width="32" Height="32" Style="{StaticResource gridStyle}">
-            <Ellipse StrokeThickness="2" Style="{StaticResource ellipseStyle}"/>
-            <Label Content="&#xE115;" FontWeight="Normal" FontSize="16" Style="{StaticResource labelStyle}"/>
+        <Grid x:Name="Config" x:Uid="Config" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE115;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Exit" x:Uid="Exit" Width="32" Height="32" Style="{StaticResource gridStyle}">
-            <Ellipse StrokeThickness="2" Style="{StaticResource ellipseStyle}"/>
-            <Label Content="&#xE10A;" FontWeight="Normal" FontSize="16" Style="{StaticResource labelStyle}"/>
+        <Grid x:Name="Exit" x:Uid="Exit" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE10A;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Home" x:Uid="Home" Width="32" Height="32" Style="{StaticResource gridStyle}">
-            <Ellipse StrokeThickness="2" Style="{StaticResource ellipseStyle}"/>
-            <Label Content="&#xE154;" FontWeight="Normal" FontSize="16" Style="{StaticResource labelStyle}"/>
+        <Grid x:Name="Home" x:Uid="Home" Style="{StaticResource gridStyle}">
+            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Label Content="&#xE154;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
     </Canvas>
 </Window>
