@@ -34,6 +34,7 @@ namespace vGamePad
             ScreenRotate.IsEnabled = SensorPresent();
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
             Skeleton.Content = check_off;
+            Focus();
 
         }
 
@@ -73,7 +74,11 @@ namespace vGamePad
         private void ScreenRotate_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            SendKeys.Send("^{ESC}o");
+            NativeMethods.keybd_event(NativeMethods.VK_LWIN, 0, 0, (UIntPtr)0);
+            byte cd = (byte)char.ConvertToUtf32("O", 0);
+            NativeMethods.keybd_event(cd, 0, 0, (UIntPtr)0);
+            NativeMethods.keybd_event(cd, 0, 2, (UIntPtr)0);
+            NativeMethods.keybd_event(NativeMethods.VK_LWIN, 0, 2, (UIntPtr)0);
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
         }
 
@@ -81,10 +86,10 @@ namespace vGamePad
         {
             try
             {
-                RegistryKey rKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation");
-                return (bool)rKey.GetValue("SensorPresent");
+                int ret = (int)Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation", "SensorPresent", 0);
+                return ret == 1 ? true : false;
             }
-            catch(NullReferenceException)
+            catch
             {
                 return false;
             }
@@ -94,14 +99,13 @@ namespace vGamePad
         {
             try
             {
-                RegistryKey rKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation");
-                return (bool)rKey.GetValue("AutoRotation");
+                int ret = (int)Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation", "Enable", 0);
+                return ret == 1 ? true : false;
             }
-            catch (NullReferenceException)
+            catch
             {
                 return false;
             }
-
         }
 
         private void SetPostion_Click(object sender, RoutedEventArgs e)

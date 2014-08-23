@@ -304,8 +304,11 @@ namespace vGamePad
             if (NowX == double.MaxValue)
                 return 50;
 
-            double z = (x + Range - NowX) * (x + Range - NowX) * (x + Range - NowX) * 0.000256;
-            System.Diagnostics.Debug.WriteLine(z);
+            double k = 50.0 / Range * Range * Range;
+
+            //double z = (x + Range - NowX) * (x + Range - NowX) * (x + Range - NowX) * 0.000256;
+            //System.Diagnostics.Debug.WriteLine(z);
+            //return (long)(k * (x - NowX) * (x - NowX) * (x - NowX) - 50) * -1;
             return (long)((x + Range - NowX) * 100 / (Range * 2));
         }
     }

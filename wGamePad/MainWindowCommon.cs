@@ -41,9 +41,9 @@ namespace vGamePad
         public const int GWL_EXSTYLE = -20;
         public const int WS_EX_NOACTIVATE = 0x8000000;
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
         internal static extern uint SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
         internal static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
         public const int SWP_NOSIZE = 0x0001;
@@ -55,7 +55,11 @@ namespace vGamePad
         public const int HWND_NOTOPMOST = -2;
         [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
         [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
-        public static extern bool SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
+        internal static extern bool SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int cx, int cy, int uFlags);
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        internal static extern uint keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+
+        public const byte VK_LWIN = 0x5B;
     }
 
     public partial class MainWindow : Window
