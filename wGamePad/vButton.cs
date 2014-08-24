@@ -331,13 +331,9 @@ namespace vGamePad
 
     public class vButtonDictionary : Dictionary<string,vButton>
     {
-        public vButtonDictionary()
+        public void SetDefaultLayout()
         {
-            // 起動時のレイアウトを取得する
-            int layoutIndex = Properties.Settings.Default.Layout;
-
-
-
+            Clear();
             Add("AnalogStick0", new vButton() { Index = 0, Top = 352.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
             Add("AnalogStick1", new vButton() { Index = 1, Top = 352.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
             Add("Button01", new vButton() { Index = 0, Top = 128.0, Right = 96.0, Visible = Visibility.Visible });
@@ -361,15 +357,40 @@ namespace vGamePad
             Add("Config", new vButton() { Top = 16.0, Right = 208.0, Visible = Visibility.Visible, Fixed = true });
             Add("Exit", new vButton() { Top = 16.0, Right = 128.0, Visible = Visibility.Visible, Fixed = true });
             Add("Home", new vButton() { Top = 16.0, Left = 16.0, Visible = Visibility.Visible, Moving = true, Fixed = true });
+        }
 
+    }
 
+    public class vLayoutControl
+    {
+        public static vButtonDictionary LoadLayout(int n)
+        {
+            vButtonDictionary d;
+            if ( n == 0 )
+            {
+                // デフォルト
+                d = new vButtonDictionary();
+                d.SetDefaultLayout();
+                return d;
+            }
+            var serializer = new DataContractSerializer(typeof(vButtonDictionary));
+            XmlReader xml = XmlReader.Create(@"D:\Users\manabe\Documents\DataStore\Test.xml");
+            d = (vButtonDictionary)serializer.ReadObject(xml);
+            xml.Close();
+            return d;
+        }
 
+        public static void SaveLayout(int n, vButtonDictionary d)
+        {
             var serializer = new DataContractSerializer(typeof(vButtonDictionary));
             using (var ms = new MemoryStream())
             {
-                serializer.WriteObject(ms, this);
+                serializer.WriteObject(ms, d); // シリアライズ
                 var xml = Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Length);
-                System.Diagnostics.Debug.WriteLine(xml);
+                Encoding utf8 = Encoding.GetEncoding("utf-8");
+                StreamWriter writer = new StreamWriter(@"D:\Users\manabe\Documents\DataStore\Test.xml", true, utf8);
+                writer.WriteLine(xml);
+                writer.Close();
             }
         }
     }

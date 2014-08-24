@@ -6,6 +6,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Runtime.Serialization;
+using System.Xml;
 using DeviceControl;
 
 namespace vGamePad
@@ -32,7 +34,7 @@ namespace vGamePad
             Height = screen.Bounds.Height;
 
             // ここにこのロジックを置くべきか？
-            dic = new vButtonDictionary();
+            dic = vLayoutControl.LoadLayout(0);
 
             double top = double.MaxValue;
             double bottom = double.MinValue;

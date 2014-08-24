@@ -123,11 +123,11 @@
             <Label Content="&#xE123;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
         <Grid x:Name="Config" x:Uid="Config" Style="{StaticResource gridStyle}">
-            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Ellipse Style="{StaticResource ellipseStyle}" Fill="Red"/>
             <Label Content="&#xE115;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
         <Grid x:Name="Exit" x:Uid="Exit" Style="{StaticResource gridStyle}">
-            <Ellipse Style="{StaticResource ellipseStyle}"/>
+            <Ellipse Style="{StaticResource ellipseStyle}" Fill="Red"/>
             <Label Content="&#xE10A;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
         <Grid x:Name="Home" x:Uid="Home" Style="{StaticResource gridStyle}">
