@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Data;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Runtime.Serialization;
@@ -27,63 +28,8 @@ namespace vGamePad
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            var screen = System.Windows.Forms.Screen.PrimaryScreen;
-            Left = screen.Bounds.Left;
-            Top = screen.Bounds.Top;
-            Width = screen.Bounds.Width;
-            Height = screen.Bounds.Height;
-
             // ここにこのロジックを置くべきか？
             dic = vLayoutControl.LoadLayout(0);
-
-            double top = double.MaxValue;
-            double bottom = double.MinValue;
-
-            foreach (UIElement ui in vGamePadCanvas.Children)
-            {
-                foreach (string key in dic.Keys)
-                {
-                    if (ui.Uid == key)
-                    {
-                        var button = dic[key];
-
-                        button.Width = (double)ui.GetValue(WidthProperty);
-                        button.Height = (double)ui.GetValue(HeightProperty);
-
-                        if (button.Top != double.MaxValue)
-                        {
-                            ui.SetValue(Canvas.TopProperty, button.Top);
-                            if (button.Top < top)
-                                top = button.Top;
-                            if ((button.Top + button.Height) > bottom)
-                                bottom = button.Top + button.Height;
-                        }
-                        if (button.Left != double.MaxValue)
-                        {
-                            ui.SetValue(Canvas.LeftProperty, button.Left);
-                        }
-                        if (button.Bottom != double.MaxValue)
-                        {
-                            ui.SetValue(Canvas.BottomProperty, button.Bottom);
-                            if ((button.Height - button.Bottom) < top)
-                                top = button.Height - button.Bottom;
-                            if ((Height - button.Bottom) > bottom)
-                                bottom = Height - button.Bottom;
-                        }
-                        if (button.Right != double.MaxValue)
-                        {
-                            ui.SetValue(Canvas.RightProperty, button.Right);
-                        }
-                        ui.SetValue(Canvas.VisibilityProperty, button.Visible);
-                        break;
-                    }
-                }
-            }
-            // 一番上にあるボタンと一番下にあるボタンの下を求める
-            vGamePadBase.Width = screen.Bounds.Width;
-            vGamePadBase.Visibility = System.Windows.Visibility.Visible;
-            vGamePadBase.Height = bottom - top + App.GRID * 2;
-            vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
 
             // 各イベントハンドラの登録
             SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
@@ -159,17 +105,13 @@ namespace vGamePad
             dic["Home"].DownAction += new EventHandler<vGamePadEventArgs>(HomeDown);
             dic["Home"].MoveAction += new EventHandler<vGamePadEventArgs>(HomeMove);
             dic["Home"].UpAction += new EventHandler<vGamePadEventArgs>(HomeUp);
-            // Sample
 
-#if DEBUG
-            // デバッグ用イベントハンドラは以下の３つにしておく
-            // MouseDown="vGamePadCanvas_MouseDown"
-            // MouseMove="vGamePadCanvas_MouseMove"
-            // MouseUp="vGamePadCanvas_MouseUp"
-            vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
-            vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
-            vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
-#endif
+            AstClock astclock = this.Resources["astClock"] as AstClock;
+            astclock.provider = this.Resources["CurrentAstDateTime"] as ObjectDataProvider;
+            astclock.Start();
+
+            PowerStatus powerstatus = this.Resources["powerStatus"] as PowerStatus;
+            powerstatus.provider = this.Resources["CurrentPowerStatus"] as ObjectDataProvider;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -188,7 +130,71 @@ namespace vGamePad
                     ex.Message);
                 dialog.ShowDialog(); 
                 Close();
+                return;
             }
+
+            // ディスプレイのサイズに合わせる
+            SystemEvents_DisplaySettingsChanged(null, null);
+
+            double top = double.MaxValue;
+            double bottom = double.MinValue;
+
+            foreach (UIElement ui in vGamePadCanvas.Children)
+            {
+                foreach (string key in dic.Keys)
+                {
+                    if (ui.Uid == key)
+                    {
+                        var button = dic[key];
+
+                        button.Width = (double)ui.GetValue(WidthProperty);
+                        button.Height = (double)ui.GetValue(HeightProperty);
+
+                        if (button.Top != double.MaxValue)
+                        {
+                            ui.SetValue(Canvas.TopProperty, button.Top);
+                            if (button.Top < top)
+                                top = button.Top;
+                            if ((button.Top + button.Height) > bottom)
+                                bottom = button.Top + button.Height;
+                        }
+                        if (button.Left != double.MaxValue)
+                        {
+                            ui.SetValue(Canvas.LeftProperty, button.Left);
+                        }
+                        if (button.Bottom != double.MaxValue)
+                        {
+                            ui.SetValue(Canvas.BottomProperty, button.Bottom);
+                            if ((button.Height - button.Bottom) < top)
+                                top = button.Height - button.Bottom;
+                            if ((Height - button.Bottom) > bottom)
+                                bottom = Height - button.Bottom;
+                        }
+                        if (button.Right != double.MaxValue)
+                        {
+                            ui.SetValue(Canvas.RightProperty, button.Right);
+                        }
+                        ui.SetValue(Canvas.VisibilityProperty, button.Visible);
+                        break;
+                    }
+                }
+            }
+
+            // 一番上にあるボタンと一番下にあるボタンの下を求める
+            vGamePadBase.Width = Width;
+            vGamePadBase.Visibility = System.Windows.Visibility.Visible;
+            vGamePadBase.Height = bottom - top + App.GRID * 2;
+            vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
+            vGameInformationWindow.SetValue(Canvas.LeftProperty, Width / 2 - vGameInformationWindow.Width / 2 );
+#if DEBUG
+            // デバッグ用イベントハンドラは以下の３つにしておく
+            // MouseDown="vGamePadCanvas_MouseDown"
+            // MouseMove="vGamePadCanvas_MouseMove"
+            // MouseUp="vGamePadCanvas_MouseUp"
+            vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
+            vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
+            vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
+#endif
         }
 
         private void ChangeButtonStatus(UIElement ui, Color A, Color B)

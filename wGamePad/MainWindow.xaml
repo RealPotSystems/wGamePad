@@ -1,6 +1,7 @@
 ﻿<Window x:Class="vGamePad.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:vGamePad"
         Title="MainWindow" Height="Auto" Width="Auto"
         WindowStyle="None" Topmost="True"
         Background="Transparent" ShowInTaskbar="False"
@@ -8,12 +9,23 @@
         Margin="0" Padding="0" Initialized="Window_Initialized" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
+            <local:AstClock x:Key="astClock"/>
+            <ObjectDataProvider MethodName="CurrentAstDateTime" x:Key="CurrentAstDateTime" ObjectInstance="{StaticResource astClock}"/>
+            <local:PowerStatus x:Key="powerStatus"/>
+            <ObjectDataProvider MethodName="CurrentPowerStatus" x:Key="CurrentPowerStatus" ObjectInstance="{StaticResource powerStatus}"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="vGamePadStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Canvas x:Name="vGamePadCanvas" Background="Transparent" Margin="0" IsManipulationEnabled="False" TouchDown="vGamePadCanvas_TouchDown" TouchMove="vGamePadCanvas_TouchMove" TouchUp="vGamePadCanvas_TouchUp">
+        <Grid x:Name="vGameInformationWindow" Width="512" Height="48" Visibility="Visible" Opacity="0.75">
+            <Rectangle x:Name="vGameFrame" Fill="Black" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="White" VerticalAlignment="Top" StrokeThickness="4" RadiusY="14.000" RadiusX="14.000" Height="48" Width="512"/>
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="AstClock" DataContext="{Binding Source={StaticResource astClock}}" Content="{Binding Source={StaticResource CurrentAstDateTime}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="8,-2,0,0" Width="248" Height="48" Foreground="White" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="16"/>
+                <Label x:Name="PowerStatus" DataContext="{Binding Source={StaticResource powerStatus}}" Content="{Binding Source={StaticResource CurrentPowerStatus}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="8,-2,0,0" Width="248" Height="48" Foreground="White" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="16"/>
+            </StackPanel>
+        </Grid>
         <Grid x:Name="vGamePadBase" Background="Black" Style="{StaticResource gridStyle}"/>
         <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>
@@ -122,13 +134,13 @@
             <Ellipse Style="{StaticResource ellipseStyle}"/>
             <Label Content="&#xE123;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
         </Grid>
-        <Grid x:Name="Config" x:Uid="Config" Style="{StaticResource gridStyle}">
-            <Ellipse Style="{StaticResource ellipseStyle}" Fill="Red"/>
-            <Label Content="&#xE115;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
+        <Grid x:Name="Config" x:Uid="Config" Style="{StaticResource gridStyle}" Width="48" Height="48">
+            <Ellipse Style="{StaticResource ellipseStyle}" StrokeThickness="4" Width="48" Height="48"/>
+            <Label Content="&#xE115;" FontWeight="Normal" Style="{StaticResource labelStyle}" FontSize="24"/>
         </Grid>
-        <Grid x:Name="Exit" x:Uid="Exit" Style="{StaticResource gridStyle}">
-            <Ellipse Style="{StaticResource ellipseStyle}" Fill="Red"/>
-            <Label Content="&#xE10A;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
+        <Grid x:Name="Exit" x:Uid="Exit" Style="{StaticResource gridStyle}" Width="48" Height="48">
+            <Ellipse Style="{StaticResource ellipseStyle}" StrokeThickness="4" Width="48" Height="48"/>
+            <Label Content="&#xE10A;" FontWeight="Normal" Style="{StaticResource labelStyle}" FontSize="24"/>
         </Grid>
         <Grid x:Name="Home" x:Uid="Home" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>

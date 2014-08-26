@@ -34,8 +34,12 @@ namespace vGamePad
 
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
-            Height = Screen.PrimaryScreen.Bounds.Height;
-            Width = Screen.PrimaryScreen.Bounds.Width;
+            var dpi = ViewExtensions.GetDpiScaleFactor(this);
+            var screen = System.Windows.Forms.Screen.PrimaryScreen;
+            Top = 0;
+            Left = 0;
+            Width = (int)(screen.Bounds.Width / dpi.X);
+            Height = (int)(screen.Bounds.Height / dpi.Y);
             vGamePadBase.Width = Width;
         }
 

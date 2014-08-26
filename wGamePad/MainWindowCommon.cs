@@ -2,9 +2,26 @@
 using System.Windows;
 using System.Windows.Interop;
 using System.Media;
+using System.Windows.Media;
 
 namespace vGamePad
 {
+    public static class ViewExtensions
+    {
+        public static Point GetDpiScaleFactor(this Visual visual)
+        {
+            var source = PresentationSource.FromVisual(visual);
+            if (source != null && source.CompositionTarget != null)
+            {
+                return new Point(
+                    source.CompositionTarget.TransformToDevice.M11,
+                    source.CompositionTarget.TransformToDevice.M22);
+            }
+
+            return new Point(1.0, 1.0);
+        }
+    }
+
     public static class PlayButtonSound
     {
         private static SoundPlayer player = new SoundPlayer(Properties.Resources.Sound01);

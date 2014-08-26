@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AstClock.cs" />
     <Compile Include="ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
@@ -84,6 +85,7 @@
     </Compile>
     <Compile Include="MainWindowCommon.cs" />
     <Compile Include="MainWindowEvents.cs" />
+    <Compile Include="PowerStatus.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="vButton.cs" />
     <Page Include="ConfigWindow.xaml">
