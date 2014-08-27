@@ -61,6 +61,33 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   {0} ボタンのみ表示する に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ConfigButton01 {
+            get {
+                return ResourceManager.GetString("ConfigButton01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} アストルティア時間を表示 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ConfigButton02 {
+            get {
+                return ResourceManager.GetString("ConfigButton02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} バッテリー残量を表示 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ConfigButton03 {
+            get {
+                return ResourceManager.GetString("ConfigButton03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   vGamePadメッセージ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string DialogTitle {

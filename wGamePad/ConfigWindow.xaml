@@ -29,9 +29,9 @@
             <Button x:Name="Maintenance" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Vertical">
-            <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White"/>
-            <Button x:Name="AstTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White"/>
-            <Button x:Name="BtyTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="32" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White"/>
+            <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="Skeleton_Click"/>
+            <Button x:Name="AstTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="AstTime_Click"/>
+            <Button x:Name="BtyTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="BtyTime_Click"/>
         </StackPanel>
         <TextBox x:Name="About" Grid.Row="3" Margin="10,0,10,10" IsReadOnly="True" Foreground="White" Background="Black" FontSize="12" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
     </Grid>

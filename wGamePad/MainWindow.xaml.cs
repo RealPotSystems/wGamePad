@@ -180,12 +180,38 @@ namespace vGamePad
                 }
             }
 
+            // 情報ウィンドウを出す
+            if (Properties.Settings.Default.Clock || Properties.Settings.Default.Battery)
+            {
+                vGameInformationWindow.Visibility = System.Windows.Visibility.Visible;
+                double w = 0;
+                if (Properties.Settings.Default.Clock)
+                {
+                    AstClock.Visibility = System.Windows.Visibility.Visible;
+                    w += 544 / 2;
+                }
+                else
+                {
+                    AstClock.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                if (Properties.Settings.Default.Battery)
+                {
+                    PowerStatus.Visibility = System.Windows.Visibility.Visible;
+                    w += 544 / 2;
+                }
+                else
+                {
+                    PowerStatus.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                vGameInformationWindow.Width = w;
+                vGameInformationWindow.SetValue(Canvas.LeftProperty, Width / 2 - vGameInformationWindow.Width / 2);
+            }
+
             // 一番上にあるボタンと一番下にあるボタンの下を求める
             vGamePadBase.Width = Width;
             vGamePadBase.Visibility = System.Windows.Visibility.Visible;
             vGamePadBase.Height = bottom - top + App.GRID * 2;
             vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
-            vGameInformationWindow.SetValue(Canvas.LeftProperty, Width / 2 - vGameInformationWindow.Width / 2 );
 #if DEBUG
             // デバッグ用イベントハンドラは以下の３つにしておく
             // MouseDown="vGamePadCanvas_MouseDown"
@@ -222,7 +248,7 @@ namespace vGamePad
                 {
                     foreach (UIElement ui in vGamePadCanvas.Children)
                     {
-                        if (ui.Uid == key)
+                        if (ui.Uid == key && ui.Visibility == System.Windows.Visibility.Visible)
                         {
                             // イベントハンドラが登録されている場合はDownイベントを実行する
                             dic[key].ActionEvent(vButton.ActionType.Down, ui, point, id);

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfigButton01" xml:space="preserve">
+    <value>{0} ボタンのみ表示する</value>
+  </data>
+  <data name="ConfigButton02" xml:space="preserve">
+    <value>{0} アストルティア時間を表示</value>
+  </data>
+  <data name="ConfigButton03" xml:space="preserve">
+    <value>{0} バッテリー残量を表示</value>
+  </data>
   <data name="DialogTitle" xml:space="preserve">
     <value>vGamePadメッセージ</value>
   </data>

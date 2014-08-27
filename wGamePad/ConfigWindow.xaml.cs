@@ -49,14 +49,19 @@ namespace vGamePad
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.Sound)
-            {
-                Sound.Content = sound_on;
-            }
-            else
-            {
-                Sound.Content = sound_off;
-            }
+            Sound.Content = Properties.Settings.Default.Sound ? sound_on : sound_off;
+
+            Skeleton.Content = Properties.Settings.Default.Skeleton ?
+                String.Format(Properties.Resources.ConfigButton01, check_on) :
+                String.Format(Properties.Resources.ConfigButton01, check_off);
+
+            AstTime.Content = Properties.Settings.Default.Clock ?
+                String.Format(Properties.Resources.ConfigButton02, check_on) :
+                String.Format(Properties.Resources.ConfigButton02, check_off);
+
+            BtyTime.Content = Properties.Settings.Default.Battery ?
+                String.Format(Properties.Resources.ConfigButton03, check_on) :
+                String.Format(Properties.Resources.ConfigButton03, check_off);
         }
 
         private void Sound_Click(object sender, RoutedEventArgs e)
@@ -201,6 +206,30 @@ namespace vGamePad
                 }
             }
             Close();
+        }
+
+        private void Skeleton_Click(object sender, RoutedEventArgs e)
+        {
+           Properties.Settings.Default.Skeleton = Properties.Settings.Default.Skeleton ? false : true;
+           Skeleton.Content = Properties.Settings.Default.Skeleton ?
+               String.Format(Properties.Resources.ConfigButton01, check_on) :
+               String.Format(Properties.Resources.ConfigButton01, check_off);
+        }
+
+        private void AstTime_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Clock = Properties.Settings.Default.Clock ? false : true;
+            AstTime.Content = Properties.Settings.Default.Clock ?
+                String.Format(Properties.Resources.ConfigButton02, check_on) :
+                String.Format(Properties.Resources.ConfigButton02, check_off);
+        }
+
+        private void BtyTime_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Battery = Properties.Settings.Default.Battery ? false : true;
+            BtyTime.Content = Properties.Settings.Default.Battery ?
+                String.Format(Properties.Resources.ConfigButton03, check_on) :
+                String.Format(Properties.Resources.ConfigButton03, check_off);
         }
     }
 }

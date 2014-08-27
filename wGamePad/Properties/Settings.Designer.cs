@@ -51,5 +51,41 @@ namespace vGamePad.Properties {
                 this["Layout"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Clock {
+            get {
+                return ((bool)(this["Clock"]));
+            }
+            set {
+                this["Clock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Battery {
+            get {
+                return ((bool)(this["Battery"]));
+            }
+            set {
+                this["Battery"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Skeleton {
+            get {
+                return ((bool)(this["Skeleton"]));
+            }
+            set {
+                this["Skeleton"] = value;
+            }
+        }
     }
 }
