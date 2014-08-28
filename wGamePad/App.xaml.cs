@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows;
+using System.Runtime;
 
 namespace vGamePad
 {
@@ -39,6 +40,14 @@ namespace vGamePad
         /// vGamePadのメインウィンドウ
         /// </summary>
         private MainWindow main = null;
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public App()
+        {
+            ProfileOptimization.SetProfileRoot(Environment.CurrentDirectory);
+            ProfileOptimization.StartProfile("vGamePad.JIT.Profile");
+        }
         /// <summary>
         /// vGamePadのスタートアップ処理
         /// </summary>

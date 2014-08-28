@@ -354,8 +354,8 @@ namespace vGamePad
             Add("Button_RIGHT", new vButton() { Index = 1, Top = 192.0, Left = 160.0, Visible = Visibility.Visible });
             Add("Keyboard", new vButton() { Top = 512.0, Left = 48.0, Visible = Visibility.Visible });
             Add("Crop", new vButton() { Top = 512, Right = 48.0, Visible = Visibility.Visible });
-            Add("Config", new vButton() { Top = 0.0, Left = 128.0, Visible = Visibility.Visible, Fixed = true });
-            Add("Exit", new vButton() { Top = 0.0, Right = 128.0, Visible = Visibility.Visible, Fixed = true });
+            Add("Config", new vButton() { Top = 0.0, Left = 72.0, Visible = Visibility.Visible, Fixed = true });
+            Add("Exit", new vButton() { Top = 0.0, Right = 72.0, Visible = Visibility.Visible, Fixed = true });
             Add("Home", new vButton() { Top = 16.0, Left = 16.0, Visible = Visibility.Visible, Moving = true, Fixed = true });
         }
 

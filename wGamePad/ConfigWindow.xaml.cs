@@ -39,6 +39,7 @@ namespace vGamePad
             ScreenRotate.IsEnabled = SensorPresent();
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
             Skeleton.Content = check_off;
+            BtyTime.IsEnabled = PowerStatus.GetSystemBatteryStatus();
         }
 
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
