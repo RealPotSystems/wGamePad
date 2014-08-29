@@ -39,7 +39,12 @@ namespace vGamePad
             ScreenRotate.IsEnabled = SensorPresent();
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
             Skeleton.Content = check_off;
-            BtyTime.IsEnabled = PowerStatus.GetSystemBatteryStatus();
+                
+            if ( PowerStatus.GetSystemBatteryStatus() == false ) // バッテリーなし
+            {
+                Properties.Settings.Default.Battery = false;
+                BtyTime.IsEnabled = PowerStatus.GetSystemBatteryStatus();
+            }
         }
 
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -143,6 +148,7 @@ namespace vGamePad
 
         private void Maintenance_Click(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
 
             if (App.MaintenanceMode)
@@ -211,6 +217,7 @@ namespace vGamePad
 
         private void Skeleton_Click(object sender, RoutedEventArgs e)
         {
+           PlayButtonSound.Play();
            Properties.Settings.Default.Skeleton = Properties.Settings.Default.Skeleton ? false : true;
            Skeleton.Content = Properties.Settings.Default.Skeleton ?
                String.Format(Properties.Resources.ConfigButton01, check_on) :
@@ -219,6 +226,7 @@ namespace vGamePad
 
         private void AstTime_Click(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             Properties.Settings.Default.Clock = Properties.Settings.Default.Clock ? false : true;
             AstTime.Content = Properties.Settings.Default.Clock ?
                 String.Format(Properties.Resources.ConfigButton02, check_on) :
@@ -227,6 +235,7 @@ namespace vGamePad
 
         private void BtyTime_Click(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             Properties.Settings.Default.Battery = Properties.Settings.Default.Battery ? false : true;
             BtyTime.Content = Properties.Settings.Default.Battery ?
                 String.Format(Properties.Resources.ConfigButton03, check_on) :

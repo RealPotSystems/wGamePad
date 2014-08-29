@@ -61,6 +61,42 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   {0} AST {1:00}:{2:00}  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AstClockString01 {
+            get {
+                return ResourceManager.GetString("AstClockString01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   朝 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AstClockString02 {
+            get {
+                return ResourceManager.GetString("AstClockString02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   夜 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AstClockString03 {
+            get {
+                return ResourceManager.GetString("AstClockString03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0}まであと{1:00}分{2:00}秒 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AstClockString04 {
+            get {
+                return ResourceManager.GetString("AstClockString04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} ボタンのみ表示する に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ConfigButton01 {
@@ -102,6 +138,96 @@ namespace vGamePad.Properties {
         internal static string ExitApplication {
             get {
                 return ResourceManager.GetString("ExitApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   充電してください に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString01 {
+            get {
+                return ResourceManager.GetString("PowerStatusString01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   初期化中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString02 {
+            get {
+                return ResourceManager.GetString("PowerStatusString02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   計算中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString03 {
+            get {
+                return ResourceManager.GetString("PowerStatusString03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   残りプレイ時間 {0:00}時間{1:00}分 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString04 {
+            get {
+                return ResourceManager.GetString("PowerStatusString04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   バッテリーがありません に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString05 {
+            get {
+                return ResourceManager.GetString("PowerStatusString05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ??? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString06 {
+            get {
+                return ResourceManager.GetString("PowerStatusString06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0,3} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString07 {
+            get {
+                return ResourceManager.GetString("PowerStatusString07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   充電中 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString08 {
+            get {
+                return ResourceManager.GetString("PowerStatusString08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   AC電源 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString09 {
+            get {
+                return ResourceManager.GetString("PowerStatusString09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} {1}%:{2} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PowerStatusString10 {
+            get {
+                return ResourceManager.GetString("PowerStatusString10", resourceCulture);
             }
         }
         

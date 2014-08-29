@@ -105,17 +105,16 @@ namespace vGamePad
             dic["Home"].DownAction += new EventHandler<vGamePadEventArgs>(HomeDown);
             dic["Home"].MoveAction += new EventHandler<vGamePadEventArgs>(HomeMove);
             dic["Home"].UpAction += new EventHandler<vGamePadEventArgs>(HomeUp);
-
-            AstClock astclock = this.Resources["astClock"] as AstClock;
-            astclock.provider = this.Resources["CurrentAstDateTime"] as ObjectDataProvider;
-            astclock.Start();
-
-            PowerStatus powerstatus = this.Resources["powerStatus"] as PowerStatus;
-            powerstatus.provider = this.Resources["CurrentPowerStatus"] as ObjectDataProvider;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            AstClock astclock = this.Resources["astClock"] as AstClock;
+            astclock.provider = this.Resources["CurrentAstDateTime"] as ObjectDataProvider;
+
+            PowerStatus powerstatus = this.Resources["powerStatus"] as PowerStatus;
+            powerstatus.provider = this.Resources["CurrentPowerStatus"] as ObjectDataProvider; 
+            
             try
             {
                 devCon.Initialize();
@@ -136,9 +135,7 @@ namespace vGamePad
             // ディスプレイのサイズに合わせる
             SystemEvents_DisplaySettingsChanged(null, null);
 
-            double top = double.MaxValue;
-            double bottom = double.MinValue;
-
+            // とりあええずここに配置
             foreach (UIElement ui in vGamePadCanvas.Children)
             {
                 foreach (string key in dic.Keys)
@@ -153,10 +150,6 @@ namespace vGamePad
                         if (button.Top != double.MaxValue)
                         {
                             ui.SetValue(Canvas.TopProperty, button.Top);
-                            if (button.Top < top)
-                                top = button.Top;
-                            if ((button.Top + button.Height) > bottom)
-                                bottom = button.Top + button.Height;
                         }
                         if (button.Left != double.MaxValue)
                         {
@@ -165,10 +158,6 @@ namespace vGamePad
                         if (button.Bottom != double.MaxValue)
                         {
                             ui.SetValue(Canvas.BottomProperty, button.Bottom);
-                            if ((button.Height - button.Bottom) < top)
-                                top = button.Height - button.Bottom;
-                            if ((Height - button.Bottom) > bottom)
-                                bottom = Height - button.Bottom;
                         }
                         if (button.Right != double.MaxValue)
                         {
@@ -180,38 +169,10 @@ namespace vGamePad
                 }
             }
 
-            // 情報ウィンドウを出す
-            if (Properties.Settings.Default.Clock || Properties.Settings.Default.Battery)
-            {
-                vGameInformationWindow.Visibility = System.Windows.Visibility.Visible;
-                double w = 0;
-                if (Properties.Settings.Default.Clock)
-                {
-                    AstClock.Visibility = System.Windows.Visibility.Visible;
-                    w += 544 / 2;
-                }
-                else
-                {
-                    AstClock.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                if (Properties.Settings.Default.Battery)
-                {
-                    PowerStatus.Visibility = System.Windows.Visibility.Visible;
-                    w += 544 / 2;
-                }
-                else
-                {
-                    PowerStatus.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                vGameInformationWindow.Width = w;
-                vGameInformationWindow.SetValue(Canvas.LeftProperty, Width / 2 - vGameInformationWindow.Width / 2);
-            }
+            SetConfig();
 
-            // 一番上にあるボタンと一番下にあるボタンの下を求める
-            vGamePadBase.Width = Width;
-            vGamePadBase.Visibility = System.Windows.Visibility.Visible;
-            vGamePadBase.Height = bottom - top + App.GRID * 2;
-            vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
+            // とりあえずコーディングここまで
+
 #if DEBUG
             // デバッグ用イベントハンドラは以下の３つにしておく
             // MouseDown="vGamePadCanvas_MouseDown"
@@ -221,6 +182,78 @@ namespace vGamePad
             vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
             vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
 #endif
+        }
+
+        public void SetConfig()
+        {
+            // 情報ウィンドウを出す
+            if (Properties.Settings.Default.Clock || Properties.Settings.Default.Battery)
+            {
+                vGameInformationWindow.Width = 544;
+                vGameInformationWindow.Visibility = System.Windows.Visibility.Visible;
+                double w = 0;
+                if (Properties.Settings.Default.Clock)
+                {
+                    AstClock.Visibility = System.Windows.Visibility.Visible;
+                    w += vGameInformationWindow.Width / 2;
+                }
+                else
+                {
+                    AstClock.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                if (Properties.Settings.Default.Battery)
+                {
+                    PowerStatus.Visibility = System.Windows.Visibility.Visible;
+                    w += vGameInformationWindow.Width / 2;
+                }
+                else
+                {
+                    PowerStatus.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                vGameInformationWindow.Width = w;
+                vGameInformationWindow.SetValue(Canvas.LeftProperty, Width / 2 - vGameInformationWindow.Width / 2);
+            }
+            else
+            {
+                vGameInformationWindow.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            // スライドウィンドウを出す/出さない
+            if (Properties.Settings.Default.Skeleton)
+            {
+                Home.Visibility = System.Windows.Visibility.Hidden;
+                vGamePadBase.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                Home.Visibility = System.Windows.Visibility.Visible;
+                vGamePadBase.Visibility = System.Windows.Visibility.Visible;
+                vGamePadBase.Width = Width;
+                double top = Height, bottom = 0;
+                foreach (string key in dic.Keys)
+                {
+                    if (dic[key].Fixed == false && dic[key].Visible == System.Windows.Visibility.Visible)
+                    {
+                        if (dic[key].Top == double.MaxValue)
+                        {
+                            if ((dic[key].Height - dic[key].Bottom) < top)
+                                top = dic[key].Height - dic[key].Bottom;
+                            if ((Height - dic[key].Bottom) > bottom)
+                                bottom = Height - dic[key].Bottom;
+                        }
+                        else
+                        {
+                            if (dic[key].Top < top)
+                                top = dic[key].Top;
+                            if ((dic[key].Top + dic[key].Height) > bottom)
+                                bottom = dic[key].Top + dic[key].Height;
+                        }
+                    }
+                }
+                vGamePadBase.Height = bottom - top + App.GRID * 2;
+                vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
+            }
+
         }
 
         private void ChangeButtonStatus(UIElement ui, Color A, Color B)

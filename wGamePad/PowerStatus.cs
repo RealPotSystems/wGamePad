@@ -66,7 +66,7 @@ namespace vGamePad
                 // バッテリー残量が10%未満の場合、無条件で計算せず返却
                 if (BatteryLifePercent <= 0.100f)
                 {
-                    _PlayTimeString = "充電してください";
+                    _PlayTimeString = Properties.Resources.PowerStatusString01; // "充電してください";
                     return;
                 }
 
@@ -79,7 +79,7 @@ namespace vGamePad
                     // 計測を開始する基準点を設定する
                     _StartBatteryLife = n - 1;
 
-                    _PlayTimeString = "初期化中...";
+                    _PlayTimeString = Properties.Resources.PowerStatusString02; // "初期化中...";
                     return;
                 }
 
@@ -92,7 +92,7 @@ namespace vGamePad
                     // 次のチェック時間を設定する
                     _CtrlBreakBatteryLife = n - 1;
 
-                    _PlayTimeString = "計算中...";
+                    _PlayTimeString = Properties.Resources.PowerStatusString03; // "計算中...";
                     return;
                 }
 
@@ -115,7 +115,7 @@ namespace vGamePad
                     _PlaySecond = (int)seconds;
 
                     ts = new TimeSpan(0, 0, _PlaySecond);
-                    _PlayTimeString = string.Format("残りプレイ時間 {0:00}時間{1:00}分", ts.Hours, ts.Minutes);
+                    _PlayTimeString = string.Format(Properties.Resources.PowerStatusString04 /* "残りプレイ時間 {0:00}時間{1:00}分" */ , ts.Hours, ts.Minutes);
                 }
             }
         }
@@ -134,6 +134,7 @@ namespace vGamePad
                 timer = new DispatcherTimer();
                 timer.Tick += timer_Tick;
                 timer.Interval = new TimeSpan(0, 0, 1);
+                timer.Start();
                 SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             }
         }
@@ -149,30 +150,32 @@ namespace vGamePad
                     }
                     break;
             }
-            provider.Refresh();
+            if (provider != null)
+                provider.Refresh();
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            provider.Refresh();
+            if (provider != null)
+                provider.Refresh();
         }
 
         public string CurrentPowerStatus()
         {
             if ( battery == false )
             {
-                return "バッテリーがありません";
+                return Properties.Resources.PowerStatusString05; // "バッテリーがありません";
             }
 
             string percent;
             float f = SystemInformation.PowerStatus.BatteryLifePercent;
             if (f > 1)
             {
-                percent = "???";
+                percent = Properties.Resources.PowerStatusString06; // "???";
             }
             else
             {
-                percent = String.Format("{0,3}", f * 100);
+                percent = String.Format(Properties.Resources.PowerStatusString07 /* "{0,3}" */, f * 100);
             }
 
             string mode;
@@ -180,12 +183,12 @@ namespace vGamePad
             if ((SystemInformation.PowerStatus.BatteryChargeStatus & BatteryChargeStatus.Charging) == BatteryChargeStatus.Charging)
             {
                 mode = "🔌";
-                status = "充電中";
+                status = Properties.Resources.PowerStatusString08; // "充電中";
             }
             else if (SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Online && f == 1.00)
             {
                 mode = "🔌";
-                status = "AC電源";
+                status = Properties.Resources.PowerStatusString09; // "AC電源";
             }
             else
             {
@@ -194,7 +197,7 @@ namespace vGamePad
                 status = playTime._PlayTimeString;
             }
 
-            return String.Format("{0} {1}%:{2}",mode, percent, status);
+            return String.Format(Properties.Resources.PowerStatusString10 /* "{0} {1}%:{2}" */ ,mode, percent, status);
         }
 
         public static bool GetSystemBatteryStatus()

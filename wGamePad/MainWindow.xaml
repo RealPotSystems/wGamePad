@@ -143,9 +143,9 @@
             <Ellipse Style="{StaticResource ellipseStyle}" StrokeThickness="4" Width="48" Height="48"/>
             <Label Content="&#xE10A;" FontWeight="Normal" Style="{StaticResource labelStyle}" FontSize="24"/>
         </Grid>
-        <Grid x:Name="Home" x:Uid="Home" Style="{StaticResource gridStyle}">
-            <Ellipse Style="{StaticResource ellipseStyle}"/>
-            <Label Content="&#xE154;" FontWeight="Normal" Style="{StaticResource labelStyle}"/>
+        <Grid x:Name="Home" x:Uid="Home" Style="{StaticResource gridStyle}" Width="48" Height="48">
+            <Ellipse Style="{StaticResource ellipseStyle}" StrokeThickness="4" Width="48" Height="48"/>
+            <Label Content="&#xE154;" FontWeight="Normal" Style="{StaticResource labelStyle}" FontSize="24"/>
         </Grid>
     </Canvas>
 </Window>
