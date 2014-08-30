@@ -83,6 +83,12 @@
     <Compile Include="DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LayoutSelect.xaml.cs">
+      <DependentUpon>LayoutSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LayoutSetting.xaml.cs">
+      <DependentUpon>LayoutSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindowCommon.cs" />
     <Compile Include="MainWindowEvents.cs" />
     <Compile Include="PowerStatus.cs" />
@@ -95,6 +101,14 @@
     <Page Include="DialogWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LayoutSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LayoutSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

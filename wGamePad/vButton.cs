@@ -365,32 +365,61 @@ namespace vGamePad
     {
         public static vButtonDictionary LoadLayout(int n)
         {
-            vButtonDictionary d;
+            var d = new vButtonDictionary();
+
+            // 0はデフォルト
             if ( n == 0 )
             {
                 // デフォルト
-                d = new vButtonDictionary();
                 d.SetDefaultLayout();
                 return d;
             }
-            var serializer = new DataContractSerializer(typeof(vButtonDictionary));
-            XmlReader xml = XmlReader.Create(@"D:\Users\manabe\Documents\DataStore\Test.xml");
-            d = (vButtonDictionary)serializer.ReadObject(xml);
-            xml.Close();
-            return d;
+            try
+            {
+                var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+                var serializer = new DataContractSerializer(typeof(vButtonDictionary));
+                XmlReader xml = XmlReader.Create(xmlFilePath);
+                d = (vButtonDictionary)serializer.ReadObject(xml);
+                xml.Close();
+                return d;
+            }
+            catch (FileNotFoundException ex)
+            {
+                // ダイアログメッセージを表示する
+                vGamePad.DialogWindow.DialogWindow dialog = new vGamePad.DialogWindow.DialogWindow(
+                    Properties.Resources.DialogTitle,
+                    ex.Message + "\n" + Properties.Resources.ButtonLayoutString01);
+                dialog.ShowDialog();
+                d.SetDefaultLayout();
+                return d;
+            }
         }
 
         public static void SaveLayout(int n, vButtonDictionary d)
         {
+            var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
             var serializer = new DataContractSerializer(typeof(vButtonDictionary));
             using (var ms = new MemoryStream())
             {
                 serializer.WriteObject(ms, d); // シリアライズ
                 var xml = Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Length);
                 Encoding utf8 = Encoding.GetEncoding("utf-8");
-                StreamWriter writer = new StreamWriter(@"D:\Users\manabe\Documents\DataStore\Test.xml", true, utf8);
+                StreamWriter writer = new StreamWriter(xmlFilePath, true, utf8);
                 writer.WriteLine(xml);
                 writer.Close();
+            }
+        }
+
+        public static bool LayoutFileExists(int n)
+        {
+            var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+            if (File.Exists(xmlFilePath))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

@@ -21,14 +21,22 @@
         <Label x:Name="Type" Content="&#xE17E;&#xE115;" Foreground="White" Grid.Row="0" VerticalContentAlignment="Center" Margin="5,5,352,5" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="12" HorizontalContentAlignment="Center"/>
         <Label x:Name="MessageTitle" Content="vGamePad環境設定" Grid.Row="0" Foreground="White" VerticalContentAlignment="Center" Margin="48,5,48,5" FontFamily="Segoe UI" FontSize="16"/>
         <Label x:Name="Exit" Content="&#xE17E;&#xE10A;" Foreground="White" Grid.Row="0" VerticalContentAlignment="Center" Margin="352,5,5,5" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="12" HorizontalContentAlignment="Center" MouseLeftButtonDown="Exit_MouseLeftButtonDown" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel x:Name="LayoutMenu" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
+            <Button x:Name="GoBack" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE112;" Style="{StaticResource defaultButton}" Click="GoBack_Click"/>
+            <Button x:Name="GoForward" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE111;" Style="{StaticResource defaultButton}" Click="GoForward_Click"/>
+            <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
+            <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
+            <Button x:Name="Return" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
+        </StackPanel>
+        <StackPanel x:Name="NormalMenu" Grid.Row="1" Orientation="Horizontal" Visibility="Visible">
             <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE1AA;" Click="SetPostion_Click" Style="{StaticResource defaultButton}"/>
             <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="Sound_Click" Style="{StaticResource defaultButton}"/>
             <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="ScreenRotate_Click" Style="{StaticResource defaultButton}"/>
             <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" IsEnabled="False" Style="{StaticResource defaultButton}"/>
             <Button x:Name="Maintenance" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Vertical">
+        <Frame x:Name="LayoutFrame" Grid.Row="2" NavigationUIVisibility="Hidden" Visibility="Collapsed" Navigated="LayoutFrame_Navigated"/>
+        <StackPanel x:Name="NormalFrame" Grid.Row="2" Orientation="Vertical" Visibility="Visible">
             <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="Skeleton_Click"/>
             <Button x:Name="AstTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="AstTime_Click"/>
             <Button x:Name="BtyTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="BtyTime_Click"/>

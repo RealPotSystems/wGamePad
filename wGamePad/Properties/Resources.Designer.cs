@@ -97,6 +97,15 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   デフォルトレイアウトで起動します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ButtonLayoutString01 {
+            get {
+                return ResourceManager.GetString("ButtonLayoutString01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} ボタンのみ表示する に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ConfigButton01 {

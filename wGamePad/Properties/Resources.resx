@@ -129,6 +129,9 @@
   <data name="AstClockString04" xml:space="preserve">
     <value>{0}まであと{1:00}分{2:00}秒</value>
   </data>
+  <data name="ButtonLayoutString01" xml:space="preserve">
+    <value>デフォルトレイアウトで起動します。</value>
+  </data>
   <data name="ConfigButton01" xml:space="preserve">
     <value>{0} ボタンのみ表示する</value>
   </data>

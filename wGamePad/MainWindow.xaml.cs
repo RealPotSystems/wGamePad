@@ -29,7 +29,7 @@ namespace vGamePad
         private void Window_Initialized(object sender, EventArgs e)
         {
             // ここにこのロジックを置くべきか？
-            dic = vLayoutControl.LoadLayout(0);
+            dic = vLayoutControl.LoadLayout(Properties.Settings.Default.Layout);
 
             // 各イベントハンドラの登録
             SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
