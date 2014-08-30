@@ -125,7 +125,7 @@ namespace vGamePad
         public bool battery = true;
         public PowerStatus()
         {
-            if (GetSystemBatteryStatus())
+            if (!GetSystemBatteryStatus())
             {
                 battery = false;
             }
