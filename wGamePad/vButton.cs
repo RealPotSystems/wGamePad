@@ -336,10 +336,10 @@ namespace vGamePad
             Clear();
             Add("AnalogStick0", new vButton() { Index = 0, Top = 352.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
             Add("AnalogStick1", new vButton() { Index = 1, Top = 352.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
-            Add("Button01", new vButton() { Index = 0, Top = 128.0, Right = 96.0, Visible = Visibility.Visible });
-            Add("Button02", new vButton() { Index = 1, Top = 192.0, Right = 32.0, Visible = Visibility.Visible });
-            Add("Button03", new vButton() { Index = 2, Top = 256.0, Right = 96.0, Visible = Visibility.Visible });
-            Add("Button04", new vButton() { Index = 3, Top = 192.0, Right = 160.0, Visible = Visibility.Visible });
+            Add("Button01", new vButton() { Index = 0, Top = 128.0, Right = 112.0, Visible = Visibility.Visible });
+            Add("Button02", new vButton() { Index = 1, Top = 192.0, Right = 48.0, Visible = Visibility.Visible });
+            Add("Button03", new vButton() { Index = 2, Top = 256.0, Right = 112.0, Visible = Visibility.Visible });
+            Add("Button04", new vButton() { Index = 3, Top = 192.0, Right = 176.0, Visible = Visibility.Visible });
             Add("Button05", new vButton() { Index = 4, Top = 320.0, Right = 240.0, Visible = Visibility.Visible });
             Add("Button06", new vButton() { Index = 5, Top = 416.0, Right = 240.0, Visible = Visibility.Visible });
             Add("Button07", new vButton() { Index = 6, Top = 320.0, Left = 240.0, Visible = Visibility.Visible });
@@ -348,15 +348,15 @@ namespace vGamePad
             Add("Button10", new vButton() { Index = 9, Top = 512.0, Left = 176.0, Visible = Visibility.Visible });
             Add("Button11", new vButton() { });
             Add("Button12", new vButton() { Index = 11, Top = 512.0, Right = 176.0, Visible = Visibility.Visible });
-            Add("Button_UP", new vButton() { Index = 0, Top = 128.0, Left = 96.0, Visible = Visibility.Visible });
-            Add("Button_DOWN", new vButton() { Index = 2, Top = 256.0, Left = 96.0, Visible = Visibility.Visible });
-            Add("Button_LEFT", new vButton() { Index = 3, Top = 192.0, Left = 32.0, Visible = Visibility.Visible });
-            Add("Button_RIGHT", new vButton() { Index = 1, Top = 192.0, Left = 160.0, Visible = Visibility.Visible });
+            Add("Button_UP", new vButton() { Index = 0, Top = 128.0, Left = 112.0, Visible = Visibility.Visible });
+            Add("Button_DOWN", new vButton() { Index = 2, Top = 256.0, Left = 112.0, Visible = Visibility.Visible });
+            Add("Button_LEFT", new vButton() { Index = 3, Top = 192.0, Left = 48.0, Visible = Visibility.Visible });
+            Add("Button_RIGHT", new vButton() { Index = 1, Top = 192.0, Left = 176.0, Visible = Visibility.Visible });
             Add("Keyboard", new vButton() { Top = 512.0, Left = 48.0, Visible = Visibility.Visible });
             Add("Crop", new vButton() { Top = 512, Right = 48.0, Visible = Visibility.Visible });
             Add("Config", new vButton() { Top = 0.0, Left = 72.0, Visible = Visibility.Visible, Fixed = true });
             Add("Exit", new vButton() { Top = 0.0, Right = 72.0, Visible = Visibility.Visible, Fixed = true });
-            Add("Home", new vButton() { Top = 16.0, Left = 16.0, Visible = Visibility.Visible, Moving = true, Fixed = true });
+            Add("Home", new vButton() { Top = 80.0, Left = 32.0, Visible = Visibility.Visible, Moving = true, Fixed = true });
         }
 
     }
@@ -365,32 +365,61 @@ namespace vGamePad
     {
         public static vButtonDictionary LoadLayout(int n)
         {
-            vButtonDictionary d;
+            var d = new vButtonDictionary();
+
+            // 0はデフォルト
             if ( n == 0 )
             {
                 // デフォルト
-                d = new vButtonDictionary();
                 d.SetDefaultLayout();
                 return d;
             }
-            var serializer = new DataContractSerializer(typeof(vButtonDictionary));
-            XmlReader xml = XmlReader.Create(@"D:\Users\manabe\Documents\DataStore\Test.xml");
-            d = (vButtonDictionary)serializer.ReadObject(xml);
-            xml.Close();
-            return d;
+            try
+            {
+                var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+                var serializer = new DataContractSerializer(typeof(vButtonDictionary));
+                XmlReader xml = XmlReader.Create(xmlFilePath);
+                d = (vButtonDictionary)serializer.ReadObject(xml);
+                xml.Close();
+                return d;
+            }
+            catch (FileNotFoundException ex)
+            {
+                // ダイアログメッセージを表示する
+                vGamePad.DialogWindow.DialogWindow dialog = new vGamePad.DialogWindow.DialogWindow(
+                    Properties.Resources.DialogTitle,
+                    ex.Message + "\n" + Properties.Resources.ButtonLayoutString01);
+                dialog.ShowDialog();
+                d.SetDefaultLayout();
+                return d;
+            }
         }
 
         public static void SaveLayout(int n, vButtonDictionary d)
         {
+            var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
             var serializer = new DataContractSerializer(typeof(vButtonDictionary));
             using (var ms = new MemoryStream())
             {
                 serializer.WriteObject(ms, d); // シリアライズ
                 var xml = Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Length);
                 Encoding utf8 = Encoding.GetEncoding("utf-8");
-                StreamWriter writer = new StreamWriter(@"D:\Users\manabe\Documents\DataStore\Test.xml", true, utf8);
+                StreamWriter writer = new StreamWriter(xmlFilePath, true, utf8);
                 writer.WriteLine(xml);
                 writer.Close();
+            }
+        }
+
+        public static bool LayoutFileExists(int n)
+        {
+            var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+            if (File.Exists(xmlFilePath))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

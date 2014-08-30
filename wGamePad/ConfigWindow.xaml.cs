@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 using Microsoft.Win32;
 
 namespace vGamePad
@@ -15,6 +16,7 @@ namespace vGamePad
     /// </summary>
     public partial class ConfigWindow : Window
     {
+        public static NavigationService navigation = null;
         private const string versionFormat = "{0} version {1}\n{2} {3}.\n";
         private const string sound_on = "\uE15D";
         private const string sound_off = "\uE198";
@@ -39,7 +41,12 @@ namespace vGamePad
             ScreenRotate.IsEnabled = SensorPresent();
             ScreenRotate.Content = AutoRotation() ? ScreenRotate_on : ScreenRotate_off;
             Skeleton.Content = check_off;
-            BtyTime.IsEnabled = PowerStatus.GetSystemBatteryStatus();
+                
+            if ( PowerStatus.GetSystemBatteryStatus() == false ) // バッテリーなし
+            {
+                Properties.Settings.Default.Battery = false;
+                BtyTime.IsEnabled = PowerStatus.GetSystemBatteryStatus();
+            }
         }
 
         private void Exit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -63,6 +70,8 @@ namespace vGamePad
             BtyTime.Content = Properties.Settings.Default.Battery ?
                 String.Format(Properties.Resources.ConfigButton03, check_on) :
                 String.Format(Properties.Resources.ConfigButton03, check_off);
+
+            navigation = LayoutFrame.NavigationService;
         }
 
         private void Sound_Click(object sender, RoutedEventArgs e)
@@ -143,74 +152,97 @@ namespace vGamePad
 
         private void Maintenance_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            PlayButtonSound.Play();
 
-            if (App.MaintenanceMode)
+            if (LayoutFrame.Visibility == System.Windows.Visibility.Visible)
             {
-                App.MaintenanceMode = false;
-
-                mainWindow.LeftContent.Content = stick;
-                mainWindow.RightContent.Content = stick;
-
-                List<UIElement> uiList = new List<UIElement>();
-                foreach (object c in mainWindow.vGamePadCanvas.Children)
-                {
-                    // System.Windows.Shapes.Path
-                    Debug.WriteLine(((UIElement)c).GetType());
-                    if (((UIElement)c).GetType().ToString() == "System.Windows.Shapes.Path")
-                    {
-                        uiList.Add((UIElement)c);
-                    }
-                }
-                foreach (var c in uiList)
-                {
-                    mainWindow.vGamePadCanvas.Children.Remove(c);
-                }
-                mainWindow.vGamePadCanvas.Background = new SolidColorBrush(Colors.Transparent);
+                NormalFrame.Visibility = System.Windows.Visibility.Visible;
+                LayoutFrame.Visibility = System.Windows.Visibility.Collapsed;
+                NormalMenu.Visibility = System.Windows.Visibility.Visible;
+                LayoutMenu.Visibility = System.Windows.Visibility.Hidden;
             }
             else
             {
-                App.MaintenanceMode = true;
-
-                ScaleTransform scaleTransform = new ScaleTransform();
-
-                mainWindow.LeftContent.Content = "左";
-                mainWindow.RightContent.Content = "右";
-                mainWindow.vGamePadCanvas.Background = new SolidColorBrush(Colors.DarkGray);
-                for (int i = 0; i < mainWindow.vGamePadCanvas.ActualWidth; i += App.GRID)
+                LayoutFrame.Visibility = System.Windows.Visibility.Visible;
+                NormalFrame.Visibility = System.Windows.Visibility.Collapsed;
+                NormalMenu.Visibility = System.Windows.Visibility.Hidden;
+                LayoutMenu.Visibility = System.Windows.Visibility.Visible;
+                if ( navigation.Content == null )
                 {
-                    Path path = new Path()
-                    {
-                        Data = new LineGeometry(new Point(i, 0), new Point(i, mainWindow.vGamePadCanvas.ActualHeight)),
-                        Stroke = Brushes.White,
-                        StrokeThickness = .5
-                    };
-
-                    path.Data.Transform = scaleTransform;
-
-                    mainWindow.vGamePadCanvas.Children.Add(path);
+                    navigation.Navigate(new Uri("LayoutSelect.xaml", UriKind.Relative));
                 }
 
-                // 横線
-                for (int i = 0; i < mainWindow.vGamePadCanvas.ActualHeight; i += App.GRID)
-                {
-                    Path path = new Path()
-                    {
-                        Data = new LineGeometry(new Point(0, i), new Point(mainWindow.vGamePadCanvas.ActualWidth, i)),
-                        Stroke = Brushes.White,
-                        StrokeThickness = .5
-                    };
-
-                    path.Data.Transform = scaleTransform;
-
-                    mainWindow.vGamePadCanvas.Children.Add(path);
-                }
             }
-            Close();
+            /*
+                        MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                        if (App.MaintenanceMode)
+                        {
+                            App.MaintenanceMode = false;
+
+                            mainWindow.LeftContent.Content = stick;
+                            mainWindow.RightContent.Content = stick;
+
+                            List<UIElement> uiList = new List<UIElement>();
+                            foreach (object c in mainWindow.vGamePadCanvas.Children)
+                            {
+                                // System.Windows.Shapes.Path
+                                Debug.WriteLine(((UIElement)c).GetType());
+                                if (((UIElement)c).GetType().ToString() == "System.Windows.Shapes.Path")
+                                {
+                                    uiList.Add((UIElement)c);
+                                }
+                            }
+                            foreach (var c in uiList)
+                            {
+                                mainWindow.vGamePadCanvas.Children.Remove(c);
+                            }
+                            mainWindow.vGamePadCanvas.Background = new SolidColorBrush(Colors.Transparent);
+                        }
+                        else
+                        {
+                            App.MaintenanceMode = true;
+
+                            ScaleTransform scaleTransform = new ScaleTransform();
+
+                            mainWindow.LeftContent.Content = "左";
+                            mainWindow.RightContent.Content = "右";
+                            mainWindow.vGamePadCanvas.Background = new SolidColorBrush(Colors.DarkGray);
+                            for (int i = 0; i < mainWindow.vGamePadCanvas.ActualWidth; i += App.GRID)
+                            {
+                                Path path = new Path()
+                                {
+                                    Data = new LineGeometry(new Point(i, 0), new Point(i, mainWindow.vGamePadCanvas.ActualHeight)),
+                                    Stroke = Brushes.White,
+                                    StrokeThickness = .5
+                                };
+
+                                path.Data.Transform = scaleTransform;
+
+                                mainWindow.vGamePadCanvas.Children.Add(path);
+                            }
+
+                            // 横線
+                            for (int i = 0; i < mainWindow.vGamePadCanvas.ActualHeight; i += App.GRID)
+                            {
+                                Path path = new Path()
+                                {
+                                    Data = new LineGeometry(new Point(0, i), new Point(mainWindow.vGamePadCanvas.ActualWidth, i)),
+                                    Stroke = Brushes.White,
+                                    StrokeThickness = .5
+                                };
+
+                                path.Data.Transform = scaleTransform;
+
+                                mainWindow.vGamePadCanvas.Children.Add(path);
+                            }
+                        }
+                        Close();
+            */
         }
 
         private void Skeleton_Click(object sender, RoutedEventArgs e)
         {
+           PlayButtonSound.Play();
            Properties.Settings.Default.Skeleton = Properties.Settings.Default.Skeleton ? false : true;
            Skeleton.Content = Properties.Settings.Default.Skeleton ?
                String.Format(Properties.Resources.ConfigButton01, check_on) :
@@ -219,6 +251,7 @@ namespace vGamePad
 
         private void AstTime_Click(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             Properties.Settings.Default.Clock = Properties.Settings.Default.Clock ? false : true;
             AstTime.Content = Properties.Settings.Default.Clock ?
                 String.Format(Properties.Resources.ConfigButton02, check_on) :
@@ -227,10 +260,45 @@ namespace vGamePad
 
         private void BtyTime_Click(object sender, RoutedEventArgs e)
         {
+            PlayButtonSound.Play();
             Properties.Settings.Default.Battery = Properties.Settings.Default.Battery ? false : true;
             BtyTime.Content = Properties.Settings.Default.Battery ?
                 String.Format(Properties.Resources.ConfigButton03, check_on) :
                 String.Format(Properties.Resources.ConfigButton03, check_off);
+        }
+
+        private void LayoutFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (navigation.CanGoBack)
+            {
+                GoBack.IsEnabled = true;
+            }
+            else
+            {
+                GoBack.IsEnabled = false;
+            }
+            if (navigation.CanGoForward)
+            {
+                GoForward.IsEnabled = true;
+            }
+            else
+            {
+                GoForward.IsEnabled = false;
+            }
+        }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play();
+            if (navigation.CanGoBack)
+                navigation.GoBack();
+        }
+
+        private void GoForward_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play(); 
+            if (navigation.CanGoForward)
+                navigation.GoForward();
         }
     }
 }

@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AstClockString01" xml:space="preserve">
+    <value>{0} AST {1:00}:{2:00} </value>
+  </data>
+  <data name="AstClockString02" xml:space="preserve">
+    <value>朝</value>
+  </data>
+  <data name="AstClockString03" xml:space="preserve">
+    <value>夜</value>
+  </data>
+  <data name="AstClockString04" xml:space="preserve">
+    <value>{0}まであと{1:00}分{2:00}秒</value>
+  </data>
+  <data name="ButtonLayoutString01" xml:space="preserve">
+    <value>デフォルトレイアウトで起動します。</value>
+  </data>
   <data name="ConfigButton01" xml:space="preserve">
     <value>{0} ボタンのみ表示する</value>
   </data>
@@ -131,6 +146,36 @@
   </data>
   <data name="ExitApplication" xml:space="preserve">
     <value>vGamePadを終了してもよろしいですか？</value>
+  </data>
+  <data name="PowerStatusString01" xml:space="preserve">
+    <value>充電してください</value>
+  </data>
+  <data name="PowerStatusString02" xml:space="preserve">
+    <value>初期化中...</value>
+  </data>
+  <data name="PowerStatusString03" xml:space="preserve">
+    <value>計算中...</value>
+  </data>
+  <data name="PowerStatusString04" xml:space="preserve">
+    <value>残りプレイ時間 {0:00}時間{1:00}分</value>
+  </data>
+  <data name="PowerStatusString05" xml:space="preserve">
+    <value>バッテリーがありません</value>
+  </data>
+  <data name="PowerStatusString06" xml:space="preserve">
+    <value>???</value>
+  </data>
+  <data name="PowerStatusString07" xml:space="preserve">
+    <value>{0,3}</value>
+  </data>
+  <data name="PowerStatusString08" xml:space="preserve">
+    <value>充電中</value>
+  </data>
+  <data name="PowerStatusString09" xml:space="preserve">
+    <value>AC電源</value>
+  </data>
+  <data name="PowerStatusString10" xml:space="preserve">
+    <value>{0} {1}%:{2}</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Sound01" type="System.Resources.ResXFileRef, System.Windows.Forms">
