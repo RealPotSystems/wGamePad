@@ -157,7 +157,7 @@
     <value>計算中...</value>
   </data>
   <data name="PowerStatusString04" xml:space="preserve">
-    <value>残りプレイ時間 {0:00}時間{1:00}分</value>
+    <value>残りプレイ {0:00}時間{1:00}分</value>
   </data>
   <data name="PowerStatusString05" xml:space="preserve">
     <value>バッテリーがありません</value>

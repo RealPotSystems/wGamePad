@@ -178,7 +178,7 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   残りプレイ時間 {0:00}時間{1:00}分 に類似しているローカライズされた文字列を検索します。
+        ///   残りプレイ {0:00}時間{1:00}分 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PowerStatusString04 {
             get {
