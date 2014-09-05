@@ -27,7 +27,8 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid x:Name="vGamePadBase" Background="Black" Style="{StaticResource gridStyle}"/>
+        <Grid x:Name="vGamePadBaseLeft" Background="Black" Style="{StaticResource gridStyle}"/>
+        <Grid x:Name="vGamePadBaseRight" Background="Black" Style="{StaticResource gridStyle}"/>
         <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128" Style="{StaticResource gridStyle}">
             <Ellipse Style="{StaticResource ellipseStyle}"/>
             <Label x:Name="LeftContent" Content="&#xE10A;" FontSize="64" Style="{StaticResource labelStyle}"/>

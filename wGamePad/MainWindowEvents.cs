@@ -40,7 +40,6 @@ namespace vGamePad
             Left = 0;
             Width = (int)(screen.Bounds.Width / dpi.X);
             Height = (int)(screen.Bounds.Height / dpi.Y);
-            vGamePadBase.Width = Width;
         }
 
         public void DefaultDown(object sender, vGamePadEventArgs e)
@@ -302,76 +301,54 @@ namespace vGamePad
 
             dic[e.ui.Uid].Id = e.id;
             dic[e.ui.Uid].Range = Height;
-            vGamePadBase.Background = new SolidColorBrush(Colors.White);
-            // 移動可能なコントロール
-            if (dic[e.ui.Uid].Moving)
-            {
-                // この座標を中心点にする
-                // 中心点の計算
-                double height = (double)e.ui.GetValue(HeightProperty);
-                e.ui.SetValue(Canvas.TopProperty, e.point.Y - height / 2);
-            }
+            vGamePadBaseLeft.Background = new SolidColorBrush(Colors.White);
+            vGamePadBaseRight.Background = new SolidColorBrush(Colors.White);
         }
 
         public void HomeMove(object sender, vGamePadEventArgs e)
         {
-            Point pos = dic[e.ui.Uid].vGetPosition(e.point);
-            pos.Y = ((int)(pos.Y / App.GRID)) * App.GRID;
-            double height = (double)e.ui.GetValue(HeightProperty);
-            if (pos.Y < height / 2 + App.GRID)
-                pos.Y = height / 2 + App.GRID;
-            else if (pos.Y > (Height - vGamePadBase.Height + height / 2 + App.GRID))
-                pos.Y = Height - vGamePadBase.Height + height / 2 + App.GRID;
-            e.ui.ClearValue(Canvas.BottomProperty);
-            e.ui.SetValue(Canvas.TopProperty, pos.Y - height / 2);
-            vGamePadBase.SetValue(Canvas.TopProperty, pos.Y - height / 2 - App.GRID);
+            double posY = ((int)(e.point.Y / App.GRID)) * App.GRID;
+            if (posY > Height - (double)e.ui.GetValue(HeightProperty))
+                posY = Height - (double)e.ui.GetValue(HeightProperty);
+            e.ui.SetValue(Canvas.TopProperty, posY);
+            
+            vGamePadBaseLeft.SetValue(Canvas.TopProperty, posY);
+            vGamePadBaseRight.SetValue(Canvas.TopProperty, posY);
         }
 
         public void HomeUp(object sender, vGamePadEventArgs e)
         {
-            this.vGamePadBase.Background = new SolidColorBrush(Colors.Black);
+            vGamePadBaseLeft.Background = new SolidColorBrush(Colors.Black);
+            vGamePadBaseRight.Background = new SolidColorBrush(Colors.Black);
             ChangeButtonStatus(e.ui, Colors.Black, Colors.White);
-            if (dic[e.ui.Uid].Moving)
+
+            double posY = ((int)(e.point.Y / App.GRID)) * App.GRID;
+            if (posY > Height - (double)e.ui.GetValue(HeightProperty))
+                posY = Height - (double)e.ui.GetValue(HeightProperty);
+
+            double distance = posY - dic[e.ui.Uid].Top;
+            // Homeを基準に移動
+            foreach (UIElement ui in vGamePadCanvas.Children)
             {
-                Point pos = dic[e.ui.Uid].vGetPosition(e.point);
-                pos.Y = ((int)(pos.Y / App.GRID)) * App.GRID;
-                double height = (double)e.ui.GetValue(HeightProperty);
-                if (pos.Y < height / 2 + App.GRID)
-                    pos.Y = height / 2 + App.GRID;
-                else if (pos.Y > (Height - vGamePadBase.Height + height / 2 + App.GRID))
-                    pos.Y = Height - vGamePadBase.Height + height / 2 + App.GRID;
-
-                // 自分の座標以外を全部移動させる
-                double range = pos.Y - height / 2 - dic[e.ui.Uid].Top;
-
-                foreach (UIElement ui in vGamePadCanvas.Children)
+                foreach (string key in dic.Keys)
                 {
-                    foreach (string key in dic.Keys)
+                    var value = dic[key];
+                    if (ui.Uid == key && value.Fixed == false && value.Visible == System.Windows.Visibility.Visible)
                     {
-                        if (ui.Uid == "Home")
-                            continue;
-                        if (ui.Uid == key)
+                        if (value.Top != double.MaxValue)
                         {
-                            if (dic[key].Fixed)
-                                break;
-                            if (dic[key].Top != double.MaxValue)
-                            {
-                                dic[key].Top = dic[key].Top + range;
-                                ui.ClearValue(Canvas.BottomProperty);
-                                ui.SetValue(Canvas.TopProperty, dic[key].Top);
-                            }
-                            if (dic[key].Bottom != double.MaxValue)
-                            {
-                                dic[key].Bottom = dic[key].Bottom + range;
-                                ui.ClearValue(Canvas.TopProperty);
-                                ui.SetValue(Canvas.BottomProperty, dic[key].Bottom);
-                            }
+                            value.Top += distance;
+                            ui.SetValue(Canvas.TopProperty, value.Top);
+                        }
+                        if (value.Bottom != double.MaxValue)
+                        {
+                            value.Bottom += distance;
+                            ui.SetValue(Canvas.BottomProperty, value.Bottom);
                         }
                     }
                 }
-                vGamePadBase.SetValue(Canvas.TopProperty, pos.Y - height / 2 - App.GRID);
-                dic[e.ui.Uid].Top = pos.Y - height / 2;
             }
+            dic[e.ui.Uid].Top = posY;
         }
     }
 }
