@@ -195,7 +195,7 @@ namespace vGamePad
             Top = 0;
             Left = 0;
             Width = (int)(screen.Bounds.Width / dpi.X);
-            Height = (int)(screen.Bounds.Height / dpi.Y) / 2;
+            Height = (int)(screen.Bounds.Height / dpi.Y);
 
             ScaleTransform scaleTransform = new ScaleTransform();
 
