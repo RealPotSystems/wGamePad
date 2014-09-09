@@ -34,6 +34,19 @@ namespace vGamePad
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
+            // レイアウトモードに移行してもよいかの確認
+            var dialog = new DialogWindow.DialogWindow("ボタンレイアウトの作成", "ボタンレイアウト作成モードに移行します。\nよろしいですか？", DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            var ret = dialog.ShowDialog();
+            if (ret == true)
+            {
+                var w = Window.GetWindow(this);
+                w.Close();
+
+                // レイアウト作成モードに移行
+                // レイアウトモードは上にコマンドエリアを表示
+                var layoutWindow = new LayoutWindow();
+                layoutWindow.ShowDialog();
+            }
         }
     }
 }

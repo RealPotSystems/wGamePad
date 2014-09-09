@@ -18,7 +18,7 @@ namespace vGamePad
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static vButtonDictionary dic = null;
+        public static vButtonDictionary dic = null;
         public static JoyStick devCon = new JoyStick();
 
         public MainWindow()

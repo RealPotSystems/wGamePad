@@ -89,6 +89,9 @@
     <Compile Include="LayoutSetting.xaml.cs">
       <DependentUpon>LayoutSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LayoutWindow.xaml.cs">
+      <DependentUpon>LayoutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindowCommon.cs" />
     <Compile Include="MainWindowEvents.cs" />
     <Compile Include="PowerStatus.cs" />
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LayoutSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LayoutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

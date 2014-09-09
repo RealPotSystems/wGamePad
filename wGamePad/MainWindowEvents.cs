@@ -40,6 +40,9 @@ namespace vGamePad
             Left = 0;
             Width = (int)(screen.Bounds.Width / dpi.X);
             Height = (int)(screen.Bounds.Height / dpi.Y);
+
+            // 情報ウィンドウを中心に移動させる
+            SetConfig();
         }
 
         public void DefaultDown(object sender, vGamePadEventArgs e)
