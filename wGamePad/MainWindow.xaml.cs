@@ -221,37 +221,30 @@ namespace vGamePad
             // スライドウィンドウを出す/出さない
             if (Properties.Settings.Default.Skeleton)
             {
-                Home.Visibility = System.Windows.Visibility.Hidden;
-                vGamePadBase.Visibility = System.Windows.Visibility.Hidden;
+                vGamePadBaseLeft.Visibility = System.Windows.Visibility.Collapsed;
+                vGamePadBaseRight.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
-                Home.Visibility = System.Windows.Visibility.Visible;
-                vGamePadBase.Visibility = System.Windows.Visibility.Visible;
-                vGamePadBase.Width = Width;
-                double top = Height, bottom = 0;
-                foreach (string key in dic.Keys)
-                {
-                    if (dic[key].Fixed == false && dic[key].Visible == System.Windows.Visibility.Visible)
-                    {
-                        if (dic[key].Top == double.MaxValue)
-                        {
-                            if ((dic[key].Height - dic[key].Bottom) < top)
-                                top = dic[key].Height - dic[key].Bottom;
-                            if ((Height - dic[key].Bottom) > bottom)
-                                bottom = Height - dic[key].Bottom;
-                        }
-                        else
-                        {
-                            if (dic[key].Top < top)
-                                top = dic[key].Top;
-                            if ((dic[key].Top + dic[key].Height) > bottom)
-                                bottom = dic[key].Top + dic[key].Height;
-                        }
-                    }
-                }
-                vGamePadBase.Height = bottom - top + App.GRID * 2;
-                vGamePadBase.SetValue(Canvas.TopProperty, top - App.GRID);
+                vGamePadBaseLeft.Visibility = System.Windows.Visibility.Hidden;
+                vGamePadBaseRight.Visibility = System.Windows.Visibility.Hidden;
+
+                vGamePadBaseLeft.SetValue(Canvas.TopProperty, dic.TopOfTop - Home.Height);
+                vGamePadBaseLeft.SetValue(Canvas.LeftProperty, (double)0);
+                vGamePadBaseLeft.Height = dic.BottomOfBottom - dic.TopOfTop + Home.Height * 2;
+                vGamePadBaseLeft.Width = dic.LeftOfRight + Home.Width;
+
+                vGamePadBaseRight.SetValue(Canvas.TopProperty, dic.TopOfTop - Home.Height);
+                vGamePadBaseRight.SetValue(Canvas.RightProperty, (double)0);
+                vGamePadBaseRight.Height = dic.BottomOfBottom - dic.TopOfTop + Home.Height * 2;
+                vGamePadBaseRight.Width = dic.RightOfLeft + Home.Width;
+
+                vGamePadBaseLeft.Visibility = System.Windows.Visibility.Visible;
+                vGamePadBaseRight.Visibility = System.Windows.Visibility.Visible;
+
+                // Homeボタンの配置
+                Home.SetValue(Canvas.TopProperty, dic.TopOfTop - Home.Height);
+                dic["Home"].Top = dic.TopOfTop - Home.Height;
             }
 
         }
