@@ -23,16 +23,67 @@ namespace vGamePad
 
         public MainWindow()
         {
+
             InitializeComponent();
         }
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            // ここにこのロジックを置くべきか？
-            dic = vLayoutControl.LoadLayout(Properties.Settings.Default.Layout);
-
             // 各イベントハンドラの登録
             SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            AstClock astclock = this.Resources["astClock"] as AstClock;
+            astclock.provider = this.Resources["CurrentAstDateTime"] as ObjectDataProvider;
+
+            PowerStatus powerstatus = this.Resources["powerStatus"] as PowerStatus;
+            powerstatus.provider = this.Resources["CurrentPowerStatus"] as ObjectDataProvider; 
+            
+            try
+            {
+                devCon.Initialize();
+                devCon.MoveStick(0, 50, 50);    // とりあえず中央に
+                devCon.MoveStick(1, 50, 50);    // とりあえず中央に
+            }
+            catch(Exception ex)
+            {
+                // ダイアログメッセージを表示する
+                vGamePad.DialogWindow.DialogWindow dialog = new vGamePad.DialogWindow.DialogWindow(
+                    Properties.Resources.DialogTitle,
+                    ex.Message);
+                dialog.ShowDialog(); 
+                Close();
+                return;
+            }
+
+            // レイアウトデータに合わせて配置する
+            SetLayout();
+
+            // ディスプレイのサイズに合わせる
+            SystemEvents_DisplaySettingsChanged(null, null);
+
+            // とりあえずコーディングここまで
+
+#if DEBUG
+            // デバッグ用イベントハンドラは以下の３つにしておく
+            // MouseDown="vGamePadCanvas_MouseDown"
+            // MouseMove="vGamePadCanvas_MouseMove"
+            // MouseUp="vGamePadCanvas_MouseUp"
+            vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
+            vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
+            vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
+#endif
+        }
+
+        public void SetLayout()
+        {
+            if ( dic != null )
+            {
+                dic.Clear();
+            }
+            dic = vLayoutControl.LoadLayout(Properties.Settings.Default.Layout);
 
             dic["AnalogStick0"].DownAction += new EventHandler<vGamePadEventArgs>(AnalogStickDown);
             dic["AnalogStick0"].MoveAction += new EventHandler<vGamePadEventArgs>(AnalogStickMove);
@@ -105,35 +156,6 @@ namespace vGamePad
             dic["Home"].DownAction += new EventHandler<vGamePadEventArgs>(HomeDown);
             dic["Home"].MoveAction += new EventHandler<vGamePadEventArgs>(HomeMove);
             dic["Home"].UpAction += new EventHandler<vGamePadEventArgs>(HomeUp);
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            AstClock astclock = this.Resources["astClock"] as AstClock;
-            astclock.provider = this.Resources["CurrentAstDateTime"] as ObjectDataProvider;
-
-            PowerStatus powerstatus = this.Resources["powerStatus"] as PowerStatus;
-            powerstatus.provider = this.Resources["CurrentPowerStatus"] as ObjectDataProvider; 
-            
-            try
-            {
-                devCon.Initialize();
-                devCon.MoveStick(0, 50, 50);    // とりあえず中央に
-                devCon.MoveStick(1, 50, 50);    // とりあえず中央に
-            }
-            catch(Exception ex)
-            {
-                // ダイアログメッセージを表示する
-                vGamePad.DialogWindow.DialogWindow dialog = new vGamePad.DialogWindow.DialogWindow(
-                    Properties.Resources.DialogTitle,
-                    ex.Message);
-                dialog.ShowDialog(); 
-                Close();
-                return;
-            }
-
-            // ディスプレイのサイズに合わせる
-            SystemEvents_DisplaySettingsChanged(null, null);
 
             // とりあええずここに配置
             foreach (UIElement ui in vGamePadCanvas.Children)
@@ -168,20 +190,6 @@ namespace vGamePad
                     }
                 }
             }
-
-            SetConfig();
-
-            // とりあえずコーディングここまで
-
-#if DEBUG
-            // デバッグ用イベントハンドラは以下の３つにしておく
-            // MouseDown="vGamePadCanvas_MouseDown"
-            // MouseMove="vGamePadCanvas_MouseMove"
-            // MouseUp="vGamePadCanvas_MouseUp"
-            vGamePadCanvas.MouseDown += vGamePadCanvas_MouseDown;
-            vGamePadCanvas.MouseMove += vGamePadCanvas_MouseMove;
-            vGamePadCanvas.MouseUp += vGamePadCanvas_MouseUp;
-#endif
         }
 
         public void SetConfig()
@@ -221,8 +229,8 @@ namespace vGamePad
             // スライドウィンドウを出す/出さない
             if (Properties.Settings.Default.Skeleton)
             {
-                vGamePadBaseLeft.Visibility = System.Windows.Visibility.Collapsed;
-                vGamePadBaseRight.Visibility = System.Windows.Visibility.Collapsed;
+                vGamePadBaseLeft.Visibility = System.Windows.Visibility.Hidden;
+                vGamePadBaseRight.Visibility = System.Windows.Visibility.Hidden;
             }
             else
             {
@@ -241,12 +249,10 @@ namespace vGamePad
 
                 vGamePadBaseLeft.Visibility = System.Windows.Visibility.Visible;
                 vGamePadBaseRight.Visibility = System.Windows.Visibility.Visible;
-
-                // Homeボタンの配置
-                Home.SetValue(Canvas.TopProperty, dic.TopOfTop - Home.Height);
-                dic["Home"].Top = dic.TopOfTop - Home.Height;
             }
-
+            // Homeボタンの配置
+            Home.SetValue(Canvas.TopProperty, dic.TopOfTop - Home.Height);
+            dic["Home"].Top = dic.TopOfTop - Home.Height;
         }
 
         private void ChangeButtonStatus(UIElement ui, Color A, Color B)
