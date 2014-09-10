@@ -7,8 +7,8 @@
       d:DesignHeight="300" d:DesignWidth="400"
 	Title="LayoutSetting" Loaded="Page_Loaded">
     <StackPanel x:Name="NormalFrame" Grid.Row="2" Orientation="Vertical" Visibility="Visible">
-        <Button x:Name="Layout1" Content="レイアウト1" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White"/>
-        <Button x:Name="Layout2" Content="レイアウト2" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White"/>
-        <Button x:Name="Layout3" Content="デフォルト レイアウト" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White"/>
+        <Button x:Name="Layout1" Content="レイアウト1" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="LayoutClick"/>
+        <Button x:Name="Layout2" Content="レイアウト2" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="LayoutClick"/>
+        <Button x:Name="Layout3" Content="デフォルト レイアウト" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="LayoutClick"/>
     </StackPanel>
 </Page>
