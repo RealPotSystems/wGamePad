@@ -85,13 +85,6 @@ namespace vGamePad
             topRight.Background = new SolidColorBrush(Colors.White);
             bottomLeft.Background = new SolidColorBrush(Colors.White);
             bottomRight.Background = new SolidColorBrush(Colors.White);
-
-            // top + left を起点に変更する
-            var button = layoutDic[grid.Uid];
-            button.Top = gridtop + 32;
-            button.Bottom = double.MaxValue;
-            button.Left = gridleft + 32;
-            button.Right = double.MaxValue;
         }
 
         private void TopLeftMove(Grid grid, MouseEventArgs e)
@@ -126,6 +119,15 @@ namespace vGamePad
             buttonState = null;
 
             // 移動先の設定
+            var gridtop = (double)grid.GetValue(Canvas.TopProperty);
+            var gridleft = (double)grid.GetValue(Canvas.LeftProperty);
+
+            // top + left を起点に変更する
+            var button = layoutDic[grid.Uid];
+            button.Top = gridtop + 32;
+            button.Bottom = double.MaxValue;
+            button.Left = gridleft + 32;
+            button.Right = double.MaxValue;
         }
 
         private void TopRightDown(Grid grid, UIElement source)
@@ -152,18 +154,19 @@ namespace vGamePad
             topRight.Background = new SolidColorBrush(Colors.Red);
             bottomLeft.Background = new SolidColorBrush(Colors.White);
             bottomRight.Background = new SolidColorBrush(Colors.White);
-
-            // top + right を起点に変更する
-            var button = layoutDic[grid.Uid];
-            button.Top = gridtop + 32;
-            button.Bottom = double.MaxValue;
-            button.Left = double.MaxValue;
-            button.Right = Width - grid.Width - 32;
         }
 
         private void TopRightMove(Grid grid, MouseEventArgs e)
         {
             var _point = getScreenRange(e.GetPosition(LayoutAreaCanvas));
+
+            if (_point.Y > Height - grid.Height - 16)
+                _point.Y = Height - grid.Height - 16;
+            if (_point.X > Width - 32)
+                _point.X = Width - 32;
+            if (_point.X < grid.Width - 32)
+                _point.X = grid.Width - 32;
+
             grid.SetValue(Canvas.TopProperty, (double)_point.Y);
             grid.SetValue(Canvas.LeftProperty, (double)_point.X - grid.Width + 32 );
 
@@ -186,6 +189,160 @@ namespace vGamePad
             Line2.Visibility = System.Windows.Visibility.Collapsed;
             buttonState.Children.RemoveRange(1, 4);
             buttonState = null;
+
+            var gridtop = (double)grid.GetValue(Canvas.TopProperty);
+            var gridleft = (double)grid.GetValue(Canvas.LeftProperty);
+
+            // top + right を起点に変更する
+            var button = layoutDic[grid.Uid];
+            button.Top = gridtop + 32;
+            button.Bottom = double.MaxValue;
+            button.Left = double.MaxValue;
+            button.Right = Width - gridleft - grid.Width + 32;
+        }
+
+        private void BottomLeftDown(Grid grid, UIElement source)
+        {
+            var gridtop = (double)grid.GetValue(Canvas.TopProperty);
+            var gridleft = (double)grid.GetValue(Canvas.LeftProperty);
+
+            // 横
+            Line1.X1 = 32;
+            Line1.Y1 = gridtop + grid.Width - 32;
+            Line1.X2 = gridleft + 32;
+            Line1.Y2 = gridtop + grid.Width - 32;
+
+            // 縦
+            Line2.X1 = gridleft + 32;
+            Line2.Y1 = Height - 48;
+            Line2.X2 = gridleft + 32;
+            Line2.Y2 = gridtop + grid.Width - 32;
+
+            Line1.Visibility = System.Windows.Visibility.Visible;
+            Line2.Visibility = System.Windows.Visibility.Visible;
+
+            topLeft.Background = new SolidColorBrush(Colors.White);
+            topRight.Background = new SolidColorBrush(Colors.White);
+            bottomLeft.Background = new SolidColorBrush(Colors.Red);
+            bottomRight.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void BottomLeftMove(Grid grid, MouseEventArgs e)
+        {
+            var _point = getScreenRange(e.GetPosition(LayoutAreaCanvas));
+
+            if (_point.Y > Height - 48)
+                _point.Y = Height - 48;
+            if (_point.Y < grid.Height - 16)
+                _point.Y = grid.Height - 16;
+            if (_point.X > Width - grid.Width)
+                _point.X = Width - grid.Width;
+
+            grid.SetValue(Canvas.TopProperty, (double)_point.Y - grid.Height + 32);
+            grid.SetValue(Canvas.LeftProperty, (double)_point.X);
+
+            // 横
+            Line1.X1 = 32;
+            Line1.Y1 = _point.Y;
+            Line1.X2 = _point.X + 32;
+            Line1.Y2 = _point.Y;
+
+            Line2.X1 = _point.X + 32;
+            Line2.Y1 = Height - 48;
+            Line2.X2 = _point.X + 32;
+            Line2.Y2 = _point.Y;
+        }
+
+        private void BottomLeftUp(Grid grid, UIElement source)
+        {
+            Line1.Visibility = System.Windows.Visibility.Collapsed;
+            Line2.Visibility = System.Windows.Visibility.Collapsed;
+            buttonState.Children.RemoveRange(1, 4);
+            buttonState = null;
+
+            // 移動先の設定
+            var gridtop = (double)grid.GetValue(Canvas.TopProperty);
+            var gridleft = (double)grid.GetValue(Canvas.LeftProperty);
+
+            // bottom + left を起点に変更する
+            var button = layoutDic[grid.Uid];
+            button.Top = double.MaxValue;
+            button.Bottom = Height - gridtop - grid.Height + 32;
+            button.Left = gridleft + 32;
+            button.Right = double.MaxValue;
+        }
+
+        private void BottomRightDown(Grid grid, UIElement source)
+        {
+            var gridtop = (double)grid.GetValue(Canvas.TopProperty);
+            var gridleft = (double)grid.GetValue(Canvas.LeftProperty);
+
+            // 横
+            Line1.X1 = Width - 32;
+            Line1.Y1 = gridtop + grid.Width - 32;
+            Line1.X2 = gridleft + grid.Width - 32;
+            Line1.Y2 = gridtop + grid.Width - 32;
+
+            // 縦
+            Line2.X1 = gridleft + grid.Width - 32;
+            Line2.Y1 = Height - 48;
+            Line2.X2 = gridleft + grid.Width - 32;
+            Line2.Y2 = gridtop + grid.Width - 32;
+
+            Line1.Visibility = System.Windows.Visibility.Visible;
+            Line2.Visibility = System.Windows.Visibility.Visible;
+
+            topLeft.Background = new SolidColorBrush(Colors.White);
+            topRight.Background = new SolidColorBrush(Colors.White);
+            bottomLeft.Background = new SolidColorBrush(Colors.White);
+            bottomRight.Background = new SolidColorBrush(Colors.Red);
+        }
+
+        private void BottomRightMove(Grid grid, MouseEventArgs e)
+        {
+            var _point = getScreenRange(e.GetPosition(LayoutAreaCanvas));
+            if (_point.Y > Height - 48)
+                _point.Y = Height - 48;
+            if (_point.Y < grid.Height - 16)
+                _point.Y = grid.Height - 16;
+            if (_point.X > Width - 32)
+                _point.X = Width - 32;
+            if (_point.X < grid.Width - 32)
+                _point.X = grid.Width - 32;
+
+            grid.SetValue(Canvas.TopProperty, (double)_point.Y - grid.Height + 32);
+            grid.SetValue(Canvas.LeftProperty, (double)_point.X - grid.Width + 32);
+
+            // 横
+            Line1.X1 = Width - 32;
+            Line1.Y1 = _point.Y;
+            Line1.X2 = _point.X;
+            Line1.Y2 = _point.Y;
+
+            // 縦
+            Line2.X1 = _point.X;
+            Line2.Y1 = Height - 48;
+            Line2.X2 = _point.X;
+            Line2.Y2 = _point.Y;
+        }
+
+        private void BottomRightUp(Grid grid, UIElement source)
+        {
+            Line1.Visibility = System.Windows.Visibility.Collapsed;
+            Line2.Visibility = System.Windows.Visibility.Collapsed;
+            buttonState.Children.RemoveRange(1, 4);
+            buttonState = null;
+
+            // 移動先の設定
+            var gridtop = (double)grid.GetValue(Canvas.TopProperty);
+            var gridleft = (double)grid.GetValue(Canvas.LeftProperty);
+
+            // bottom + right を起点に変更する
+            var button = layoutDic[grid.Uid];
+            button.Top = double.MaxValue;
+            button.Bottom = Height - gridtop - grid.Height + 32;
+            button.Left = double.MaxValue;
+            button.Right = Width - gridleft - grid.Width + 32;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -208,9 +365,7 @@ namespace vGamePad
                     Stroke = Brushes.White,
                     StrokeThickness = .5
                 };
-
                 path.Data.Transform = scaleTransform;
-
                 GridLineAreaCanvas.Children.Add(path);
             }
 
@@ -223,49 +378,16 @@ namespace vGamePad
                     Stroke = Brushes.White,
                     StrokeThickness = .5
                 };
-
                 path.Data.Transform = scaleTransform;
-
                 GridLineAreaCanvas.Children.Add(path);
             }
-
-
-            // 現在のレイアウトを取り込み初期値とする
-            if (layoutDic != null)
-            {
-                foreach (string key in MainWindow.dic.Keys)
-                {
-                    var button = layoutDic[key];
-
-                    if (button.Fixed == true)
-                        continue;
-                    if (button.Top == double.MaxValue && button.Bottom == double.MaxValue)
-                        continue;
-                    var searchKey = key;
-                    // 基準の取得
-                    foreach (UIElement ui in LayoutAreaCanvas.Children)
-                    {
-                        if ( ui.Uid == searchKey )
-                        {
-                            System.Diagnostics.Debug.WriteLine(ui.Uid);
-                            if (button.Top != double.MaxValue)
-                                ui.SetValue(Canvas.TopProperty, button.Top - 32);
-                            if (button.Bottom != double.MaxValue)
-                                ui.SetValue(Canvas.TopProperty, Height - button.Height - button.Bottom - 32);
-                            if (button.Left != double.MaxValue)
-                                ui.SetValue(Canvas.LeftProperty, button.Left - 32);
-                            if (button.Right != double.MaxValue)
-                                ui.SetValue(Canvas.LeftProperty, Width - button.Width - button.Right - 32);
-                            ui.Visibility = System.Windows.Visibility.Visible;
-                            break;
-                        }
-                    }
-                }
-            }
+            SetButtonLayout();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            PlayButtonSound.Play();
+
             var grid = (Grid)sender;
             var postion = (UIElement)e.Source;
             switch (postion.Uid)
@@ -279,15 +401,25 @@ namespace vGamePad
                     postion.CaptureMouse();
                     break;
                 case "BottomLeft":
+                    BottomLeftDown(grid, postion);
+                    postion.CaptureMouse();
                     break;
                 case "BottomRight":
+                    BottomRightDown(grid, postion);
+                    postion.CaptureMouse();
                     break;
                 default:
-                    // すべてのボタンで同じロジックを採用する
                     if (buttonState != null)
                     {
                         buttonState.Children.RemoveRange(1, 4);
                         buttonState.SetValue(Canvas.ZIndexProperty, 0);
+                    }
+                    // すべてのボタンで同じロジックを採用する
+                    if (buttonState == grid)
+                    {
+                        // 同じボタンが二回押された
+                        buttonState = null;
+                        break;
                     }
 
                     // 周りの４つのブロックを作成
@@ -331,8 +463,12 @@ namespace vGamePad
                     postion.ReleaseMouseCapture();
                     break;
                 case "BottomLeft":
+                    BottomLeftUp(grid, postion);
+                    postion.ReleaseMouseCapture();
                     break;
                 case "BottomRight":
+                    BottomRightUp(grid, postion);
+                    postion.ReleaseMouseCapture();
                     break;
                 default:
                     break;
@@ -356,8 +492,10 @@ namespace vGamePad
                     TopRightMove(grid, e);
                     break;
                 case "BottomLeft":
+                    BottomLeftMove(grid, e);
                     break;
                 case "BottomRight":
+                    BottomRightMove(grid, e);
                     break;
                 default:
                     break;
@@ -365,9 +503,102 @@ namespace vGamePad
             e.Handled = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            PlayButtonSound.Play();
+            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - 保存", "ボタンレイアウトの保存場所を選択してください。\nすでに存在する場合は上書きされるので注意してください。", DialogWindow.DialogWindow.DialogStyle.ORIGINAL);
+            var result = dialog.ShowDialog();
+            var ret = dialog.result;
+            switch (ret)
+            {
+                case 1:
+                case 2:
+                    vLayoutControl.SaveLayout((int)ret, layoutDic);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play();
+            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - 読込", "ロードするボタンレイアウトを選択してください。\n編集中のレイアウトは破棄されるので注意してください。", DialogWindow.DialogWindow.DialogStyle.ORIGINAL);
+            if (!vLayoutControl.LayoutFileExists(1))
+                dialog.Botton1.IsEnabled = false;
+            if (!vLayoutControl.LayoutFileExists(2))
+                dialog.Botton2.IsEnabled = false;
+            var result = dialog.ShowDialog();
+            var ret = dialog.result;
+            switch (ret)
+            {
+                case 1:
+                case 2:
+                    layoutDic = vLayoutControl.LoadLayout((int)ret);
+                    // 現在のレイアウトをいったん保存しておく
+                    vLayoutControl.SaveLayout(9, layoutDic);
+                    SetButtonLayout();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play();
+            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - リセット", "レイアウトを初期状態に戻します。\n編集内容は破棄されます。注意してください。", DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                layoutDic = vLayoutControl.LoadLayout(9);
+                SetButtonLayout();
+            }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play();
+            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - 終了", "レイアウトの編集を終了してもよろしいですか？\n編集内容は保存されません。", DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            var result = dialog.ShowDialog();
+            if (result == true)
+                DialogResult = true;
+        }
+
+        private void SetButtonLayout()
+        {
+            // 現在のレイアウトを取り込み初期値とする
+            if (layoutDic != null)
+            {
+                foreach (string key in MainWindow.dic.Keys)
+                {
+                    var button = layoutDic[key];
+
+                    if (button.Fixed == true)
+                        continue;
+                    if (button.Top == double.MaxValue && button.Bottom == double.MaxValue)
+                        continue;
+                    var searchKey = key;
+                    // 基準の取得
+                    foreach (UIElement ui in LayoutAreaCanvas.Children)
+                    {
+                        if (ui.Uid == searchKey)
+                        {
+                            System.Diagnostics.Debug.WriteLine(ui.Uid);
+                            if (button.Top != double.MaxValue)
+                                ui.SetValue(Canvas.TopProperty, button.Top - 32);
+                            if (button.Bottom != double.MaxValue)
+                                ui.SetValue(Canvas.TopProperty, Height - button.Height - button.Bottom - 32);
+                            if (button.Left != double.MaxValue)
+                                ui.SetValue(Canvas.LeftProperty, button.Left - 32);
+                            if (button.Right != double.MaxValue)
+                                ui.SetValue(Canvas.LeftProperty, Width - button.Width - button.Right - 32);
+                            ui.Visibility = System.Windows.Visibility.Visible;
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

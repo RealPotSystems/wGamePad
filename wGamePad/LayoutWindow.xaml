@@ -41,29 +41,39 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="Black">
             <StackPanel Orientation="Horizontal">
                 <Label Content="vGamePad ボタンレイアウトの作成" Margin="8,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="16" Foreground="White"/>
-                <Button Width="48" Margin="8,0"/>
-                <Button Width="48" Margin="8,0"/>
-                <Button Width="48" Margin="8,0"/>
-                <Button Width="48" Margin="8,0" Click="Button_Click">
-                    <Label Content="&#xE10A;" FontSize="28" FontFamily="Segoe UI Symbol"/>
+                <Button Width="48" Margin="8,0" Click="Save_Click" Background="Transparent" BorderThickness="0">
+                    <Label Content="&#xE17E;&#xE105;" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                </Button>
+                <Button Width="48" Margin="8,0" Click="Load_Click" Background="Transparent" BorderThickness="0">
+                    <Label Content="&#xE17E;&#xE1A5;" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                </Button>
+                <Button Width="48" Margin="8,0" Click="Reset_Click" Background="Transparent" BorderThickness="0">
+                    <Label Content="&#xE17E;&#xE149;" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                </Button>
+                <Button Width="48" Margin="8,0" Click="Cancel_Click" Background="Transparent" BorderThickness="0">
+                    <Label Content="&#xE17E;&#xE10A;" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
                 </Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" Background="Black"/>
         <Grid Grid.Row="1" Grid.Column="20" Background="Black"/>
-        <Grid Grid.Row="2" Grid.ColumnSpan="3" Background="Black"/>
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" Background="Black">
+            <TextBlock x:Name="TextMessage" Foreground="White" Background="Transparent" Margin="32,0" FontSize="16" VerticalAlignment="Center"/>
+        </Grid>
         <Canvas x:Name="GridLineAreaCanvas" Grid.Row="1" Grid.Column="1" Opacity="0.50"/>
         <Canvas x:Name="LayoutAreaCanvas" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3">
             <Line x:Name="Line1" Stroke="Red" StrokeThickness="6" Opacity="0.75" Visibility="Collapsed"/>
             <Line x:Name="Line2" Stroke="Red" StrokeThickness="6" Opacity="0.75" Visibility="Collapsed"/>
             <Grid x:Uid="AnalogStick0" Width="192" Height="192" Style="{StaticResource baseStyle}">
                 <Grid x:Name="AnalogStick0" x:Uid="AnalogStick0" Width="128" Height="128" Style="{StaticResource gridStyle}">
+                    <Rectangle Width="192" Height="192"  Margin="-32" Stroke="White" StrokeThickness="2" StrokeDashArray="4,2"/>
                     <Ellipse Style="{StaticResource ellipseStyle}"/>
                     <Label x:Name="LeftContent" Content="左" FontSize="64" Style="{StaticResource labelStyle}"/>
                 </Grid>
             </Grid>
             <Grid x:Uid="AnalogStick1" Width="192" Height="192" Style="{StaticResource baseStyle}">
                 <Grid x:Name="AnalogStick1" x:Uid="AnalogStick1" Width="128" Height="128" Style="{StaticResource gridStyle}">
+                    <Rectangle Width="192" Height="192"  Margin="-32" Stroke="White" StrokeThickness="2" StrokeDashArray="4,2"/>
                     <Ellipse Style="{StaticResource ellipseStyle}"/>
                     <Label x:Name="RightContent" Content="右" FontSize="64" Style="{StaticResource labelStyle}"/>
                 </Grid>
