@@ -345,7 +345,7 @@ namespace vGamePad
                         }
                         if (value.Bottom != double.MaxValue)
                         {
-                            value.Bottom += distance;
+                            value.Bottom -= distance;
                             ui.SetValue(Canvas.BottomProperty, value.Bottom);
                         }
                     }
