@@ -13,11 +13,14 @@
         </Grid.RowDefinitions>
         <Label x:Name="Type" Content="&#xE17E;&#xE171;" Foreground="White" Grid.Row="0" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="5,5,352,5" FontFamily="Segoe UI Symbol" FontWeight="Bold" FontSize="12"/>
         <Label x:Name="MessageTitle" Grid.Row="0" Foreground="White" VerticalContentAlignment="Center" Margin="48,5,5,5" FontFamily="Segoe UI" FontSize="16"/>
-        <TextBox x:Name="MessageText" Grid.Row="1" IsReadOnly="True" Margin="10,0,10,5" Foreground="White" Background="Black" FontSize="16" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+        <TextBox x:Name="MessageText" Grid.Row="1" IsReadOnly="True" Margin="10,0,10,5" Foreground="White" Background="Black" FontSize="20" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button x:Name="Yes" Margin="10,5,5,10" Width="185" Background="Black" Content="はい" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnOkClick"/>
             <Button x:Name="No" Margin="5,5,10,10" Width="185" Background="Black" Content="いいえ" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnCancelClick"/>
             <Button x:Name="OK" Margin="10,5,10,10" Width="380" Background="Black" Content="OK" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnOkClick"/>
+            <Button x:Name="Botton1" Content="レイアウト1" Margin="10,5,5,10" Width="120" Background="Black" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnBottonClick"/>
+            <Button x:Name="Botton2" Content="レイアウト2" Margin="5,5,5,10" Width="120" Background="Black" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnBottonClick"/>
+            <Button x:Name="Botton3" Content="キャンセル" Margin="5,5,5,10" Width="120" Background="Black" Foreground="White" FontWeight="Bold" FontSize="16" Visibility="Collapsed" Click="OnBottonClick"/>
         </StackPanel>
     </Grid>
 </Window>
