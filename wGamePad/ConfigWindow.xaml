@@ -11,7 +11,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Opacity="0.75" Background="Black">
+    <Grid x:Name="ConfigGrid" Opacity="0.75" Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="96"/>
