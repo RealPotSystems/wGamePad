@@ -39,13 +39,13 @@ namespace vGamePad
             var ret = dialog.ShowDialog();
             if (ret == true)
             {
-                var w = Window.GetWindow(this);
-                w.Close();
-
+                var configWindow = (ConfigWindow)Window.GetWindow(this);
+                configWindow.ConfigGrid.Visibility = System.Windows.Visibility.Hidden;
                 // レイアウト作成モードに移行
                 // レイアウトモードは上にコマンドエリアを表示
                 var layoutWindow = new LayoutWindow();
                 layoutWindow.ShowDialog();
+                configWindow.ConfigGrid.Visibility = System.Windows.Visibility.Visible;
             }
         }
     }
