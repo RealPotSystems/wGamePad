@@ -485,7 +485,7 @@ namespace vGamePad
                 serializer.WriteObject(ms, d); // シリアライズ
                 var xml = Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Length);
                 Encoding utf8 = Encoding.GetEncoding("utf-8");
-                StreamWriter writer = new StreamWriter(xmlFilePath, true, utf8);
+                StreamWriter writer = new StreamWriter(xmlFilePath, false, utf8);
                 writer.WriteLine(xml);
                 writer.Close();
             }
