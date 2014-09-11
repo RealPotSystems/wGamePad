@@ -336,13 +336,10 @@ namespace vGamePad
             Clear();
             Add("AnalogStick0", new vButton() { Index = 0, Top = 352.0, Left = 80.0, Visible = Visibility.Visible, Moving = true });
             Add("AnalogStick1", new vButton() { Index = 1, Top = 352.0, Right = 80.0, Visible = Visibility.Visible, Moving = true });
-            //Add("Button01", new vButton() { Index = 0, Top = 128.0, Right = 112.0, Visible = Visibility.Visible });
-            Add("Button01", new vButton() { Index = 0, Top = 128.0 + 32.0, Right = 112.0, Visible = Visibility.Visible });
-            //Add("Button02", new vButton() { Index = 1, Top = 192.0, Right = 48.0, Visible = Visibility.Visible });
-            Add("Button02", new vButton() { Index = 1, Top = 192.0+16.0, Right = 48.0+16.0, Visible = Visibility.Visible });
+            Add("Button01", new vButton() { Index = 0, Top = 128.0, Right = 112.0, Visible = Visibility.Visible });
+            Add("Button02", new vButton() { Index = 1, Top = 192.0, Right = 48.0, Visible = Visibility.Visible });
             Add("Button03", new vButton() { Index = 2, Top = 256.0, Right = 112.0, Visible = Visibility.Visible });
-            //Add("Button04", new vButton() { Index = 3, Top = 192.0, Right = 176.0, Visible = Visibility.Visible });
-            Add("Button04", new vButton() { Index = 3, Top = 192.0+16.0, Right = 176.0-16.0, Visible = Visibility.Visible });
+            Add("Button04", new vButton() { Index = 3, Top = 192.0, Right = 176.0, Visible = Visibility.Visible });
             Add("Button05", new vButton() { Index = 4, Top = 320.0, Right = 240.0, Visible = Visibility.Visible });
             Add("Button06", new vButton() { Index = 5, Top = 416.0, Right = 240.0, Visible = Visibility.Visible });
             Add("Button07", new vButton() { Index = 6, Top = 320.0, Left = 240.0, Visible = Visibility.Visible });
