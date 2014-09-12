@@ -151,7 +151,8 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   ボタンレイアウト作成モードに移行します。\nよろしいですか？ に類似しているローカライズされた文字列を検索します。
+        ///   ボタンレイアウト作成モードに移行します。
+        ///よろしいですか？ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LayoutSelectMessage {
             get {
@@ -196,7 +197,8 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   レイアウトの編集を終了してもよろしいですか？\n編集内容は破棄されます。注意してください。 に類似しているローカライズされた文字列を検索します。
+        ///   レイアウトの編集を終了してもよろしいですか？
+        ///編集内容は破棄されます。注意してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LayoutWindowCloseMessage {
             get {
@@ -214,7 +216,8 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   ロードするボタンレイアウトを選択してください。\n編集中のレイアウトは破棄されるので注意してください。 に類似しているローカライズされた文字列を検索します。
+        ///   ロードするボタンレイアウトを選択してください。
+        ///編集中のレイアウトは破棄されるので注意してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LayoutWindowLoadMessage {
             get {
@@ -232,7 +235,8 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   レイアウトを初期状態に戻します。\n編集内容は破棄されます。注意してください。 に類似しているローカライズされた文字列を検索します。
+        ///   レイアウトを初期状態に戻します。
+        ///編集内容は破棄されます。注意してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LayoutWindowResetMessage {
             get {
@@ -250,7 +254,8 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   vGamePad ボタンレイアウト - 保存 に類似しているローカライズされた文字列を検索します。
+        ///   ボタンレイアウトの保存場所を選択してください。
+        ///すでに存在する場合は上書きされるので注意してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LayoutWindowSaveMessage {
             get {
@@ -259,7 +264,7 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   ボタンレイアウトの保存場所を選択してください。\nすでに存在する場合は上書きされるので注意してください。 に類似しているローカライズされた文字列を検索します。
+        ///   vGamePad ボタンレイアウト - 保存 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LayoutWindowSaveTitle {
             get {
