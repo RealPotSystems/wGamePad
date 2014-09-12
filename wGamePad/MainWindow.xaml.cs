@@ -7,8 +7,6 @@ using System.Windows.Shapes;
 using System.Windows.Data;
 using Microsoft.Win32;
 using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Xml;
 using DeviceControl;
 
 namespace vGamePad

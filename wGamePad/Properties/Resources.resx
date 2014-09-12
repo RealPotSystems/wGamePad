@@ -147,6 +147,45 @@
   <data name="ExitApplication" xml:space="preserve">
     <value>vGamePadを終了してもよろしいですか？</value>
   </data>
+  <data name="LayoutSelectMessage" xml:space="preserve">
+    <value>ボタンレイアウト作成モードに移行します。\nよろしいですか？</value>
+  </data>
+  <data name="LayoutSelectTitle" xml:space="preserve">
+    <value>ボタンレイアウトの作成</value>
+  </data>
+  <data name="LayoutSettingLayout1" xml:space="preserve">
+    <value>レイアウト1</value>
+  </data>
+  <data name="LayoutSettingLayout2" xml:space="preserve">
+    <value>レイアウト2</value>
+  </data>
+  <data name="LayoutSettingLayoutDefault" xml:space="preserve">
+    <value>デフォルト レイアウト</value>
+  </data>
+  <data name="LayoutWindowCloseMessage" xml:space="preserve">
+    <value>レイアウトの編集を終了してもよろしいですか？\n編集内容は破棄されます。注意してください。</value>
+  </data>
+  <data name="LayoutWindowCloseTitle" xml:space="preserve">
+    <value>vGamePad ボタンレイアウト - 終了</value>
+  </data>
+  <data name="LayoutWindowLoadMessage" xml:space="preserve">
+    <value>ロードするボタンレイアウトを選択してください。\n編集中のレイアウトは破棄されるので注意してください。</value>
+  </data>
+  <data name="LayoutWindowLoadTitle" xml:space="preserve">
+    <value>vGamePad ボタンレイアウト - 読込</value>
+  </data>
+  <data name="LayoutWindowResetMessage" xml:space="preserve">
+    <value>レイアウトを初期状態に戻します。\n編集内容は破棄されます。注意してください。</value>
+  </data>
+  <data name="LayoutWindowResetTitle" xml:space="preserve">
+    <value>vGamePad ボタンレイアウト - リセット</value>
+  </data>
+  <data name="LayoutWindowSaveMessage" xml:space="preserve">
+    <value>vGamePad ボタンレイアウト - 保存</value>
+  </data>
+  <data name="LayoutWindowSaveTitle" xml:space="preserve">
+    <value>ボタンレイアウトの保存場所を選択してください。\nすでに存在する場合は上書きされるので注意してください。</value>
+  </data>
   <data name="PowerStatusString01" xml:space="preserve">
     <value>充電してください</value>
   </data>
@@ -176,6 +215,9 @@
   </data>
   <data name="PowerStatusString10" xml:space="preserve">
     <value>{0} {1}%:{2}</value>
+  </data>
+  <data name="ProcessName" xml:space="preserve">
+    <value>DQXGame</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Sound01" type="System.Resources.ResXFileRef, System.Windows.Forms">

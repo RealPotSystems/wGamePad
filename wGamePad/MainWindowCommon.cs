@@ -3,8 +3,6 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Media;
 using System.Windows.Media;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace vGamePad
 {

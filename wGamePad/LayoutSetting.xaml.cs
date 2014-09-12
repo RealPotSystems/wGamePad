@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 
 namespace vGamePad
 {
@@ -42,9 +30,9 @@ namespace vGamePad
 
             int n = Properties.Settings.Default.Layout;
 
-            Layout1.Content = string.Format("{0} {1}", n == 1 ? check_on : check_off, "レイアウト1");
-            Layout2.Content = string.Format("{0} {1}", n == 2 ? check_on : check_off, "レイアウト2");
-            Layout3.Content = string.Format("{0} {1}", n == 0 ? check_on : check_off, "デフォルト レイアウト");
+            Layout1.Content = string.Format("{0} {1}", n == 1 ? check_on : check_off, Properties.Resources.LayoutSettingLayout1);
+            Layout2.Content = string.Format("{0} {1}", n == 2 ? check_on : check_off, Properties.Resources.LayoutSettingLayout2);
+            Layout3.Content = string.Format("{0} {1}", n == 0 ? check_on : check_off, Properties.Resources.LayoutSettingLayoutDefault);
         }
 
         private void LayoutClick(object sender, RoutedEventArgs e)
@@ -64,9 +52,9 @@ namespace vGamePad
             }
             int n = Properties.Settings.Default.Layout;
 
-            Layout1.Content = string.Format("{0} {1}", n == 1 ? check_on : check_off, "レイアウト1");
-            Layout2.Content = string.Format("{0} {1}", n == 2 ? check_on : check_off, "レイアウト2");
-            Layout3.Content = string.Format("{0} {1}", n == 0 ? check_on : check_off, "デフォルト レイアウト");
+            Layout1.Content = string.Format("{0} {1}", n == 1 ? check_on : check_off, Properties.Resources.LayoutSettingLayout1);
+            Layout2.Content = string.Format("{0} {1}", n == 2 ? check_on : check_off, Properties.Resources.LayoutSettingLayout2);
+            Layout3.Content = string.Format("{0} {1}", n == 0 ? check_on : check_off, Properties.Resources.LayoutSettingLayoutDefault);
 
             // 選択されたレイアウトを適用する
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

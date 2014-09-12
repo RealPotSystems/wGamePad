@@ -151,6 +151,123 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   ボタンレイアウト作成モードに移行します。\nよろしいですか？ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutSelectMessage {
+            get {
+                return ResourceManager.GetString("LayoutSelectMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ボタンレイアウトの作成 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutSelectTitle {
+            get {
+                return ResourceManager.GetString("LayoutSelectTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   レイアウト1 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutSettingLayout1 {
+            get {
+                return ResourceManager.GetString("LayoutSettingLayout1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   レイアウト2 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutSettingLayout2 {
+            get {
+                return ResourceManager.GetString("LayoutSettingLayout2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   デフォルト レイアウト に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutSettingLayoutDefault {
+            get {
+                return ResourceManager.GetString("LayoutSettingLayoutDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   レイアウトの編集を終了してもよろしいですか？\n編集内容は破棄されます。注意してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowCloseMessage {
+            get {
+                return ResourceManager.GetString("LayoutWindowCloseMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   vGamePad ボタンレイアウト - 終了 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowCloseTitle {
+            get {
+                return ResourceManager.GetString("LayoutWindowCloseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ロードするボタンレイアウトを選択してください。\n編集中のレイアウトは破棄されるので注意してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowLoadMessage {
+            get {
+                return ResourceManager.GetString("LayoutWindowLoadMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   vGamePad ボタンレイアウト - 読込 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowLoadTitle {
+            get {
+                return ResourceManager.GetString("LayoutWindowLoadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   レイアウトを初期状態に戻します。\n編集内容は破棄されます。注意してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowResetMessage {
+            get {
+                return ResourceManager.GetString("LayoutWindowResetMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   vGamePad ボタンレイアウト - リセット に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowResetTitle {
+            get {
+                return ResourceManager.GetString("LayoutWindowResetTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   vGamePad ボタンレイアウト - 保存 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowSaveMessage {
+            get {
+                return ResourceManager.GetString("LayoutWindowSaveMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ボタンレイアウトの保存場所を選択してください。\nすでに存在する場合は上書きされるので注意してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LayoutWindowSaveTitle {
+            get {
+                return ResourceManager.GetString("LayoutWindowSaveTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   充電してください に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PowerStatusString01 {
@@ -237,6 +354,15 @@ namespace vGamePad.Properties {
         internal static string PowerStatusString10 {
             get {
                 return ResourceManager.GetString("PowerStatusString10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   DQXGame に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ProcessName {
+            get {
+                return ResourceManager.GetString("ProcessName", resourceCulture);
             }
         }
         

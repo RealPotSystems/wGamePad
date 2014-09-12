@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace vGamePad
@@ -506,7 +498,10 @@ namespace vGamePad
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - 保存", "ボタンレイアウトの保存場所を選択してください。\nすでに存在する場合は上書きされるので注意してください。", DialogWindow.DialogWindow.DialogStyle.ORIGINAL);
+            var dialog = new DialogWindow.DialogWindow(
+                Properties.Resources.LayoutWindowSaveTitle,
+                Properties.Resources.LayoutWindowSaveMessage,
+                DialogWindow.DialogWindow.DialogStyle.ORIGINAL);
             var result = dialog.ShowDialog();
             var ret = dialog.result;
             switch (ret)
@@ -523,7 +518,10 @@ namespace vGamePad
         private void Load_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - 読込", "ロードするボタンレイアウトを選択してください。\n編集中のレイアウトは破棄されるので注意してください。", DialogWindow.DialogWindow.DialogStyle.ORIGINAL);
+            var dialog = new DialogWindow.DialogWindow(
+                Properties.Resources.LayoutWindowLoadTitle,
+                Properties.Resources.LayoutWindowLoadMessage,
+                DialogWindow.DialogWindow.DialogStyle.ORIGINAL);
             if (!vLayoutControl.LayoutFileExists(1))
                 dialog.Botton1.IsEnabled = false;
             if (!vLayoutControl.LayoutFileExists(2))
@@ -547,7 +545,10 @@ namespace vGamePad
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - リセット", "レイアウトを初期状態に戻します。\n編集内容は破棄されます。注意してください。", DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            var dialog = new DialogWindow.DialogWindow(
+                Properties.Resources.LayoutWindowResetTitle,
+                Properties.Resources.LayoutWindowResetMessage,
+                DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
             var result = dialog.ShowDialog();
             if (result == true)
             {
@@ -559,7 +560,10 @@ namespace vGamePad
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            var dialog = new DialogWindow.DialogWindow("vGamePad ボタンレイアウト - 終了", "レイアウトの編集を終了してもよろしいですか？\n編集内容は保存されません。", DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            var dialog = new DialogWindow.DialogWindow(
+                Properties.Resources.LayoutWindowCloseTitle,
+                Properties.Resources.LayoutWindowCloseMessage,
+                DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
             var result = dialog.ShowDialog();
             if (result == true)
                 DialogResult = true;

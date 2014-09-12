@@ -3,11 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Navigation;
-using Microsoft.Win32;
 
 namespace vGamePad
 {
@@ -25,6 +21,10 @@ namespace vGamePad
         private const string check_on = "\uE0A2";
         private const string check_off = "\uE003";
         private const string stick = "\uE10A";
+        private const string regkey = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation";
+        private const string sensorpresent = "SensorPresent";
+        private const string enable = "Enable";
+        private const string nextpage = "LayoutSelect.xaml";
 
         public ConfigWindow()
         {
@@ -104,7 +104,7 @@ namespace vGamePad
         {
             try
             {
-                int ret = (int)Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation", "SensorPresent", 0);
+                int ret = (int)Microsoft.Win32.Registry.GetValue(regkey, sensorpresent, 0);
                 return ret == 1 ? true : false;
             }
             catch
@@ -117,7 +117,7 @@ namespace vGamePad
         {
             try
             {
-                int ret = (int)Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AutoRotation", "Enable", 0);
+                int ret = (int)Microsoft.Win32.Registry.GetValue(regkey, enable, 0);
                 return ret == 1 ? true : false;
             }
             catch
@@ -131,7 +131,7 @@ namespace vGamePad
             PlayButtonSound.Play(); 
             try
             {
-                Process[] ps = Process.GetProcessesByName("DQXGame");   // ドラクエ10のプロセス名を指定する
+                Process[] ps = Process.GetProcessesByName(Properties.Resources.ProcessName);   // ドラクエ10のプロセス名を指定する
                 if (ps.Length == 1)
                 {
                     ps[0].WaitForInputIdle();
@@ -169,7 +169,7 @@ namespace vGamePad
                 LayoutMenu.Visibility = System.Windows.Visibility.Visible;
                 if ( navigation.Content == null )
                 {
-                    navigation.Navigate(new Uri("LayoutSelect.xaml", UriKind.Relative));
+                    navigation.Navigate(new Uri(nextpage, UriKind.Relative));
                 }
 
             }

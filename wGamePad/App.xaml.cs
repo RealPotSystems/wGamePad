@@ -8,11 +8,6 @@
 //
 //------------------------------------------------------------
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Threading;
 using System.Windows;
 using System.Runtime;
@@ -47,6 +42,7 @@ namespace vGamePad
         {
             ProfileOptimization.SetProfileRoot(Environment.CurrentDirectory);
             ProfileOptimization.StartProfile("vGamePad.JIT.Profile");
+            vGamePad.Properties.Settings.Default.Upgrade();
         }
         /// <summary>
         /// vGamePadのスタートアップ処理

@@ -9,9 +9,7 @@
 //------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -441,6 +439,8 @@ namespace vGamePad
 
     public class vLayoutControl
     {
+        private const string filenameFormat = "{0}\\ButtonLayout{1}.xml";
+
         public static vButtonDictionary LoadLayout(int n)
         {
             var d = new vButtonDictionary();
@@ -454,7 +454,7 @@ namespace vGamePad
             }
             try
             {
-                var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+                var xmlFilePath = string.Format(filenameFormat, Environment.CurrentDirectory, n);
                 var serializer = new DataContractSerializer(typeof(vButtonDictionary));
                 XmlReader xml = XmlReader.Create(xmlFilePath);
                 d = (vButtonDictionary)serializer.ReadObject(xml);
@@ -475,7 +475,7 @@ namespace vGamePad
 
         public static void SaveLayout(int n, vButtonDictionary d)
         {
-            var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+            var xmlFilePath = string.Format(filenameFormat, Environment.CurrentDirectory, n);
             var serializer = new DataContractSerializer(typeof(vButtonDictionary));
             using (var ms = new MemoryStream())
             {
@@ -490,7 +490,7 @@ namespace vGamePad
 
         public static bool LayoutFileExists(int n)
         {
-            var xmlFilePath = string.Format("{0}\\ButtonLayout{1}.xml", Environment.CurrentDirectory, n);
+            var xmlFilePath = string.Format(filenameFormat, Environment.CurrentDirectory, n);
             if (File.Exists(xmlFilePath))
             {
                 return true;

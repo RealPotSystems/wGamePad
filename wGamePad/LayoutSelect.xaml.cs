@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace vGamePad
 {
@@ -20,6 +9,8 @@ namespace vGamePad
     /// </summary>
     public partial class LayoutSelect : Page
     {
+        private const string nextpage = "LayoutSetting.xaml";
+
         public LayoutSelect()
         {
             InitializeComponent();
@@ -28,14 +19,17 @@ namespace vGamePad
         private void Set_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            ConfigWindow.navigation.Navigate(new Uri("LayoutSetting.xaml", UriKind.Relative));
+            ConfigWindow.navigation.Navigate(nextpage, UriKind.Relative);
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
             // レイアウトモードに移行してもよいかの確認
-            var dialog = new DialogWindow.DialogWindow("ボタンレイアウトの作成", "ボタンレイアウト作成モードに移行します。\nよろしいですか？", DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
+            var dialog = new DialogWindow.DialogWindow(
+                Properties.Resources.LayoutSelectTitle,
+                Properties.Resources.LayoutSelectMessage,
+                DialogWindow.DialogWindow.DialogStyle.OKCANCEL);
             var ret = dialog.ShowDialog();
             if (ret == true)
             {
