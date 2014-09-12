@@ -169,18 +169,23 @@ namespace vGamePad
 
                         if (button.Top != double.MaxValue)
                         {
+                            ui.ClearValue(Canvas.BottomProperty);
                             ui.SetValue(Canvas.TopProperty, button.Top);
                         }
-                        if (button.Left != double.MaxValue)
+                        else if (button.Bottom != double.MaxValue)
                         {
-                            ui.SetValue(Canvas.LeftProperty, button.Left);
-                        }
-                        if (button.Bottom != double.MaxValue)
-                        {
+                            ui.ClearValue(Canvas.TopProperty);
                             ui.SetValue(Canvas.BottomProperty, button.Bottom);
                         }
-                        if (button.Right != double.MaxValue)
+
+                        if (button.Left != double.MaxValue)
                         {
+                            ui.ClearValue(Canvas.RightProperty);
+                            ui.SetValue(Canvas.LeftProperty, button.Left);
+                        }
+                        else if (button.Right != double.MaxValue)
+                        {
+                            ui.ClearValue(Canvas.LeftProperty);
                             ui.SetValue(Canvas.RightProperty, button.Right);
                         }
                         ui.SetValue(Canvas.VisibilityProperty, button.Visible);

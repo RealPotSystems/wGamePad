@@ -263,6 +263,7 @@ namespace vGamePad
             ConfigWindow conf = new ConfigWindow();
             Hide();
             conf.ShowDialog();
+            SetLayout();
             SetConfig();
             Show();
         }
