@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Real Pot Systems")]
 [assembly: AssemblyProduct("vGamePad")]
-[assembly: AssemblyCopyright("Copyright ©  2014 TAKUBON")]
+[assembly: AssemblyCopyright("Copyright © 2014 TAKUBON")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
