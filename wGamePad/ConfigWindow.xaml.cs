@@ -12,7 +12,7 @@ namespace vGamePad
     /// </summary>
     public partial class ConfigWindow : Window
     {
-        public static NavigationService navigation = null;
+        public NavigationService navigation = null;
         private const string versionFormat = "{0} version {1}\n{2} {3}.\n";
         private const string sound_on = "\uE15D";
         private const string sound_off = "\uE198";

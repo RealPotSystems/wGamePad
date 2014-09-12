@@ -19,7 +19,8 @@ namespace vGamePad
         private void Set_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
-            ConfigWindow.navigation.Navigate(nextpage, UriKind.Relative);
+            var configWindow = (ConfigWindow)Window.GetWindow(this);
+            configWindow.navigation.Navigate(new Uri(nextpage, UriKind.Relative));
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
