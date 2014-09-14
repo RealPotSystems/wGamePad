@@ -106,7 +106,7 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   {0} ボタンのみ表示する に類似しているローカライズされた文字列を検索します。
+        ///   {0} ボタンのみ表示 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ConfigButton01 {
             get {
@@ -133,11 +133,48 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
+        ///   {0} ①～④ボタンの連射を使う に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ConfigButton04 {
+            get {
+                return ResourceManager.GetString("ConfigButton04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   vGamePadメッセージ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string DialogTitle {
             get {
                 return ResourceManager.GetString("DialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   強制的にvGamePadを終了します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExceptionMessage001 {
+            get {
+                return ResourceManager.GetString("ExceptionMessage001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ご利用の環境にはタッチスクリーン機能がありません。
+        ///vGamePadをご利用いただけません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExceptionMessage002 {
+            get {
+                return ResourceManager.GetString("ExceptionMessage002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   vGamePad エラーメッセージ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ExceptionTitle {
+            get {
+                return ResourceManager.GetString("ExceptionTitle", resourceCulture);
             }
         }
         

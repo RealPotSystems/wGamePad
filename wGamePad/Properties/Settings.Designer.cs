@@ -87,5 +87,29 @@ namespace vGamePad.Properties {
                 this["Skeleton"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsUpgraded {
+            get {
+                return ((bool)(this["IsUpgraded"]));
+            }
+            set {
+                this["IsUpgraded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Barrage {
+            get {
+                return ((bool)(this["Barrage"]));
+            }
+            set {
+                this["Barrage"] = value;
+            }
+        }
     }
 }

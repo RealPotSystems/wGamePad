@@ -160,6 +160,14 @@ namespace vGamePad
             {
                 vButtonTimerDic.Add(e.ui.Uid, new BarrageTimer(e.ui));
             }
+
+            // 連射機能のON/OFF確認
+            if (!Properties.Settings.Default.Barrage)
+            {
+                // 強制的にタイマーOFFにする
+                dic[e.ui.Uid].Barrage = vButton.BarrageState.TimerOn;
+            }
+
             // 対象のボタンのタイマー状態で動作を切り分け
             switch (dic[e.ui.Uid].Barrage)
             {
@@ -183,7 +191,6 @@ namespace vGamePad
 
         public void BarrageUp(object sender, vGamePadEventArgs e)
         {
-            // デフォルト動作は不要
             // vJoyボタンアップ
             devCon.FreeButton(dic[e.ui.Uid].Index);
 
@@ -304,8 +311,13 @@ namespace vGamePad
 
             dic[e.ui.Uid].Id = e.id;
             dic[e.ui.Uid].Range = Height;
+
             vGamePadBaseLeft.Background = new SolidColorBrush(Colors.White);
             vGamePadBaseRight.Background = new SolidColorBrush(Colors.White);
+
+            vGamePadBaseLeft.Visibility = System.Windows.Visibility.Visible;
+            vGamePadBaseRight.Visibility = System.Windows.Visibility.Visible;
+
         }
 
         public void HomeMove(object sender, vGamePadEventArgs e)
@@ -321,6 +333,11 @@ namespace vGamePad
 
         public void HomeUp(object sender, vGamePadEventArgs e)
         {
+            if (Properties.Settings.Default.Skeleton)
+            {
+                vGamePadBaseLeft.Visibility = System.Windows.Visibility.Hidden;
+                vGamePadBaseRight.Visibility = System.Windows.Visibility.Hidden;
+            }
             vGamePadBaseLeft.Background = new SolidColorBrush(Colors.Black);
             vGamePadBaseRight.Background = new SolidColorBrush(Colors.Black);
             ChangeButtonStatus(e.ui, Colors.Black, Colors.White);

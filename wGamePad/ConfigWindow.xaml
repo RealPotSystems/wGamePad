@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
-        Title="ConfigWindow" Height="500" Width="400" Loaded="Window_Loaded">
+        Title="ConfigWindow" Height="580" Width="400" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -31,13 +31,14 @@
         <StackPanel x:Name="NormalMenu" Grid.Row="1" Orientation="Horizontal" Visibility="Visible">
             <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE1AA;" Click="SetPostion_Click" Style="{StaticResource defaultButton}"/>
             <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="Sound_Click" Style="{StaticResource defaultButton}"/>
+            <Button FontSize="40" Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" IsEnabled="False" Style="{StaticResource defaultButton}"/>
             <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="ScreenRotate_Click" Style="{StaticResource defaultButton}"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" IsEnabled="False" Style="{StaticResource defaultButton}"/>
             <Button x:Name="Maintenance" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
         </StackPanel>
         <Frame x:Name="LayoutFrame" Grid.Row="2" NavigationUIVisibility="Hidden" Visibility="Collapsed" Navigated="LayoutFrame_Navigated"/>
         <StackPanel x:Name="NormalFrame" Grid.Row="2" Orientation="Vertical" Visibility="Visible">
             <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="Skeleton_Click"/>
+            <Button x:Name="Barrage" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="Barrage_Click"/>
             <Button x:Name="AstTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="AstTime_Click"/>
             <Button x:Name="BtyTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="BtyTime_Click"/>
         </StackPanel>

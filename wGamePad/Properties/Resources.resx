@@ -133,7 +133,7 @@
     <value>デフォルトレイアウトで起動します。</value>
   </data>
   <data name="ConfigButton01" xml:space="preserve">
-    <value>{0} ボタンのみ表示する</value>
+    <value>{0} ボタンのみ表示</value>
   </data>
   <data name="ConfigButton02" xml:space="preserve">
     <value>{0} アストルティア時間を表示</value>
@@ -141,8 +141,21 @@
   <data name="ConfigButton03" xml:space="preserve">
     <value>{0} バッテリー残量を表示</value>
   </data>
+  <data name="ConfigButton04" xml:space="preserve">
+    <value>{0} ①-④ボタンの連射を使う</value>
+  </data>
   <data name="DialogTitle" xml:space="preserve">
     <value>vGamePadメッセージ</value>
+  </data>
+  <data name="ExceptionMessage001" xml:space="preserve">
+    <value>強制的にvGamePadを終了します。</value>
+  </data>
+  <data name="ExceptionMessage002" xml:space="preserve">
+    <value>ご利用の環境にはタッチスクリーン機能がありません。
+vGamePadをご利用いただけません。</value>
+  </data>
+  <data name="ExceptionTitle" xml:space="preserve">
+    <value>vGamePad エラーメッセージ</value>
   </data>
   <data name="ExitApplication" xml:space="preserve">
     <value>vGamePadを終了してもよろしいですか？</value>

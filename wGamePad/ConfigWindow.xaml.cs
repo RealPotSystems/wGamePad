@@ -63,6 +63,10 @@ namespace vGamePad
                 String.Format(Properties.Resources.ConfigButton01, check_on) :
                 String.Format(Properties.Resources.ConfigButton01, check_off);
 
+            Barrage.Content = Properties.Settings.Default.Barrage ?
+                String.Format(Properties.Resources.ConfigButton04, check_on) :
+                String.Format(Properties.Resources.ConfigButton04, check_off);
+
             AstTime.Content = Properties.Settings.Default.Clock ?
                 String.Format(Properties.Resources.ConfigButton02, check_on) :
                 String.Format(Properties.Resources.ConfigButton02, check_off);
@@ -234,6 +238,15 @@ namespace vGamePad
             PlayButtonSound.Play(); 
             if (navigation.CanGoForward)
                 navigation.GoForward();
+        }
+
+        private void Barrage_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play();
+            Properties.Settings.Default.Barrage = Properties.Settings.Default.Barrage ? false : true;
+            Barrage.Content = Properties.Settings.Default.Barrage ?
+                String.Format(Properties.Resources.ConfigButton04, check_on) :
+                String.Format(Properties.Resources.ConfigButton04, check_off);
         }
     }
 }
