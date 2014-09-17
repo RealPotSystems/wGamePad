@@ -111,5 +111,29 @@ namespace vGamePad.Properties {
                 this["Barrage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public string Foreground {
+            get {
+                return ((string)(this["Foreground"]));
+            }
+            set {
+                this["Foreground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public string Background {
+            get {
+                return ((string)(this["Background"]));
+            }
+            set {
+                this["Background"] = value;
+            }
+        }
     }
 }
