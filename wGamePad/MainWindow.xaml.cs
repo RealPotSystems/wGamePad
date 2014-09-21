@@ -19,9 +19,10 @@ namespace vGamePad
         public static vButtonDictionary dic = null;
         public static JoyStick devCon = new JoyStick();
 
+        public ColorChanged colorChanged;
+
         public MainWindow()
         {
-
             InitializeComponent();
         }
 
@@ -33,6 +34,8 @@ namespace vGamePad
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            colorChanged = DataContext as ColorChanged;
+
             AstClock astclock = this.Resources["astClock"] as AstClock;
             astclock.provider = this.Resources["CurrentAstDateTime"] as ObjectDataProvider;
 
@@ -63,7 +66,6 @@ namespace vGamePad
             SystemEvents_DisplaySettingsChanged(null, null);
 
             // とりあえずコーディングここまで
-
 #if DEBUG
             // デバッグ用イベントハンドラは以下の３つにしておく
             // MouseDown="vGamePadCanvas_MouseDown"

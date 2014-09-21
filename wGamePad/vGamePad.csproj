@@ -78,6 +78,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AstClock.cs" />
+    <Compile Include="ClockSetting.xaml.cs">
+      <DependentUpon>ClockSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Compile Include="PowerStatus.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="vButton.cs" />
+    <Page Include="ClockSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

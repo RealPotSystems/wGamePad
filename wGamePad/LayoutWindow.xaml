@@ -6,12 +6,14 @@
         WindowStyle="None" Topmost="True"
         Background="Transparent" ShowInTaskbar="False"
         AllowsTransparency="True"
-        Margin="0" Padding="0" Loaded="Window_Loaded">
+        Margin="0" Padding="0" Loaded="Window_Loaded"
+        DataContext="{DynamicResource colorChanged}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="vGamePadStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <local:ColorChanged x:Key="colorChanged"/>
             <Style x:Key="baseStyle" TargetType="Grid">
                 <Setter Property="Width" Value="128"/>
                 <Setter Property="Height" Value="128"/>

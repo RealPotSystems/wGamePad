@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Media;
 using System.Windows.Media;
+using System.ComponentModel;
+using MColor = System.Windows.Media.Color;
+using DColor = System.Drawing.Color;
 
 namespace vGamePad
 {
@@ -19,6 +22,64 @@ namespace vGamePad
             }
 
             return new Point(1.0, 1.0);
+        }
+
+        public static MColor ToMediaColor(this DColor color)
+        {
+            return MColor.FromArgb(color.A, color.R, color.G, color.B);
+        }
+    }
+
+    public class ColorChanged : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string foreground = "White";
+        private string background = "Black";
+
+        public string Foreground
+        {
+            get
+            {
+                return this.foreground;
+            }
+            set
+            {
+                if (value != this.foreground)
+                {
+                    value = this.foreground;
+                    NotifyPropertyChanged("Foreground");
+                }
+            }
+        }
+
+        public string Background
+        {
+            get
+            {
+                return this.background;
+            }
+            set
+            {
+                if (value != this.background)
+                {
+                    value = this.background;
+                    NotifyPropertyChanged("Background");
+                }
+            }
+        }
+
+        public ColorChanged ()
+        {
+            Foreground = Properties.Settings.Default.Foreground;
+            Background = Properties.Settings.Default.Background;
+        }
+
+        private void NotifyPropertyChanged(string info)
+        {
+            if (PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
     }
 

@@ -3,7 +3,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.ComponentModel;
 
 namespace vGamePad
 {
@@ -18,19 +17,21 @@ namespace vGamePad
         private Grid bottomLeft = null;
         private Grid bottomRight = null;
 
-        private ColorChanged colorChanged;
-
         private vButtonDictionary layoutDic = null;
+
+        private ColorChanged colorChanged = null;
+
         public LayoutWindow()
         {
             InitializeComponent();
-
-            colorChanged = DataContext as ColorChanged;
 
             // 現在のレイアウトをいったん保存しておく
             vLayoutControl.SaveLayout(9, MainWindow.dic);
             // そのレイアウトをローカルに取り込む
             layoutDic = vLayoutControl.LoadLayout(9);
+
+            // 色の設定
+            colorChanged = DataContext as ColorChanged;
         }
 
         private Grid createButton(string uid, System.Windows.VerticalAlignment v, System.Windows.HorizontalAlignment h , Color c)
@@ -606,49 +607,6 @@ namespace vGamePad
                             break;
                         }
                     }
-                }
-            }
-        }
-    }
-
-    public class ColorChanged : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string info) {
-            if (PropertyChanged != null) {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
-
-        private string foreground;
-        private string background;
-        public string Foreground
-        {
-            get
-            {
-                return foreground;
-            }
-            set
-            {
-                if (value != foreground)
-                {
-                    foreground = value;
-                    NotifyPropertyChanged("Foreground");
-                }
-            }
-        }
-        public string Background
-        {
-            get
-            {
-                return background;
-            }
-            set
-            {
-                if (value != background)
-                {
-                    background = value;
-                    NotifyPropertyChanged("Background");
                 }
             }
         }

@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="400"
 	Title="LayoutSelect">
-    <StackPanel x:Name="NormalFrame" Grid.Row="2" Orientation="Vertical" Visibility="Visible">
+    <StackPanel x:Name="NormalFrame" Orientation="Vertical" Visibility="Visible">
         <Button x:Name="Set" Content="ボタンレイアウトを設定" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="Set_Click"/>
         <Button x:Name="Create" Content="ボタンレイアウトを作成" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="Create_Click"/>
     </StackPanel>
