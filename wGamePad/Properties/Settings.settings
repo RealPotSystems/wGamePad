@@ -29,5 +29,11 @@
     <Setting Name="Background" Type="System.String" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
+    <Setting Name="AstClock" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ScreenMemo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

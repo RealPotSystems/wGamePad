@@ -560,6 +560,8 @@ namespace vGamePad
             {
                 layoutDic = vLayoutControl.LoadLayout(9);
                 SetButtonLayout();
+                colorChanged.Foreground = Properties.Settings.Default.Foreground;
+                colorChanged.Background = Properties.Settings.Default.Background;
             }
         }
 
