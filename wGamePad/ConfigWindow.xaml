@@ -28,30 +28,18 @@
             <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
             <Button x:Name="Return" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
         </StackPanel>
-        <StackPanel x:Name="ClockMenu" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
-            <Button x:Name="ClockMenuReturn" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE121;" Click="ClockSetting_Click" Style="{StaticResource defaultButton}"/>
-            <Button Height="64" Width="64" Margin="10,10,5,10" FontSize="40" IsEnabled="False" Style="{StaticResource defaultButton}" Visibility="Hidden"/>
-        </StackPanel>
         <StackPanel x:Name="NormalMenu" Grid.Row="1" Orientation="Horizontal" Visibility="Visible">
             <Button x:Name="SetPostion" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE1AA;" Click="SetPostion_Click" Style="{StaticResource defaultButton}"/>
             <Button x:Name="Sound" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Click="Sound_Click" Style="{StaticResource defaultButton}"/>
             <Button x:Name="ScreenRotate" Height="64" Width="64" Margin="10,16,5,16" FontSize="40" Click="ScreenRotate_Click" Style="{StaticResource defaultButton}"/>
-            <Button x:Name="ClockSetting" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE121;" Click="ClockSetting_Click" Style="{StaticResource defaultButton}"/>
+            <Button x:Name="ClockSetting" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE121;" FontFamily="Segoe UI Symbol" Background="Black" Foreground="White" Style="{StaticResource defaultButton}"/>
             <Button x:Name="Maintenance" Height="64" Width="64" Margin="10,10,5,10" FontSize="40" Content="&#xE2AE;" Click="Maintenance_Click" Style="{StaticResource defaultButton}"/>
         </StackPanel>
         <Frame x:Name="LayoutFrame" Grid.Row="2" NavigationUIVisibility="Hidden" Visibility="Collapsed" Navigated="LayoutFrame_Navigated"/>
-        <StackPanel x:Name="ClockFrame" Grid.Row="2" Orientation="Vertical" Visibility="Collapsed">
-            <Button x:Name="Clock1" Content="時間を表示する" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="Clock1_Click"/>
-            <Button x:Name="Clock2" Content="アストルティア時間" Height="64" Margin="60,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="Clock2_Click"/>
-            <Button x:Name="Clock3" Content="PCの時間" Height="64" Margin="60,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="Clock3_Click"/>
-        </StackPanel>
         <StackPanel x:Name="NormalFrame" Grid.Row="2" Orientation="Vertical" Visibility="Visible">
             <Button x:Name="Skeleton" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1" Background="Black" Foreground="White" Click="Skeleton_Click"/>
             <Button x:Name="Barrage" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="Barrage_Click"/>
-            <Button x:Name="ScreenMemo" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="ScreenMemo_Click"/>
+            <Button x:Name="AstTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="AstTime_Click"/>
             <Button x:Name="BtyTime" Height="64" Margin="10,0,10,16" FontFamily="Segoe UI Symbol,Segoe UI" FontSize="30" HorizontalContentAlignment="Left" Padding="14,1,1,1"  Background="Black" Foreground="White" Click="BtyTime_Click"/>
         </StackPanel>
         <TextBox x:Name="About" Grid.Row="3" Margin="10,0,10,10" IsReadOnly="True" Foreground="White" Background="Black" FontSize="12" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>

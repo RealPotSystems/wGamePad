@@ -129,29 +129,14 @@
   <data name="AstClockString04" xml:space="preserve">
     <value>{0}まであと{1:00}分{2:00}秒</value>
   </data>
-  <data name="AstClockString05" xml:space="preserve">
-    <value> {0} </value>
-  </data>
-  <data name="AstClockString06" xml:space="preserve">
-    <value>MM/dd HH:mm</value>
-  </data>
   <data name="ButtonLayoutString01" xml:space="preserve">
     <value>デフォルトレイアウトで起動します。</value>
-  </data>
-  <data name="ClockString01" xml:space="preserve">
-    <value>{0} 時間を表示する</value>
-  </data>
-  <data name="ClockString02" xml:space="preserve">
-    <value>{0} アストルティア時間</value>
-  </data>
-  <data name="ClockString03" xml:space="preserve">
-    <value>{0} PCの時間</value>
   </data>
   <data name="ConfigButton01" xml:space="preserve">
     <value>{0} ボタンのみ表示</value>
   </data>
   <data name="ConfigButton02" xml:space="preserve">
-    <value>{0} 画面メモを使う</value>
+    <value>{0} アストルティア時間を表示</value>
   </data>
   <data name="ConfigButton03" xml:space="preserve">
     <value>{0} バッテリー残量を表示</value>

@@ -97,56 +97,11 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///    {0}  に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AstClockString05 {
-            get {
-                return ResourceManager.GetString("AstClockString05", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   MM/dd HH:mm に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AstClockString06 {
-            get {
-                return ResourceManager.GetString("AstClockString06", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   デフォルトレイアウトで起動します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ButtonLayoutString01 {
             get {
                 return ResourceManager.GetString("ButtonLayoutString01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} 時間を表示する に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ClockString01 {
-            get {
-                return ResourceManager.GetString("ClockString01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} アストルティア時間 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ClockString02 {
-            get {
-                return ResourceManager.GetString("ClockString02", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} PCの時間 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ClockString03 {
-            get {
-                return ResourceManager.GetString("ClockString03", resourceCulture);
             }
         }
         
@@ -160,7 +115,7 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   {0} 画面メモを使う に類似しているローカライズされた文字列を検索します。
+        ///   {0} アストルティア時間を表示 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ConfigButton02 {
             get {
@@ -178,7 +133,7 @@ namespace vGamePad.Properties {
         }
         
         /// <summary>
-        ///   {0} ①-④ボタンの連射を使う に類似しているローカライズされた文字列を検索します。
+        ///   {0} ①～④ボタンの連射を使う に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ConfigButton04 {
             get {

@@ -53,12 +53,6 @@
                 <Button Width="48" Margin="8,0" Click="Reset_Click" Background="Transparent" BorderThickness="0">
                     <Label Content="&#xE17E;&#xE149;" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
                 </Button>
-                <Button Width="64" Margin="8,0" Background="Transparent" BorderThickness="0">
-                    <Border Background="{Binding Foreground}" BorderBrush="White" BorderThickness="3" Height="32" Width="48"/>
-                </Button>
-                <Button Width="64" Margin="8,0" Background="Transparent" BorderThickness="0">
-                    <Border Background="{Binding Background}" BorderBrush="White" BorderThickness="3" Height="32" Width="48"/>
-                </Button>
                 <Button Width="48" Margin="8,0" Click="Cancel_Click" Background="Transparent" BorderThickness="0">
                     <Label Content="&#xE17E;&#xE10A;" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
                 </Button>

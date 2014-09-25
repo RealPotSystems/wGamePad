@@ -67,7 +67,7 @@ namespace vGamePad
                 String.Format(Properties.Resources.ConfigButton04, check_on) :
                 String.Format(Properties.Resources.ConfigButton04, check_off);
 
-            ScreenMemo.Content = Properties.Settings.Default.ScreenMemo ?
+            AstTime.Content = Properties.Settings.Default.Clock ?
                 String.Format(Properties.Resources.ConfigButton02, check_on) :
                 String.Format(Properties.Resources.ConfigButton02, check_off);
 
@@ -76,30 +76,6 @@ namespace vGamePad
                 String.Format(Properties.Resources.ConfigButton03, check_off);
 
             navigation = LayoutFrame.NavigationService;
-
-            if ( Properties.Settings.Default.Clock )
-            {
-                Clock1.Content = String.Format(Properties.Resources.ClockString01, check_on);
-                Clock2.IsEnabled = true;
-                Clock3.IsEnabled = true;
-            }
-            else
-            {
-                Clock1.Content = String.Format(Properties.Resources.ClockString01, check_off);
-                Clock2.IsEnabled = false;
-                Clock3.IsEnabled = false;
-            }
-
-            if ( Properties.Settings.Default.AstClock )
-            {
-                Clock2.Content = String.Format(Properties.Resources.ClockString02, check_on);
-                Clock3.Content = String.Format(Properties.Resources.ClockString03, check_off);
-            }
-            else
-            {
-                Clock2.Content = String.Format(Properties.Resources.ClockString02, check_off);
-                Clock3.Content = String.Format(Properties.Resources.ClockString03, check_on);
-            }
         }
 
         private void Sound_Click(object sender, RoutedEventArgs e)
@@ -181,27 +157,25 @@ namespace vGamePad
         private void Maintenance_Click(object sender, RoutedEventArgs e)
         {
             PlayButtonSound.Play();
+
             if (LayoutFrame.Visibility == System.Windows.Visibility.Visible)
             {
                 NormalFrame.Visibility = System.Windows.Visibility.Visible;
                 LayoutFrame.Visibility = System.Windows.Visibility.Collapsed;
-
                 NormalMenu.Visibility = System.Windows.Visibility.Visible;
                 LayoutMenu.Visibility = System.Windows.Visibility.Hidden;
-                ClockMenu.Visibility = System.Windows.Visibility.Hidden;
             }
             else
             {
                 LayoutFrame.Visibility = System.Windows.Visibility.Visible;
                 NormalFrame.Visibility = System.Windows.Visibility.Collapsed;
-
                 NormalMenu.Visibility = System.Windows.Visibility.Hidden;
                 LayoutMenu.Visibility = System.Windows.Visibility.Visible;
-                ClockMenu.Visibility = System.Windows.Visibility.Hidden;
-                if (navigation.Content == null)
+                if ( navigation.Content == null )
                 {
                     navigation.Navigate(new Uri(nextpage, UriKind.Relative));
                 }
+
             }
         }
 
@@ -214,14 +188,14 @@ namespace vGamePad
                String.Format(Properties.Resources.ConfigButton01, check_off);
         }
 
-        //private void AstTime_Click(object sender, RoutedEventArgs e)
-        //{
-        //    PlayButtonSound.Play();
-        //    Properties.Settings.Default.Clock = Properties.Settings.Default.Clock ? false : true;
-        //    AstTime.Content = Properties.Settings.Default.Clock ?
-        //        String.Format(Properties.Resources.ConfigButton02, check_on) :
-        //        String.Format(Properties.Resources.ConfigButton02, check_off);
-        //}
+        private void AstTime_Click(object sender, RoutedEventArgs e)
+        {
+            PlayButtonSound.Play();
+            Properties.Settings.Default.Clock = Properties.Settings.Default.Clock ? false : true;
+            AstTime.Content = Properties.Settings.Default.Clock ?
+                String.Format(Properties.Resources.ConfigButton02, check_on) :
+                String.Format(Properties.Resources.ConfigButton02, check_off);
+        }
 
         private void BtyTime_Click(object sender, RoutedEventArgs e)
         {
@@ -273,82 +247,6 @@ namespace vGamePad
             Barrage.Content = Properties.Settings.Default.Barrage ?
                 String.Format(Properties.Resources.ConfigButton04, check_on) :
                 String.Format(Properties.Resources.ConfigButton04, check_off);
-        }
-
-        private void ClockSetting_Click(object sender, RoutedEventArgs e)
-        {
-            PlayButtonSound.Play();
-            if (ClockFrame.Visibility == System.Windows.Visibility.Visible)
-            {
-                NormalFrame.Visibility = System.Windows.Visibility.Visible;
-                LayoutFrame.Visibility = System.Windows.Visibility.Collapsed;
-                ClockFrame.Visibility = System.Windows.Visibility.Collapsed;
-
-                NormalMenu.Visibility = System.Windows.Visibility.Visible;
-                LayoutMenu.Visibility = System.Windows.Visibility.Collapsed;
-                ClockMenu.Visibility = System.Windows.Visibility.Hidden;
-            }
-            else
-            {
-                LayoutFrame.Visibility = System.Windows.Visibility.Collapsed;
-                NormalFrame.Visibility = System.Windows.Visibility.Collapsed;
-                ClockFrame.Visibility = System.Windows.Visibility.Visible;
-
-                NormalMenu.Visibility = System.Windows.Visibility.Hidden;
-                LayoutMenu.Visibility = System.Windows.Visibility.Hidden;
-                ClockMenu.Visibility = System.Windows.Visibility.Visible;
-            }
-
-        }
-
-        private void ScreenMemo_Click(object sender, RoutedEventArgs e)
-        {
-            PlayButtonSound.Play();
-            Properties.Settings.Default.ScreenMemo = Properties.Settings.Default.ScreenMemo ? false : true;
-            ScreenMemo.Content = Properties.Settings.Default.ScreenMemo ?
-                String.Format(Properties.Resources.ConfigButton02, check_on) :
-                String.Format(Properties.Resources.ConfigButton02, check_off);
-        }
-
-        private void Clock1_Click(object sender, RoutedEventArgs e)
-        {
-            PlayButtonSound.Play();
-            if (Properties.Settings.Default.Clock)
-            {
-                Properties.Settings.Default.Clock = false;
-                Clock1.Content = String.Format(Properties.Resources.ClockString01, check_off);
-                Clock2.IsEnabled = false;
-                Clock3.IsEnabled = false;
-            }
-            else
-            {
-                Properties.Settings.Default.Clock = true;
-                Clock1.Content = String.Format(Properties.Resources.ClockString01, check_on);
-                Clock2.IsEnabled = true;
-                Clock3.IsEnabled = true;
-            }
-        }
-
-        private void Clock2_Click(object sender, RoutedEventArgs e)
-        {
-            PlayButtonSound.Play();
-            if (!Properties.Settings.Default.AstClock)
-            {
-                Properties.Settings.Default.AstClock = true;
-                Clock2.Content = String.Format(Properties.Resources.ClockString02, check_on);
-                Clock3.Content = String.Format(Properties.Resources.ClockString03, check_off);
-            }
-        }
-
-        private void Clock3_Click(object sender, RoutedEventArgs e)
-        {
-            PlayButtonSound.Play();
-            if (Properties.Settings.Default.AstClock)
-            {
-                Properties.Settings.Default.AstClock = false;
-                Clock2.Content = String.Format(Properties.Resources.ClockString02, check_off);
-                Clock3.Content = String.Format(Properties.Resources.ClockString03, check_on);
-            }
         }
     }
 }

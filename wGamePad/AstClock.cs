@@ -57,15 +57,7 @@ namespace vGamePad
             double h = Math.Floor((double)(sec / 3600));
             double m = Math.Floor((double)(sec / 60)) % 60;
             int index = (int)h % 12 * 2 + (m >= 30 ? 1 : 0);
-            string timestr;
-            if ( Properties.Settings.Default.AstClock )
-            {
-                timestr = String.Format(Properties.Resources.AstClockString01 /* "{0} AST {1:00}:{2:00}" */, emojiList[index], h, m);
-            }
-            else
-            {
-                timestr = String.Format(Properties.Resources.AstClockString05 /* " {0} " */, datetime.ToString(Properties.Resources.AstClockString06));
-            }
+            string timestr = String.Format(Properties.Resources.AstClockString01 /* "{0} AST {1:00}:{2:00}" */, emojiList[index], h, m);
             double rt = 0.0;
             string temp;
             if (h < 6)

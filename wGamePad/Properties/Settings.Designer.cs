@@ -135,29 +135,5 @@ namespace vGamePad.Properties {
                 this["Background"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool AstClock {
-            get {
-                return ((bool)(this["AstClock"]));
-            }
-            set {
-                this["AstClock"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ScreenMemo {
-            get {
-                return ((bool)(this["ScreenMemo"]));
-            }
-            set {
-                this["ScreenMemo"] = value;
-            }
-        }
     }
 }
